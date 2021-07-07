@@ -10,7 +10,7 @@ import Footer from './footer';
 function Home()
 {
     return ( <div className="body-inner">
-        <section className="sec1" id="sec1">
+        <section  className="sec1" id="sec1">
     <Navbar />
     <Home1/>
     </section>
