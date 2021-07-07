@@ -20,9 +20,9 @@ function Home1()
           </div>
         </div>
       </header>
-      <div className="container" className="text-align: center; padding-bottom: 37px">
+      <div className="container" style={{textAlign: 'center', paddingBottom: '37px'}}>
         <img src="/assests/images/Dot.svg" className="dot" alt="" />
-        <img src="/assests/imagess/Dot1.svg" className="dot" alt="" />
+        <img src="/assests/images/Dot1.svg" className="dot" alt="" />
       </div>
          </div>)
 }
