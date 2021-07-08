@@ -1,10 +1,25 @@
-import React from 'react';
 import Navbar from './navbar';
 import Community from './community';
 import Contact from './contact';
 import Footer from './footer';
+import axios from "axios";
+import renderHTML from "react-render-html";
+import React, { useEffect, useState, setState } from "react";
 function About()
 {
+    const [about, setAbout] = useState({});
+    const [flag,setFlag]=useState(0);
+  useEffect( async() => {
+    axios
+      .get(`https://lakshy12.herokuapp.com/about1/fetch_about`)
+      .then((res) => {
+        //   const blogs = res.data.reverse();
+        console.log(res.data[0]);
+        setAbout(res.data[0]);
+        setFlag(1);
+        //   console.log(people);
+      });
+  }, []);
     return ( <div>
          <section class="sec" id="sec">
         <Navbar/>
@@ -14,7 +29,7 @@ function About()
             <div class="container">
               <div class="main-content-showcase">
                 <div class="show-box1">
-                  <h1>Truth Reconciliation Work</h1>
+                  <h1>{flag>0&&about.heading}</h1>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. At
                     curabitur nisi, egestas consectetur sed faucibus leo,
@@ -38,14 +53,10 @@ function About()
             </div>
             <div>
               <p>
-                Lacus ullamcorper pretium viverra in vestibulum lectus vehicula
-                eu. Quis imperdiet etiam molestie enim morbi ut lorem malesuada
-                viverra. Cras bibendum sit dui interdum porttitor malesuada
-                morbi sagittis odio. Enim ultricies suspendisse netus eu,
-                ultrices.
+              {flag>0&&renderHTML(about.ourObjective)}
               </p>
             </div>
-            <div>
+            {/* <div>
               <ul class="obj-list">
                 <li>
                   A in pellentesque morbi elementum convallis maecenas. Molestie
@@ -60,15 +71,13 @@ function About()
                   vehicula eu.
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
           <div class="obj-sec2">
             <div>
               <h1>Mission</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hac
-                massa malesuada placerat cras ornare sit cras. Elit praesent
-                placerat facilisi ut consectetur amet, sit.
+                {flag>0&&about.Mission}
               </p>
             </div>
             <div class="hand">
@@ -77,9 +86,7 @@ function About()
             <div>
               <h1>Vision</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hac
-                massa malesuada placerat cras ornare sit cras. Elit praesent
-                placerat facilisi ut consectetur amet, sit.
+                {flag>0&&about.Vision}
               </p>
             </div>
           </div>

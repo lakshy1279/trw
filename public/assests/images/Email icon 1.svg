@@ -1,0 +1,17 @@
+<svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d)">
+<circle cx="61" cy="61" r="50" fill="#FFCAD2"/>
+</g>
+<path d="M86.25 36H36.25C32.8125 36 30.0312 38.8125 30.0312 42.25L30 79.75C30 83.1875 32.8125 86 36.25 86H86.25C89.6875 86 92.5 83.1875 92.5 79.75V42.25C92.5 38.8125 89.6875 36 86.25 36ZM86.25 48.5L61.25 64.125L36.25 48.5V42.25L61.25 57.875L86.25 42.25V48.5Z" fill="#FF516C"/>
+<defs>
+<filter id="filter0_d" x="0" y="0" width="124" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="1" dy="1"/>
+<feGaussianBlur stdDeviation="6"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+</defs>
+</svg>
