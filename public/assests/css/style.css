@@ -731,6 +731,80 @@ input.placeholder {
   font-weight: 800;
   color: black;
 }
+/* About us */
+.sec {
+  background: url("../images/bg-img1.jfif") no-repeat center center/cover;
+}
+.objectives {
+  margin-top: 152px;
+}
+
+/* Sec1 */
+
+.obj-sec1 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left: 104px;
+  padding-right: 104px;
+}
+.obj-sec1 h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 32px;
+  text-align: justify;
+}
+.obj-sec1 p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: justify;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+ul.obj-list {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: justify;
+  list-style: inside;
+}
+
+/* Sec2 */
+.obj-sec2 {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns:
+    fit-content(398px) fit-content(340px) fit-content(399px)
+    2fr;
+}
+.obj-sec2 h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 36px;
+  text-align: justify;
+  margin-top: 28px;
+}
+.hand {
+  align-self: center;
+}
+.obj-sec2 img {
+  width: 100%;
+}
+.obj-sec2 p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: justify;
+  margin-top: 40px;
+  padding-bottom: 28px;
+}
+
 /* Media Queries */
 
 @media (max-width: 950px) {

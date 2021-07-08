@@ -13,7 +13,7 @@ function Navbar()
             <li>
               <a href="" className="border-bottom: 2px solid #262626">Home</a>
             </li>
-            <li><a href="">About</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="">Offerings</a></li>
             <li><a href="">Blog</a></li>
             <li><a href="">Contact Us</a></li>
