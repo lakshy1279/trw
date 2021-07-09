@@ -12,10 +12,12 @@ class  ContactUs extends React.Component
          reason:"Join as faciliator",
          email:"",
          phone:"",
-         message:""
+         message:"",
+         subscribeemail:""
         };
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit1 = this.handleSubmit1.bind(this);
         
     }
   
@@ -23,6 +25,23 @@ class  ContactUs extends React.Component
         this.setState({
           [event.target.name]: event.target.value,
         });
+      }
+      handleSubmit1(e)
+      {
+        e.preventDefault();
+        console.log(this.state.subscribeemail);
+        axios
+            .post(
+              "https://lakshy12.herokuapp.com/contact/add_subscriber",
+              {
+                  email:this.state.subscribeemail,
+              }
+            )
+            .then((response)=> {
+              // handle success
+              this.props.history.push("/");
+              console.log(response.data);
+            })    
       }
       handleSubmit(e) {
         e.preventDefault();
@@ -48,12 +67,7 @@ class  ContactUs extends React.Component
               // handle success
               this.props.history.push("/");
               console.log(response.data);
-            })
-            .catch(function (error) {
-              // handle error
-              console.log(error);
-            });
-            
+            })    
         } 
    render()
    {
@@ -75,13 +89,13 @@ class  ContactUs extends React.Component
               <div style={{paddingTop: '180px', paddingBottom: '180px'}}>
                 <img src="/assests/images/Email icon.svg" alt="" />
                 <p>Subscribe to our newsletter</p>
-                <form action="">
+                <form action="" onSubmit={this.handleSubmit1}>
                   <input
                     type="email"
                     style={{width:'244px'}}
-                    name="email"
+                    name="subscribeemail"
                     onChange={this.onChange}
-                    value={this.state.email}
+                    value={this.state.subscribeemail}
                     placeholder="yourname@address.com"
                     class="input"
                   />

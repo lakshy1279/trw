@@ -1,6 +1,15 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
 function Community()
 {
+  const [faciliator,setFacilitator]=useState([]);
+  useEffect(()=>{
+    axios.get('https://lakshy12.herokuapp.com/facilitator/fetch').then((res)=>{
+         console.log(res.data);
+         setFacilitator(res.data);
+    })
+  },[]);
     return ( <div>
         <section class="community">
         <div class="community-head">
