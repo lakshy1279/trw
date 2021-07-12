@@ -17,19 +17,19 @@ function Footer()
             <img src="/assests/images/logo.png" alt="Logo" />
             <ul>
             <li>
-              <a href={socialmedia.facebook}><img src="/assests/images/Facebook.svg" alt="" /></a>
+              <a href={socialmedia.facebook} target="_blank" rel="noopener noreferrer"><img src="/assests/images/Facebook.svg" alt="" /></a>
             </li>
             <li>
-              <a href={socialmedia.twitter}><img src="/assests/images/Twitter.svg" alt="" /></a>
+              <a href={socialmedia.twitter} target="_blank" rel="noopener noreferrer"><img src="/assests/images/Twitter.svg" alt="" /></a>
             </li>
             <li>
-              <a href={socialmedia.instagram}><img src="/assests/images/Instagram.svg" alt="" /></a>
+              <a href={socialmedia.instagram} target="_blank" rel="noopener noreferrer"><img src="/assests/images/Instagram.svg" alt="" /></a>
             </li>
             <li>
-              <a href={socialmedia.youtube}><img src="/assests/images/Youtube.svg" alt="" /></a>
+              <a href={socialmedia.youtube} target="_blank" rel="noopener noreferrer"><img src="/assests/images/Youtube.svg" alt="" /></a>
             </li>
             <li>
-              <a href={socialmedia.linkedIn}><img src="/assests/images/Linkedin.svg" alt="" /></a>
+              <a href={socialmedia.linkedIn} target="_blank" rel="noopener noreferrer"><img src="/assests/images/Linkedin.svg" alt="" /></a>
             </li>
             </ul>
           </div>

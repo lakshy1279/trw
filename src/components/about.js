@@ -93,7 +93,9 @@ function About()
         </div>
       </section>
       </div>
+      <div class="container">
       <Community/>
+      </div>
       <Contact/>
       <Footer/>
 </div>)
