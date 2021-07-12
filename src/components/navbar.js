@@ -1,7 +1,15 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 function Navbar()
 {
+  const [socialmedia,setMedia]=useState({});
+  useEffect(()=>{
+    axios.get('https://trw-backend-api.herokuapp.com/social/fetch_socialmedia').then((res)=>{
+         console.log(res.data);
+         setMedia(res.data[0]);
+    })
+  },[]);
+  console.log(socialmedia);
     return (<div>
         <div class="container">
         <div class="menu-btn">
@@ -20,19 +28,19 @@ function Navbar()
           </ul>
           <ul class="right-menu">
             <li>
-              <a href=""><img src="/assests/images/Facebook.svg" alt="" /></a>
+              <a href={socialmedia.facebook}><img src="/assests/images/Facebook.svg" alt="" /></a>
             </li>
             <li>
-              <a href=""><img src="/assests/images/Twitter.svg" alt="" /></a>
+              <a href={socialmedia.twitter}><img src="/assests/images/Twitter.svg" alt="" /></a>
             </li>
             <li>
-              <a href=""><img src="/assests/images/Instagram.svg" alt="" /></a>
+              <a href={socialmedia.instagram}><img src="/assests/images/Instagram.svg" alt="" /></a>
             </li>
             <li>
-              <a href=""><img src="/assests/images/Youtube.svg" alt="" /></a>
+              <a href={socialmedia.youtube}><img src="/assests/images/Youtube.svg" alt="" /></a>
             </li>
             <li>
-              <a href=""><img src="/assests/images/Linkedin.svg" alt="" /></a>
+              <a href={socialmedia.linkedIn}><img src="/assests/images/Linkedin.svg" alt="" /></a>
             </li>
           </ul>
         </nav>

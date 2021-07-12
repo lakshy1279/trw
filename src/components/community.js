@@ -50,13 +50,14 @@ function Community()
             </div>
             <br />
             <div class="partners">
-              <div class="fac">
-                <img src="/assests/images/f1.jpg" alt="" />
+              {faciliator.length>0&&faciliator.map((data)=>{
+                return (  <div class="fac">
+                <img src={data.photo} alt="" />
                 <div style={{padding: '22px'}}>
                   <span style={{fontSize: '14px', fontWeight: '700'}}
-                    >Beatrace Wade</span
+                    >{data.firstname}{" "}{data.lastname}</span
                   ><br />
-                  <span style={{fontSize: '10px', opacity: '0.5'}}>Switzerland</span
+                  <span style={{fontSize: '10px', opacity: '0.5'}}>{data.country}</span
                   ><br />
                   <span
                     class="profile"
@@ -68,9 +69,10 @@ function Community()
                     >View Profile</span
                   >
                 </div>
-              </div>
-              <div class="fac">
-                <img src="./Images/f2.jpg" alt="" />
+              </div>)
+              })}
+               {/* <div class="fac">
+                <img src="/assests/images/f4.jpg" alt="" />
                 <div style={{padding: '22px'}}>
                   <span style={{fontSize: '14px', fontWeight: '700'}}
                     >Beatrace Wade</span
@@ -88,8 +90,8 @@ function Community()
                     >View Profile</span
                   >
                 </div>
-              </div>
-              <div class="fac">
+              </div> */}
+             {/* <div class="fac">
                 <img src="/assests/images/f4.jpg" alt="" />
                 <div style={{padding: '22px'}}>
                   <span style={{fontSize: '14px', fontWeight: '700'}}
@@ -126,7 +128,7 @@ function Community()
                     >View Profile</span
                   >
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

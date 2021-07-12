@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 function Footer()
 {
+  const [socialmedia,setMedia]=useState({});
+  useEffect(()=>{
+    axios.get('https://trw-backend-api.herokuapp.com/social/fetch_socialmedia').then((res)=>{
+         console.log(res.data);
+         setMedia(res.data[0]);
+    })
+  },[]);
     return ( <div>
          <footer class="footer">
       <div class="container">
@@ -8,21 +16,21 @@ function Footer()
           <div class="fo-sec1">
             <img src="/assests/images/logo.png" alt="Logo" />
             <ul>
-              <li>
-                <a href=""><img src="/assests/images/Facebook.svg" alt="" /></a>
-              </li>
-              <li>
-                <a href=""><img src="/assests/images/Twitter.svg" alt="" /></a>
-              </li>
-              <li>
-                <a href=""><img src="/assests/images/Instagram.svg" alt="" /></a>
-              </li>
-              <li>
-                <a href=""><img src="/assests/images/Youtube.svg" alt="" /></a>
-              </li>
-              <li>
-                <a href=""><img src="/assests/images/Linkedin.svg" alt="" /></a>
-              </li>
+            <li>
+              <a href={socialmedia.facebook}><img src="/assests/images/Facebook.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href={socialmedia.twitter}><img src="/assests/images/Twitter.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href={socialmedia.instagram}><img src="/assests/images/Instagram.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href={socialmedia.youtube}><img src="/assests/images/Youtube.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href={socialmedia.linkedIn}><img src="/assests/images/Linkedin.svg" alt="" /></a>
+            </li>
             </ul>
           </div>
           <div>

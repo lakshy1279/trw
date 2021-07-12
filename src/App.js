@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import Routing from './routing';
 function App() {
   return (
