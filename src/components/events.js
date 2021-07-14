@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import renderHTML from 'react-render-html';
 function Event()
 {
+  const [Events,setEvents]=useState([]);
+  useEffect(()=>{
+    axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
+        //  console.log(res.data);
+         let temp=await res.data.reverse();
+         console.log(temp);
+         setEvents(temp);
+    })
+  },[]);
     return (
         <div>
         <div className="container">
@@ -32,7 +43,34 @@ function Event()
       <section className="more-events">
         <h1>More Events</h1>
         <div className="more">
-          <div className="more-img1">
+          {Events.length>0&&Events.slice(1,2).map((item)=>{
+            return (<div className="more-img1">
+            <img src={item.image} alt="" />
+            <div
+              style={{color: '#18a558', backgroundColor: 'white'}}
+              className="top-right"
+            >
+              {item.category}
+            </div>
+            <div className="img-bottom">
+              <div>
+                <time datetime="2014-09-20" className="icon">
+                  <strong>{new Date(item.date).toLocaleDateString('default',{month:'long'})}</strong>
+                  <span>{new Date(item.date).getDate()}</span>
+                </time>
+              </div>
+              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
+                <span className="invisible"
+                  >{item.title}: {renderHTML(item.description)}</span
+                ><br />
+                <span className="pierce">By Pierce Starre & Nicholas Ball</span
+                ><br />
+                <span className="date">3-4 July , 22:30- 10:30 CET</span>
+              </div>
+            </div>
+          </div>)
+          })}
+          {/* <div className="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
@@ -56,7 +94,7 @@ function Event()
                 <span className="date">3-4 July , 22:30- 10:30 CET</span>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
             <div
@@ -139,31 +177,33 @@ function Event()
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-          <div className="more-img1">
-            <img src="/assests/images/event-img-5.jpg" alt="" />
+          {Events.length>0&&Events.reverse().slice(0,4).map((item)=>{
+            return (<div className="more-img1">
+            <img src={item.image} alt="" />
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
               className="top-right"
             >
-              Healing
+              {item.category}
             </div>
             <div className="img-bottom">
               <div>
                 <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
+                  <strong>{new Date(item.fromdate).toLocaleDateString('default',{month:'long'})}</strong>
+                  <span>{new Date(item.fromdate).getDate()}</span>
                 </time>
               </div>
               <div style={{textAlign: 'left', paddingLeft: '14px'}}>
                 <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
+                  >{item.title}: {renderHTML(item.description)}</span
                 ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
+                <span className="pierce">By{" "}{item.eventby}</span
                 ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
+                <span className="date">{new Date(item.fromdate).getDate()}-{new Date(item.enddate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} ,{new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getMinutes()}- {new Date(item.enddate).getHours()}:{new Date(item.enddate).getMinutes()} CET</span>
               </div>
             </div>
-          </div>
+          </div>)
+          })}
           <div className="more-img1">
             <img src="/assests/images/event-3.jpg" alt="" />
             <div

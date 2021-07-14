@@ -71,7 +71,7 @@ function Community()
                 </div>
               </div>)
               })}
-               {/* <div class="fac">
+               <div class="fac">
                 <img src="/assests/images/f4.jpg" alt="" />
                 <div style={{padding: '22px'}}>
                   <span style={{fontSize: '14px', fontWeight: '700'}}
@@ -90,7 +90,7 @@ function Community()
                     >View Profile</span
                   >
                 </div>
-              </div> */}
+              </div>
              {/* <div class="fac">
                 <img src="/assests/images/f4.jpg" alt="" />
                 <div style={{padding: '22px'}}>
