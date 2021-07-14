@@ -204,7 +204,7 @@ function Event()
             </div>
           </div>)
           })}
-          <div className="more-img1">
+          {/* <div className="more-img1">
             <img src="/assests/images/event-3.jpg" alt="" />
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
@@ -277,8 +277,8 @@ function Event()
                 ><br />
                 <span className="date">3-4 July , 22:30- 10:30 CET</span>
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
       </section>
     </div>
