@@ -3,13 +3,22 @@ import axios from 'axios';
 import renderHTML from 'react-render-html';
 function Event()
 {
-  const [Events,setEvents]=useState([]);
+  const [moreEvents,setMoreEvents]=useState([]);
+  const [recEvents,setRecEvents]=useState([]);
+  function sortFunction(a,b){  
+    var dateA = new Date(a.fromdate).getTime();
+    var dateB = new Date(b.fromdate).getTime();
+    return dateA > dateB ? 1 : -1;  
+};
   useEffect(()=>{
     axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
         //  console.log(res.data);
-         let temp=await res.data.reverse();
+        const sorteddata=await res.data.sort(sortFunction);
+        console.log("sorted data",sorteddata);
+         let temp=sorteddata;
          console.log(temp);
-         setEvents(temp);
+         setMoreEvents(temp);
+         setRecEvents(temp);
     })
   },[]);
     return (
@@ -43,7 +52,7 @@ function Event()
       <section className="more-events">
         <h1>More Events</h1>
         <div className="more">
-          {Events.length>0&&Events.slice(1,2).map((item)=>{
+          {moreEvents.length>0&&moreEvents.slice(0,4).map((item)=>{
             return (<div className="more-img1">
             <img src={item.image} alt="" />
             <div
@@ -53,19 +62,19 @@ function Event()
               {item.category}
             </div>
             <div className="img-bottom">
-              <div>
+            <div>
                 <time datetime="2014-09-20" className="icon">
-                  <strong>{new Date(item.date).toLocaleDateString('default',{month:'long'})}</strong>
-                  <span>{new Date(item.date).getDate()}</span>
+                  <strong>{new Date(item.fromdate).toLocaleDateString('default',{month:'long'})}</strong>
+                  <span>{new Date(item.fromdate).getDate()}</span>
                 </time>
               </div>
               <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
+              <span className="invisible"
                   >{item.title}: {renderHTML(item.description)}</span
                 ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
+                <span className="pierce">By{" "}{item.eventby}</span
                 ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
+                <span className="date">{new Date(item.fromdate).getDate()}-{new Date(item.enddate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} ,{new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getMinutes()}- {new Date(item.enddate).getHours()}:{new Date(item.enddate).getMinutes()} CET</span>
               </div>
             </div>
           </div>)
@@ -95,7 +104,7 @@ function Event()
               </div>
             </div>
           </div> */}
-          <div className="more-img1">
+           {/* <div className="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
@@ -119,8 +128,8 @@ function Event()
                 <span className="date">3-4 July , 22:30- 10:30 CET</span>
               </div>
             </div>
-          </div>
-          <div className="more-img1">
+          </div> */}
+          {/* <div className="more-img1">
             <img src="/assests/images/event-3.jpg" alt="" />
             <div
               style={{color: '#4269f2', backgroundColor: 'white'}}
@@ -144,8 +153,8 @@ function Event()
                 <span className="date">3-4 July , 22:30- 10:30 CET</span>
               </div>
             </div>
-          </div>
-          <div className="more-img1">
+          </div> */}
+          {/* <div className="more-img1">
             <img src="/assests/images/event-4.jpg" alt="" />
             <div
               style={{color: '#4269f2', backgroundColor: 'white'}}
@@ -169,7 +178,7 @@ function Event()
                 <span className="date">3-4 July , 22:30- 10:30 CET</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -177,7 +186,7 @@ function Event()
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-          {Events.length>0&&Events.reverse().slice(0,4).map((item)=>{
+          {recEvents.length>0&&recEvents.slice(4,8).map((item)=>{
             return (<div className="more-img1">
             <img src={item.image} alt="" />
             <div

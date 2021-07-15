@@ -13,7 +13,7 @@ function Testinomial()
           <section class="testmonials">
         <h1>Testimonials</h1>
         <p>Rhoncus tempor nunc, praesent amet eu hac tortor malesuada tellus</p>
-        {/* {testmonials.length>0&&testmonials.slice(0,1).map((data)=>{
+        {testmonials.length>0&&testmonials.slice(0,1).map((data)=>{
           return(<div>
               <div class="test-main">
           <div style={{alignSelf: 'center'}}>
@@ -51,8 +51,8 @@ function Testinomial()
           />
         </div>
           </div>)
-        })} */}
-        <div class="test-main">
+        })}
+        {/* <div class="test-main">
           <div style={{alignSelf: 'center'}}>
             <button class="arrows">
               <i class="fas fa-chevron-left"></i
@@ -88,8 +88,8 @@ function Testinomial()
             src="/assests/images/Carousel Dots.svg"
             style={{marginTop: '94px'}}
             alt=""
-          />
-        </div>
+          /> */}
+        {/* </div> */}
       </section>
 </div>)
 }
