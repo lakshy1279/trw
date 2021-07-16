@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
+import MoreEvents from './moreevent';
 function Event()
 {
   const [moreEvents,setMoreEvents]=useState([]);
@@ -49,146 +50,16 @@ function Event()
       </section>
 
       {/* <!-- More Events --> */}
-      <section className="more-events">
-        <h1>More Events</h1>
-        <div className="more">
-          {moreEvents.length>0&&moreEvents.slice(0,4).map((item)=>{
-            return (<div className="more-img1">
-            <img src={item.image} alt="" />
-            <div
-              style={{color: '#18a558', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              {item.category}
-            </div>
-            <div className="img-bottom">
-            <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>{new Date(item.fromdate).toLocaleDateString('default',{month:'long'})}</strong>
-                  <span>{new Date(item.fromdate).getDate()}</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-              <span className="invisible"
-                  >{item.title}: {renderHTML(item.description)}</span
-                ><br />
-                <span className="pierce">By{" "}{item.eventby}</span
-                ><br />
-                <span className="date">{new Date(item.fromdate).getDate()}-{new Date(item.enddate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} ,{new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getMinutes()}- {new Date(item.enddate).getHours()}:{new Date(item.enddate).getMinutes()} CET</span>
-              </div>
-            </div>
-          </div>)
-          })}
-          {/* <div className="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: '#18a558', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Healing
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div> */}
-           {/* <div className="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: '#18a558', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Healing
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign:'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="more-img1">
-            <img src="/assests/images/event-3.jpg" alt="" />
-            <div
-              style={{color: '#4269f2', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Leading
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: '#4269f2', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Leading
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div> */}
-        </div>
-      </section>
-
+      <MoreEvents/>
       {/* <!-- Recently Added Events --> */}
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
           {recEvents.length>0&&recEvents.slice(4,8).map((item)=>{
             return (<div className="more-img1">
+              <div className="recent-event-img">
             <img src={item.image} alt="" />
+            </div>
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
               className="top-right"
@@ -213,81 +84,6 @@ function Event()
             </div>
           </div>)
           })}
-          {/* <div className="more-img1">
-            <img src="/assests/images/event-3.jpg" alt="" />
-            <div
-              style={{color: '#18a558', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Healing
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div className="text-align: left; padding-left: 14px">
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div>
-          <div className="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: '#4269f2', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              Leading
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div>
-          </div>
-          <div className="more-img1">
-            <img src="/assests/images/event-img8.jpg" alt="" />
-            <div
-              style={{color: '#4269f2', backgroundColor:'white'}}
-              className="top-right"
-            >
-              Leading
-            </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>July</strong>
-                  <span>03</span>
-                </time>
-              </div>
-              <div style={{textAlign: 'left',paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >Invisible: Making the invisible, visible</span
-                ><br />
-                <span className="pierce">By Pierce Starre & Nicholas Ball</span
-                ><br />
-                <span className="date">3-4 July , 22:30- 10:30 CET</span>
-              </div>
-            </div> */}
-          {/* </div> */}
         </div>
       </section>
     </div>

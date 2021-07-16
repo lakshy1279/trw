@@ -23,7 +23,7 @@ function Navbar()
             </li>
             <li><a href="/about">About</a></li>
             <li><a href="">Offerings</a></li>
-            <li><a href="">Blog</a></li>
+            <li><a href="/events">Blog</a></li>
             <li><a href="/contactus">Contact Us</a></li>
           </ul>
           <ul class="right-menu">
