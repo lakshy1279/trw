@@ -56,9 +56,9 @@ function Blog() {
         </header>
       </section>
       {/* search bar */}
-      <section className="search-bar">
-        <div className="search-main">
-          <div className="bar">
+      <section className="blog-search-bar">
+        <div className="blog-search-main">
+          <div className="blog-bar">
             <input
               type="text"
               placeholder="Search by keywords, articles, blogs"
@@ -67,8 +67,8 @@ function Blog() {
               id=""
             />
           </div>
-          <div className="btn-className">
-            <button className="search-btn">
+          <div className="blog-btn-className">
+            <button className="blog-search-btn">
               <img src="/assests/images/Vector1.svg" alt="" /> Search
             </button>
           </div>

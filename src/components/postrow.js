@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PostRow(props) {
   return (
@@ -26,6 +27,7 @@ function PostRow(props) {
             <p>{props.description}</p>
           </div>
           <div className={props.buttonClass}>
+            <Link to={`/blogs`}>
             <button className="button">
               Read More
               <i
@@ -37,6 +39,7 @@ function PostRow(props) {
                 style={{ float: "right" }}
               ></i>
             </button>
+            </Link>
           </div>
         </div>
       </div>

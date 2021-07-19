@@ -28,7 +28,7 @@ function Navbar() {
               <a href="/about">About</a>
             </li>
             <li>
-              <a href="">Offerings</a>
+              <a href="/offering">Offerings</a>
             </li>
             <li>
               <a href="/blog">Blog</a>
@@ -36,10 +36,6 @@ function Navbar() {
             <li>
               <a href="/contactus">Contact Us</a>
             </li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/offering">Offerings</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/contactus">Contact Us</a></li>
           </ul>
           <ul className="right-menu">
             <li>
