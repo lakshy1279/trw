@@ -3,6 +3,7 @@ import Home from "./components/home";
 import About from "./components/about";
 import ContactUs from "./components/contactus";
 import EventsInternal from "./components/eventsinternal";
+import Offering from "./components/offerings";
 function Routing() {
     return (
         <Router>
@@ -10,7 +11,8 @@ function Routing() {
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/about" component={About}></Route>
                 <Route exact path="/contactus" component={ContactUs}></Route>
-                <Route exact path="/events" component={EventsInternal}></Route>
+                <Route exact path="/events/:id" component={EventsInternal}></Route>
+                <Route exact path="/offering" component={Offering}></Route>
             </Switch>
         </Router>
     );

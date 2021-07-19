@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Navbar from './navbar';
 import MoreEvents from './moreevent';
 import Facilitator from './facilitator';
 import Speaker from './speaker';
 import Footer from './footer';
-function EventsInternal()
+function EventsInternal({match})
 {
+  const [event,setEvent]=useState({});
+  useEffect(()=>{
+    console.log(match.params);
+    const { id } = match.params;
+    console.log(id);
+    axios
+      .get(
+        `https://lakshy12.herokuapp.com/blog/get_event_ById/${id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setEvent(res.data);
+      });
+  },[]);
+
     return ( <div className="temp">
         <section>
     <Navbar />

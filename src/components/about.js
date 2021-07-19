@@ -56,22 +56,6 @@ function About()
               {flag>0&&renderHTML(about.ourObjective)}
               </p>
             </div>
-            {/* <div>
-              <ul class="obj-list">
-                <li>
-                  A in pellentesque morbi elementum convallis maecenas. Molestie
-                  enim morbi ut.
-                </li>
-                <li>
-                  Facilisis viverra ac sagittis, habitasse morbi maecenas purus.
-                  Morbi elementum.
-                </li>
-                <li>
-                  Sed egestas donec a mauris. Viverra in vestibulum lectus
-                  vehicula eu.
-                </li>
-              </ul>
-            </div> */}
           </div>
           <div class="obj-sec2">
             <div>

@@ -22,7 +22,7 @@ function Navbar()
               <a href="/" className="border-bottom: 2px solid #262626">Home</a>
             </li>
             <li><a href="/about">About</a></li>
-            <li><a href="">Offerings</a></li>
+            <li><a href="/offering">Offerings</a></li>
             <li><a href="/events">Blog</a></li>
             <li><a href="/contactus">Contact Us</a></li>
           </ul>
