@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function PostRow(props) {
   let date = new Date(Number(props.date)).toLocaleDateString();
@@ -29,6 +30,7 @@ function PostRow(props) {
             </p>
           </div>
           <div className={props.buttonClass}>
+            <Link to={`/blogs`}>
             <button className="button">
               Read More
               <i
@@ -40,6 +42,7 @@ function PostRow(props) {
                 style={{ float: "right" }}
               ></i>
             </button>
+            </Link>
           </div>
         </div>
       </div>
