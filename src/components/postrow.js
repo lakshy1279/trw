@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function PostRow(props) {
+  
   let date = new Date(Number(props.date)).toLocaleDateString();
-
+console.log(props._id)
   return (
     <div key={props.key}>
       <div className="card-1-healing">
@@ -13,9 +14,7 @@ function PostRow(props) {
         <div className="detail-main">
           <div className="time">
             <div>
-              <p>
-                {date}
-              </p>
+              <p>{date}</p>
             </div>
             <div>
               <p>{props.author}</p>
@@ -30,18 +29,18 @@ function PostRow(props) {
             </p>
           </div>
           <div className={props.buttonClass}>
-            <Link to={`/blogs`}>
-            <button className="button">
-              Read More
-              <i
-                className="fas fa-chevron-right"
-                style={{ float: "right" }}
-              ></i>
-              <i
-                className="fas fa-chevron-right"
-                style={{ float: "right" }}
-              ></i>
-            </button>
+            <Link to={`/blog/${props._id}`}>
+              <button className="button">
+                Read More
+                <i
+                  className="fas fa-chevron-right"
+                  style={{ float: "right" }}
+                ></i>
+                <i
+                  className="fas fa-chevron-right"
+                  style={{ float: "right" }}
+                ></i>
+              </button>
             </Link>
           </div>
         </div>

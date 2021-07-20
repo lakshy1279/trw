@@ -250,9 +250,9 @@ html {
   flex-wrap: wrap;
 }
 .row-1 {
-  display: grid;
-  grid-template-columns: 2fr 2fr;
-  grid-gap: 5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
 }
 .heading-text h1 {
   font-style: normal;
@@ -261,9 +261,8 @@ html {
   line-height: 24px;
 }
 .row-sec-heading {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  justify-items: flex-end;
+  display: flex;
+  justify-content:space-between;
 }
 
 .row-sec-para {
@@ -285,6 +284,9 @@ html {
   text-align: center;
   border-radius: 12px;
   filter: drop-shadow(1px 1px 16px rgba(0, 0, 0, 0.25));
+}
+.row-sec-2 {
+  width: 50%;
 }
 .row-sec-1 img {
   width: 100%;
@@ -357,7 +359,8 @@ html {
   font-size: 18px;
   line-height: 18px;
   margin-left: 15px;
-}.actives {
+}
+.actives {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -1820,10 +1823,10 @@ input[type="radio"]:checked + span {
   grid-template-rows: repeat(1, 1fr);
 }
 .card img {
-  padding: 14px 44px;
+  /* padding: 14px 44px;
   width: 100%;
   max-width: 212px;
-  height: 100%;
+  height: 100%; */
   object-fit: contain;
 }
 .card p {
@@ -2148,15 +2151,15 @@ input[type="radio"]:checked + span {
 .event-sec1 {
   filter: drop-shadow(1px 1px 16px rgba(0, 0, 0, 0.25));
   border-radius: 12px;
-  width: 100%;
+  width: 50%;
 }
 .event-sec1 img {
   width: 100%;
   filter: drop-shadow(1px 1px 16px rgba(0, 0, 0, 0.25));
-  border-radius: 12px;
   height: 100%;
   max-width: 525px;
   object-fit: cover;
+  padding-right:1.5rem;
 }
 .sec-4-img-event-details {
   width: 100%;
@@ -2224,6 +2227,12 @@ input[type="radio"]:checked + span {
   font-size: 12px;
   line-height: 18px;
   color: #a6a6aa;
+}
+/* blog-List */
+.bloglist-heading {
+  margin: 5rem 0;
+  border-top: 1px solid #cbcbd4;
+  padding-top: 2rem;
 }
 /* Contact Us */
 .contact-us-sec {
@@ -2515,6 +2524,16 @@ input.placeholder {
   }
 }
 @media (max-width: 950px) {
+  .row-1{
+    flex-direction: column;
+  }
+  .event-sec1>img{
+    padding-bottom:3rem;
+    width:100%;
+  }
+  .event-sec1,.row-sec-2{
+    width:100%;
+  }
   .menu-btn {
     display: block;
   }
