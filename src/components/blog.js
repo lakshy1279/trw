@@ -90,14 +90,14 @@ function Blog() {
                 <div className="healing-button">
                   <button
                     className="view-all"
-                    onClick={() => changeRoute("healing")}
+                    onClick={() => changeRoute("Healing")}
                   >
                     View all
                   </button>
                 </div>
               </div>
               <div className="healing-card">
-                {healing.map((item, index) => {
+                {healing.slice(0, 3).map((item, index) => {
                   return (
                     <PostRow
                       key={index}
@@ -107,6 +107,7 @@ function Blog() {
                       author={item.author}
                       description={item.description}
                       buttonClass="button-healing"
+                      _id={item._id}
                     />
                   );
                 })}
@@ -118,11 +119,16 @@ function Blog() {
                   <h1>Leading</h1>
                 </div>
                 <div className="healing-button leading">
-                  <button className="view-all">View all</button>
+                  <button
+                    className="view-all"
+                    onClick={() => changeRoute("Leading")}
+                  >
+                    View all
+                  </button>
                 </div>
               </div>
               <div className="healing-card">
-                {leading.map((item, index) => {
+                {leading.slice(0, 3).map((item, index) => {
                   return (
                     <PostRow
                       key={index}
@@ -132,6 +138,7 @@ function Blog() {
                       author={item.author}
                       description={item.description}
                       buttonClass="button-healing leading-but"
+                      _id={item._id}
                     />
                   );
                 })}

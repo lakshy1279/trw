@@ -69,28 +69,17 @@ function BlogInternal() {
                   </div>
                 </div>
                 <div className="para-desc">
-                  <p id="one">By Theresa Ulfa</p>
-                  <p>9th August 2021</p>
+                  <p id="one">By { article.author}</p>
+                  <p>{new Date(Number(article.date)).toLocaleDateString()}</p>
                 </div>
                 <div className="row-sec-para">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Eget eu velit et facilisi faucibus luctus tellus. Arcu enim,
-                    maecenas vitae eget turpis. Imperdiet congue viverra blandit
-                    diam dolor. Id venenatis velit eu in commodo venenatis cras
-                    vulputate. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Eget eu velit et facilisi faucibus luctus
-                    tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet
-                    congue viverra blandit diam dolor. Id venenatis velit eu in
-                    commodo venenatis cras vulputate. Arcu enim, maecenas vitae
-                    eget turpis. Imperdiet congue viverra blandit. Id venenatis
-                    velit eu in commodo venenatis cras vulputate. Lorem ipsum
-                    dolor sit. luctus tellus arcu enim, maecenas vitae.
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: article.description }}
+                  ></div>
                 </div>
               </div>
             </div>
-            <div className="row-2">
+            {/* <div className="row-2">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu
                 velit et facilisi faucibus luctus tellus. Arcu enim, maecenas
@@ -138,8 +127,8 @@ function BlogInternal() {
                 vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim,
                 maecenas vitae.
               </p>
-            </div>
-            <div className="sec-4-img-event-details">
+            </div> */}
+            {/* <div className="sec-4-img-event-details">
               <img src="/assests/images/another-long.jfif" alt="" />
             </div>
             <div className="row-2">
@@ -190,7 +179,7 @@ function BlogInternal() {
                 vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim,
                 maecenas vitae.
               </p>
-            </div>
+            </div> */}
           </div>
         </section>
         {/* Related Posts */}
