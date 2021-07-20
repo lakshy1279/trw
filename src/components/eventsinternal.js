@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import renderHTML from "react-render-html";
 import Navbar from './navbar';
 import MoreEvents from './moreevent';
 import Facilitator from './facilitator';
@@ -43,11 +44,11 @@ function EventsInternal({match})
             <div class="event-details-sec2">
                 <div class="event-box">
                     <div><h3>Event</h3></div>
-                    <div><p>: Tempor posuere imperdiet consequat est et feugiat.</p></div>
+                    <div><p>:{event.title}.</p></div>
                 </div>
                 <div class="event-box" style={{marginTop: "6px"}}>
                     <div><h3>Date</h3></div>
-                    <div><p>: 19th July 2021</p></div>
+                    <div><p>: {new Date(event.fromdate).getDate()} {new Date(event.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(event.fromdate).getFullYear()}</p></div>
                 </div>
                 <div class="event-box" style={{marginTop: "6px"}}>
                     <div><h3>Time</h3></div>
@@ -112,27 +113,28 @@ function EventsInternal({match})
                   <div class="row-sec-2">
                       <div class="row-sec-heading">
                           <div class="heading-text">
-                              <h1>Tempor posuere imperdiet consequat est et feugiat.</h1>
+                              <h1>{event.title}</h1>
                           </div>
                           <div class="heading-label">
-                              <button class="label">Heading</button>
+                              <button class="label">{event.category}</button>
                           </div>
                       </div>
                       <div class="row-sec-para">
-                          <p>
+                          {/* <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.
-                          </p>
+                          </p> */}
+                          {renderHTML(event.description)}
                       </div>
                   </div>
               </div>
-              <div class="row-2">
+              {/* <div class="row-2">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.
                   </p>
               </div>
               <div class="row-3">
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.</p>
-              </div>
+              </div> */}
               <div class="row-4">
                   <button class="button" id="padding-button">Register Now</button>
               </div>
