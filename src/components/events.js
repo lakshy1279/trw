@@ -57,7 +57,7 @@ function Event()
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-          {recEvents.length>0&&recEvents.slice(4,8).map((item)=>{
+          {recEvents.length>0&&recEvents.slice(0,4).map((item)=>{
             return (<div className="more-img1">
               <div className="recent-event-img">
             <img src={item.image} alt="" />

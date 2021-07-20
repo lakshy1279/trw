@@ -9,6 +9,8 @@ import Footer from './footer';
 function EventsInternal({match})
 {
   const [event,setEvent]=useState({});
+  const [flag,setFlag]=useState(0);
+  const [description,setDescription]=useState([]);
   useEffect(()=>{
     console.log(match.params);
     const { id } = match.params;
@@ -17,9 +19,13 @@ function EventsInternal({match})
       .get(
         `https://lakshy12.herokuapp.com/blog/get_event_ById/${id}`
       )
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
+        const temp=await res.data.description.split('</p>');
+        console.log("temp",temp);
         setEvent(res.data);
+        setDescription(temp);
+        setFlag(1);
       });
   },[]);
 
@@ -44,11 +50,11 @@ function EventsInternal({match})
             <div class="event-details-sec2">
                 <div class="event-box">
                     <div><h3>Event</h3></div>
-                    <div><p>:{event.title}.</p></div>
+                    <div><p>:{flag>0&&event.title}.</p></div>
                 </div>
                 <div class="event-box" style={{marginTop: "6px"}}>
                     <div><h3>Date</h3></div>
-                    <div><p>: {new Date(event.fromdate).getDate()} {new Date(event.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(event.fromdate).getFullYear()}</p></div>
+                    <div><p>: {flag>0&&new Date(event.fromdate).getDate()} {new Date(event.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(event.fromdate).getFullYear()}</p></div>
                 </div>
                 <div class="event-box" style={{marginTop: "6px"}}>
                     <div><h3>Time</h3></div>
@@ -108,7 +114,7 @@ function EventsInternal({match})
           <div class="description-main">
               <div class="row-1">
                   <div class="row-sec-1">
-                      <img src="/assests/images/video1.jfif" alt=""/>
+                      <img src={event.image} alt=""/>
                   </div>
                   <div class="row-sec-2">
                       <div class="row-sec-heading">
@@ -116,25 +122,21 @@ function EventsInternal({match})
                               <h1>{event.title}</h1>
                           </div>
                           <div class="heading-label">
-                              <button class="label">{event.category}</button>
+                              <button class="label">{flag>0&&event.category}</button>
                           </div>
                       </div>
                       <div class="row-sec-para">
-                          {/* <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.
-                          </p> */}
-                          {renderHTML(event.description)}
+                          {flag>0&&renderHTML(event.description
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(0, 675))}
                       </div>
                   </div>
               </div>
-              {/* <div class="row-2">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.
-                  </p>
+               <div class="row-2">
+               {flag>0&&renderHTML(event.description
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(675))}
               </div>
-              <div class="row-3">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim, maecenas vitae.</p>
-              </div> */}
               <div class="row-4">
                   <button class="button" id="padding-button">Register Now</button>
               </div>

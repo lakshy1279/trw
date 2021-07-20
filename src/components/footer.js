@@ -36,11 +36,11 @@ function Footer()
           <div>
             <h3>Quick Links</h3>
             <ul class="quicklinks">
-              <li><a href="" class="a">Home</a></li>
-              <li><a href="" class="a">About</a></li>
-              <li><a href="" class="a">Offerings</a></li>
-              <li><a href="" class="a">Blog</a></li>
-              <li><a href="" class="a">Contact Us</a></li>
+              <li><a href="/" class="a">Home</a></li>
+              <li><a href="/about" class="a">About</a></li>
+              <li><a href="/offering" class="a">Offerings</a></li>
+              <li><a href="/blog" class="a">Blog</a></li>
+              <li><a href="/contactus" class="a">Contact Us</a></li>
             </ul>
           </div>
           <div>
