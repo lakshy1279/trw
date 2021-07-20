@@ -1,36 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import Post from "./post";
 import PostRow from "./postrow";
 
 function Blog() {
-  let cardData = [
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Healing",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Leading",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Healing",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-  ];
+  const [healing, setHealing] = useState([]);
+  const [leading, setLeading] = useState([]);
+  const history = useHistory();
+  useEffect(() => {
+    async function getAticles() {
+      const article = await axios.get(
+        "https://trw-backend-api.herokuapp.com/blog/Blog1s"
+      );
+      setHealing(
+        article.data.filter((singleArticle) => {
+          return singleArticle.category === "Healing";
+        })
+      );
+      setLeading(
+        article.data.filter((singleArticle) => {
+          return singleArticle.category === "Leading";
+        })
+      );
+    }
+    getAticles();
+  }, []);
+
+  function changeRoute(blogCategory) {
+    history.push(`/blogs/${blogCategory}`);
+  }
   return (
     <div>
       <section className="blog-sec1" id="blog-sec1">
@@ -87,20 +88,25 @@ function Blog() {
                   <h1>Healing</h1>
                 </div>
                 <div className="healing-button">
-                  <button className="view-all">View all</button>
+                  <button
+                    className="view-all"
+                    onClick={() => changeRoute("healing")}
+                  >
+                    View all
+                  </button>
                 </div>
               </div>
               <div className="healing-card">
-                {cardData.map((cardItem, index) => {
+                {healing.map((item, index) => {
                   return (
                     <PostRow
                       key={index}
-                      img="/assests/images/card-1.jfif"
-                      title={cardItem.cardTitle}
-                      date={cardItem.cardData}
-                      author={cardItem.cardAuth}
-                      description={cardItem.cardDesc}
-                      buttonclassName="button-healing"
+                      img={item.image}
+                      title={item.title}
+                      date={item.date}
+                      author={item.author}
+                      description={item.description}
+                      buttonClass="button-healing"
                     />
                   );
                 })}
@@ -116,16 +122,16 @@ function Blog() {
                 </div>
               </div>
               <div className="healing-card">
-                {cardData.map((cardItem, index) => {
+                {leading.map((item, index) => {
                   return (
                     <PostRow
                       key={index}
-                      img="/assests/images/card-6.jfif"
-                      title={cardItem.cardTitle}
-                      date={cardItem.cardData}
-                      author={cardItem.cardAuth}
-                      description={cardItem.cardDesc}
-                      buttonclassName="button-healing leading-but"
+                      img={item.image}
+                      title={item.title}
+                      date={item.date}
+                      author={item.author}
+                      description={item.description}
+                      buttonClass="button-healing leading-but"
                     />
                   );
                 })}

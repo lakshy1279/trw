@@ -1,9 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Footer from "./footer";
 import Navbar from "./navbar";
 import PostRow from "./postrow";
+import { useParams } from "react-router-dom";
 
 function BlogInternal() {
+  const { id } = useParams();
+  const [article, setArticle] = useState([]);
+  useEffect(() => {
+    async function getArticle() {
+      const article = await axios.get(
+        `https://trw-backend-api.herokuapp.com/blog/update_blog1/${id}`
+      );
+
+      setArticle(article.data);
+    }
+    getArticle();
+  }, []);
+  console.log(article);
   let cardData = [
     {
       cardTitle: "Aliquam auctor",
@@ -42,15 +57,15 @@ function BlogInternal() {
           <div className="flex-event-details">
             <div className="row-1">
               <div className="event-sec1">
-                <img src="/assests/images/long-image.jfif" alt="" />
+                <img src={article.image} alt="" />
               </div>
               <div className="row-sec-2">
                 <div className="row-sec-heading">
                   <div className="heading-text">
-                    <h1>Tempor posuere imperdiet consequat est et feugiat.</h1>
+                    <h1>{article.title}</h1>
                   </div>
                   <div className="heading-label">
-                    <button className="label">Healing</button>
+                    <button className="label">{article.category}</button>
                   </div>
                 </div>
                 <div className="para-desc">
@@ -199,7 +214,7 @@ function BlogInternal() {
                     author={cardItem.cardAuth}
                     description={cardItem.cardDesc}
                     img="/assests/images/card-1.jfif"
-                    buttonclassName="button-healing"
+                    buttonClass="button-healing"
                   />
                 );
               })}

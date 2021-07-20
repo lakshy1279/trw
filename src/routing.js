@@ -5,6 +5,7 @@ import ContactUs from "./components/contactus";
 import EventsInternal from "./components/eventsinternal";
 import Blog from "./components/blog";
 import BlogInternal from "./components/bloginternal";
+import BlogList from "./components/bloglist";
 function Routing() {
   return (
     <Router>
@@ -14,7 +15,8 @@ function Routing() {
         <Route exact path="/contactus" component={ContactUs}></Route>
         <Route exact path="/events" component={EventsInternal}></Route>
         <Route exact path="/blog" component={Blog} />
-        <Route exact path="/blogs" component={BlogInternal} />
+        <Route exact path="/blog/:id" component={BlogInternal} />
+        <Route exact path="/blogs/:category" component={BlogList }/>
       </Switch>
     </Router>
   );
