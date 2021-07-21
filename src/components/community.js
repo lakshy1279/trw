@@ -71,44 +71,6 @@ function Community()
                 </div>
               </div>)
               })}
-             {/* <div class="fac">
-                <img src="/assests/images/f4.jpg" alt="" />
-                <div style={{padding: '22px'}}>
-                  <span style={{fontSize: '14px', fontWeight: '700'}}
-                    >Beatrace Wade</span
-                  ><br />
-                  <span style={{fontSize: '10px', opacity: '0.5'}}>Switzerland</span
-                  ><br />
-                  <span
-                    class="profile"
-                    style={{
-                      position: 'relative',
-                      top: '31px',
-                      fontWeight: '700',
-                      fontSize: '12px'}}
-                    >View Profile</span
-                  >
-                </div>
-              </div>
-              <div class="fac">
-                <img src="/assests/images/f4.jpg" alt="" />
-                <div style={{padding: '22px'}}>
-                  <span style={{fontSize: '14px', fontWeight: '700'}}
-                    >Beatrace Wade</span
-                  ><br />
-                  <span style={{fontSize: '10px', opacity:'0.5'}}>Switzerland</span
-                  ><br />
-                  <span
-                    class="profile"
-                    style={{
-                      position: 'relative',
-                      top: '31px',
-                      fontWeight: '700',
-                      fontSize: '12px'}}
-                    >View Profile</span
-                  >
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Carousel, { consts } from "react-elastic-carousel";
-import axios from "axios";
-import Navbar from "./navbar";
-import MoreEvents from "./moreevent";
-import Facilitator from "./facilitator";
-import Speaker from "./speaker";
-import Footer from "./footer";
-function EventsInternal({ match }) {
-  const [event, setEvent] = useState({});
+import renderHTML from "react-render-html";
+import Navbar from './navbar';
+import MoreEvents from './moreevent';
+import Facilitator from './facilitator';
+import Speaker from './speaker';
+import Footer from './footer';
+function EventsInternal({match})
+{
+  const [event,setEvent]=useState({});
+  const [flag,setFlag]=useState(0);
+  const [description,setDescription]=useState([]);
   const [organisation, setOrganisation] = useState([]);
   let breakPoints = [
     { width: 1, itemsToShow: 1, pagination: false },
@@ -22,15 +27,23 @@ function EventsInternal({ match }) {
     { width: 1750, itemsToShow: 7, pagination: false },
   ];
 
-  useEffect(() => {
+  
+  useEffect(()=>{
     console.log(match.params);
     const { id } = match.params;
     console.log(id);
     axios
-      .get(`https://lakshy12.herokuapp.com/blog/get_event_ById/${id}`)
-      .then((res) => {
+
+      .get(
+        `https://lakshy12.herokuapp.com/blog/get_event_ById/${id}`
+      )
+      .then(async (res) => {
         console.log(res.data);
+        const temp=await res.data.description.split('</p>');
+        console.log("temp",temp);
         setEvent(res.data);
+        setDescription(temp);
+        setFlag(1);
       });
     async function getOrganisation() {
       const org = await axios.get(`http://localhost:5000/organisation/fetch`);
@@ -47,7 +60,7 @@ function EventsInternal({ match }) {
             <i className="fas fa-chevron-left"></i>
             <i className="fas fa-chevron-left"></i>
           </button>
-        </div>
+          </div>
       ) : (
         <button className="arrows">
           <i className="fas fa-chevron-right"></i>
@@ -61,67 +74,47 @@ function EventsInternal({ match }) {
     );
   }
 
-  return (
-    <div className="temp">
-      <section>
-        <Navbar />
-      </section>
-      <div class="container">
-        <section class="event-details">
-          <div class="event-main">
-            <div class="event-sec1">
-              <iframe
-                width="100%"
-                height="350"
-                class="frame"
-                src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"
-              ></iframe>
-            </div>
-            <div class="event-sec2">
-              <div>
-                <h3 id="main">Event Details</h3>
-              </div>
-              <div class="event-details-sec2">
-                <div class="event-box">
-                  <div>
-                    <h3>Event</h3>
-                  </div>
-                  <div>
-                    <p>: Tempor posuere imperdiet consequat est et feugiat.</p>
-                  </div>
-                </div>
-                <div class="event-box" style={{ marginTop: "6px" }}>
-                  <div>
-                    <h3>Date</h3>
-                  </div>
-                  <div>
-                    <p>: 19th July 2021</p>
-                  </div>
-                </div>
-                <div class="event-box" style={{ marginTop: "6px" }}>
-                  <div>
-                    <h3>Time</h3>
-                  </div>
-                  <div>
-                    <p>: IST: 8:00, CET: 12:00, EST: 19:00</p>
-                  </div>
-                </div>
-                <div class="event-box" style={{ marginTop: "6px" }}>
-                  <div>
-                    <h3>Link</h3>
-                  </div>
-                  <div>
-                    {" "}
-                    <a href="">
-                      <p id="link">: https://registrationlink.com/</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div style={{ alignSelf: "flex-end", marginTop: "10px" }}>
-                <input type="button" value="Register" class="button1" />
-              </div>
-            </div>
+  return (<div className="temp">
+  <section>
+<Navbar />
+</section>
+<div class="container">
+<section class="event-details">
+  <div class="event-main">
+    <div class="event-sec1">
+      <iframe
+        width="100%"
+        height="350"
+        class="frame"
+        src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"
+      >
+      </iframe>
+    </div>
+    <div class="event-sec2">
+      <div><h3 id="main">Event Details</h3></div>
+      <div class="event-details-sec2">
+          <div class="event-box">
+              <div><h3>Event</h3></div>
+              <div><p>:{flag>0&&event.title}.</p></div>
+          </div>
+          <div class="event-box" style={{marginTop: "6px"}}>
+              <div><h3>Date</h3></div>
+              <div><p>: {flag>0&&new Date(event.fromdate).getDate()} {new Date(event.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(event.fromdate).getFullYear()}</p></div>
+          </div>
+          <div class="event-box" style={{marginTop: "6px"}}>
+              <div><h3>Time</h3></div>
+              <div><p>: IST: 8:00, CET: 12:00, EST: 19:00</p></div>
+          </div>
+          <div class="event-box" style={{marginTop: "6px"}}>
+              <div><h3>Link</h3></div>
+              <div> <a href=""><p id="link">: https://registrationlink.com/</p></a></div>
+          </div>
+      </div>
+      <div style={{alignSelf: "flex-end",marginTop: "10px"}}>
+          <input type="button" value="Register" class="button1"/>
+      </div>
+    </div>
+    
           </div>
         </section>
         <Facilitator />
@@ -150,91 +143,35 @@ function EventsInternal({ match }) {
         </section>
         <section class="description">
           <div class="description-main">
-            <div class="row-1">
-              <div class="row-sec-1">
-                <img src="/assests/images/video1.jfif" alt="" />
-              </div>
-              <div class="row-sec-2">
-                <div class="row-sec-heading">
-                  <div class="heading-text">
-                    <h1>Tempor posuere imperdiet consequat est et feugiat.</h1>
+
+              <div class="row-1">
+                  <div class="row-sec-1">
+                      <img src={event.image} alt=""/>
                   </div>
-                  <div class="heading-label">
-                    <button class="label">Heading</button>
+                  <div class="row-sec-2">
+                      <div class="row-sec-heading">
+                          <div class="heading-text">
+                              <h1>{event.title}</h1>
+                          </div>
+                          <div class="heading-label">
+                              <button class="label">{flag>0&&event.category}</button>
+                          </div>
+                      </div>
+                      <div class="row-sec-para">
+                          {flag>0&&renderHTML(event.description
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(0, 675))}
+                      </div>
                   </div>
-                </div>
-                <div class="row-sec-para">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Eget eu velit et facilisi faucibus luctus tellus. Arcu enim,
-                    maecenas vitae eget turpis. Imperdiet congue viverra blandit
-                    diam dolor. Id venenatis velit eu in commodo venenatis cras
-                    vulputate. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Eget eu velit et facilisi faucibus luctus
-                    tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet
-                    congue viverra blandit diam dolor. Id venenatis velit eu in
-                    commodo venenatis cras vulputate. Arcu enim, maecenas vitae
-                    eget turpis. Imperdiet congue viverra blandit. Id venenatis
-                    velit eu in commodo venenatis cras vulputate. Lorem ipsum
-                    dolor sit. luctus tellus arcu enim, maecenas vitae.
-                  </p>
-                </div>
               </div>
-            </div>
-            <div class="row-2">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu
-                velit et facilisi faucibus luctus tellus. Arcu enim, maecenas
-                vitae eget turpis. Imperdiet congue viverra blandit diam dolor.
-                Id venenatis velit eu in commodo venenatis cras vulputate. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit
-                et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae
-                eget turpis. Imperdiet congue viverra blandit diam dolor. Id
-                venenatis velit eu in commodo venenatis cras vulputate. Arcu
-                enim, maecenas vitae eget turpis. Imperdiet congue viverra
-                blandit. Id venenatis velit eu in commodo venenatis cras
-                vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim,
-                maecenas vitae. Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Eget eu velit et facilisi faucibus luctus
-                tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue
-                viverra blandit diam dolor. Id venenatis velit eu in commodo
-                venenatis cras vulputate. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Eget eu velit et facilisi faucibus
-                luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet
-                congue viverra blandit diam dolor. Id venenatis velit eu in
-                commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget
-                turpis. Imperdiet congue viverra blandit. Id venenatis velit eu
-                in commodo venenatis cras vulputate. Lorem ipsum dolor sit.
-                luctus tellus arcu enim, maecenas vitae.
-              </p>
-            </div>
-            <div class="row-3">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu
-                velit et facilisi faucibus luctus tellus. Arcu enim, maecenas
-                vitae eget turpis. Imperdiet congue viverra blandit diam dolor.
-                Id venenatis velit eu in commodo venenatis cras vulputate. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit
-                et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae
-                eget turpis. Imperdiet congue viverra blandit diam dolor. Id
-                venenatis velit eu in commodo venenatis cras vulputate. Arcu
-                enim, maecenas vitae eget turpis. Imperdiet congue viverra
-                blandit. Id venenatis velit eu in commodo venenatis cras
-                vulputate. Lorem ipsum dolor sit. luctus tellus arcu eget eu
-                velit et facilisi faucibus luctus tellus. Arcu enim, maecenas
-                vitae eget turpis. Imperdiet congue viverra blandit diam dolor.
-                Id venenatis velit eu in commodo venenatis cras vulputate. Arcu
-                enim, maecenas vitae eget turpis. Imperdiet congue viverra
-                blandit. Id venenatis velit eu in commodo venenatis cras
-                vulputate. Lorem ipsum dolor sit. luctus tellus arcu enim,
-                maecenas vitae.
-              </p>
-            </div>
-            <div class="row-4">
-              <button class="button" id="padding-button">
-                Register Now
-              </button>
-            </div>
+               <div class="row-2">
+               {flag>0&&renderHTML(event.description
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(675))}
+              </div>
+              <div class="row-4">
+                  <button class="button" id="padding-button">Register Now</button>
+              </div>
           </div>
         </section>
         <div style={{ marginTop: "109px", borderTop: "1px solid #cbcbd4" }}>

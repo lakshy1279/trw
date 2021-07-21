@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from './navbar';
 import Footer from './footer';
 import { Link } from 'react-router-dom';
+import MoreEvents from './moreevent';
 function Offering()
 {
   const [moreEvents,setMoreEvents]=useState([]);
@@ -409,7 +410,8 @@ function Offering()
         {/* See all events */}
         <section class="see-all-events">
         <h1 id="see-all">See All Events</h1>
-        <div class="more">
+        <MoreEvents/>
+        {/* <div class="more">
           {moreEvents.length>0&&moreEvents.slice(0,4).map((data)=>{
             return (  <div class="more-img1">
             <img src={data.image} alt="" />
@@ -433,70 +435,14 @@ function Offering()
             </div>
           </div>)
           })}
-          {/* <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div> */}
-          {/* <div class="more-img1">
-            <img src="/assests/images/event-3.jpg" alt="" />
-            <div
-              style={{color: "#4269f2" ,backgroundColor:"white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div> */}
-          {/* <div class="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-          </div>
-        </div> */}
-      </div>
+      </div> */}
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
       <section class="see-all-events">
         <h1 id="see-all">See All Events</h1>
-        <div class="more">
-          <div class="more-img1">
+        <MoreEvents/>
+         {/* <div class="more"> */}
+          {/* <div class="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
             <div
               style={{color: "#18a558", backgroundColor: "white"}}
@@ -572,13 +518,14 @@ function Offering()
                 <p id="by">by Pierce Starre & Nicholas Ball</p>
               </div>
           </div>
-        </div>
-      </div>
+        </div>*/ }
+      {/* </div> */}
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
       <section class="see-all-events">
         <h1 id="see-all">See All Events</h1>
-        <div class="more">
+        <MoreEvents/>
+        {/* <div class="more">
           <div class="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
             <div
@@ -655,7 +602,7 @@ function Offering()
               </div>
           </div>
         </div>
-      </div>
+      </div>  */}
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
       <section class="next-prev">

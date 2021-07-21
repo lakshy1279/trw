@@ -57,6 +57,7 @@ function Testinomial() {
                   />
                 </div>
               </div>
+
             );
           })}
         {/* <div class="test-main">
@@ -80,7 +81,8 @@ function Testinomial() {
                 </p>
                 <h3>Semper phasellus</h3>
                 <h4>Nibh ut</h4>
-              </div>
+
+            </div>
             </div>
           </div>
           <div style={{alignSelf: 'center'}}>
@@ -97,6 +99,7 @@ function Testinomial() {
             alt=""
           /> */}
         {/* </div> */}
+
       </section>
     </div>
   );

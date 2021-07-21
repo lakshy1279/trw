@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
 function Event()
 {
@@ -50,12 +49,15 @@ function Event()
       </section>
 
       {/* <!-- More Events --> */}
+      <section className="more-events">
+      <h1>More Events</h1>
       <MoreEvents/>
+      </section>
       {/* <!-- Recently Added Events --> */}
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-          {recEvents.length>0&&recEvents.slice(4,8).map((item)=>{
+          {recEvents.length>0&&recEvents.slice(0,4).map((item)=>{
             return (<div className="more-img1">
               <div className="recent-event-img">
             <img src={item.image} alt="" />
@@ -66,22 +68,16 @@ function Event()
             >
               {item.category}
             </div>
-            <div className="img-bottom">
-              <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>{new Date(item.fromdate).toLocaleDateString('default',{month:'long'})}</strong>
-                  <span>{new Date(item.fromdate).getDate()}</span>
-                </time>
+            <div class="img-bottom">
+              <div class="img-text">
+                <h1>
+                 {item.title}
+                </h1>
+                <p id="date">{new Date(item.fromdate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(item.fromdate).getFullYear()}</p>
+                <p id="time">IST: {new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, CET: {new Date(item.enddate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, EST: 19:00</p>
+                <p id="by">{item.eventby}</p>
               </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-                <span className="invisible"
-                  >{item.title}: {renderHTML(item.description)}</span
-                ><br />
-                <span className="pierce">By{" "}{item.eventby}</span
-                ><br />
-                <span className="date">{new Date(item.fromdate).getDate()}-{new Date(item.enddate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} ,{new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getMinutes()}- {new Date(item.enddate).getHours()}:{new Date(item.enddate).getMinutes()} CET</span>
               </div>
-            </div>
           </div>)
           })}
         </div>

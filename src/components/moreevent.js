@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import renderHTML from 'react-render-html';
+import { Link } from 'react-router-dom';
 function MoreEvents()
 {
     const [moreEvents,setMoreEvents]=useState([]);
@@ -20,8 +20,6 @@ function MoreEvents()
     })
   },[]);
     return ( <div>
-         <section className="more-events">
-        <h1>More Events</h1>
         <div className="more">
           {moreEvents.length>0&&moreEvents.slice(0,4).map((item)=>{
             return (<div className="more-img1">
@@ -32,26 +30,21 @@ function MoreEvents()
             >
               {item.category}
             </div>
-            <div className="img-bottom">
-            <div>
-                <time datetime="2014-09-20" className="icon">
-                  <strong>{new Date(item.fromdate).toLocaleDateString('default',{month:'long'})}</strong>
-                  <span>{new Date(item.fromdate).getDate()}</span>
-                </time>
+            <div class="img-bottom">
+              <div class="img-text">
+              <Link to={`/events/${item._id}`}>
+                <h1>
+                 {item.title}
+                </h1>
+                </Link>
+                <p id="date">{new Date(item.fromdate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(item.fromdate).getFullYear()}</p>
+                <p id="time">IST: {new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, CET: {new Date(item.enddate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, EST: 19:00</p>
+                <p id="by">{item.eventby}</p>
               </div>
-              <div style={{textAlign: 'left', paddingLeft: '14px'}}>
-              <span className="invisible"
-                  >{item.title}: {renderHTML(item.description)}</span
-                ><br />
-                <span className="pierce">By{" "}{item.eventby}</span
-                ><br />
-                <span className="date">{new Date(item.fromdate).getDate()}-{new Date(item.enddate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} ,{new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getMinutes()}- {new Date(item.enddate).getHours()}:{new Date(item.enddate).getMinutes()} CET</span>
               </div>
-            </div>
           </div>)
           })}
         </div>
-      </section>
 </div>)
 }
 
