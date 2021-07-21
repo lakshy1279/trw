@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Carousel, { consts } from "react-elastic-carousel";
 import axios from "axios";
 import Navbar from "./navbar";
 import MoreEvents from "./moreevent";
@@ -8,6 +9,19 @@ import Footer from "./footer";
 function EventsInternal({ match }) {
   const [event, setEvent] = useState({});
   const [organisation, setOrganisation] = useState([]);
+  let breakPoints = [
+    { width: 1, itemsToShow: 1, pagination: false },
+    {
+      width: 550,
+      itemsToShow: 2,
+      pagination: false,
+    },
+    { width: 850, itemsToShow: 4, pagination: false },
+    { width: 1150, itemsToShow: 5 },
+    { width: 1450, itemsToShow: 6, pagination: false },
+    { width: 1750, itemsToShow: 7, pagination: false },
+  ];
+
   useEffect(() => {
     console.log(match.params);
     const { id } = match.params;
@@ -25,7 +39,27 @@ function EventsInternal({ match }) {
     getOrganisation();
   }, []);
 
-  console.log(organisation);
+  function customArrow({ type, onClick, isEdge }) {
+    const pointer =
+      type === consts.PREV ? (
+        <div style={{ alignSelf: "center" }}>
+          <button className="arrows">
+            <i className="fas fa-chevron-left"></i>
+            <i className="fas fa-chevron-left"></i>
+          </button>
+        </div>
+      ) : (
+        <button className="arrows">
+          <i className="fas fa-chevron-right"></i>
+          <i className="fas fa-chevron-right"></i>
+        </button>
+      );
+    return (
+      <p style={{ alignSelf: "center" }} onClick={onClick} disabled={isEdge}>
+        {pointer}
+      </p>
+    );
+  }
 
   return (
     <div className="temp">
@@ -94,15 +128,24 @@ function EventsInternal({ match }) {
         <Speaker />
         <section class="partners-grp">
           <h1>Organsiations</h1>
-          <div className="log-slider">
-            {organisation.map((org, index) => {
-              return<div className="logo-card">
-              <div className="logo-container">
-                <img src={org.logo} alt="logo"/>
-              </div>
-            </div>
-            })}
+          <div className="logo-slider">
+            <Carousel
+              itemsToShow={4}
+              itemsToScroll={1}
+              breakPoints={breakPoints}
+              renderArrow={customArrow}
             
+            >
+              {organisation.map((org, index) => {
+                return (
+                  <div className="logo-card">
+                    <div className="logo-container">
+                      <img src={org.logo} alt="logo" />
+                    </div>
+                  </div>
+                );
+              })}
+            </Carousel>
           </div>
         </section>
         <section class="description">
