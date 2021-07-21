@@ -55,12 +55,12 @@ function BlogInternal() {
         {/* Sec-2 Event Details*/}
         <section className="event-details">
           <div className="flex-event-details">
-            <div className="row-1">
-              <div className="event-sec1">
+            <div className="blog-internal-row">
+              <div className="blog-img-container">
                 <img src={article.image} alt="" />
               </div>
-              <div className="row-sec-2">
-                <div className="row-sec-heading">
+              <div className="blog-container">
+                <div className="blog-heading-container">
                   <div className="heading-text">
                     <h1>{article.title}</h1>
                   </div>
@@ -69,7 +69,7 @@ function BlogInternal() {
                   </div>
                 </div>
                 <div className="para-desc">
-                  <p id="one">By { article.author}</p>
+                  <p id="one">By {article.author}</p>
                   <p>{new Date(Number(article.date)).toLocaleDateString()}</p>
                 </div>
                 <div className="row-sec-para">
