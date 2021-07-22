@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function PostRow(props) {
   
   let date = new Date(Number(props.date)).toLocaleDateString();
-console.log(props._id)
+
   return (
     <div key={props.key}>
       <div className="card-1-healing">
@@ -21,7 +21,7 @@ console.log(props._id)
             </div>
           </div>
           <div className="heading-healing-body">
-            <h1>{props.title}</h1>
+            <h1>{props.title.substring(0, 30)}...</h1>
           </div>
           <div className="para-healing-body">
             <p>

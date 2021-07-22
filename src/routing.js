@@ -7,6 +7,7 @@ import Offering from "./components/offerings";
 import Blog from "./components/blog";
 import BlogInternal from "./components/bloginternal";
 import BlogList from "./components/bloglist";
+import SearchResult from "./components/searchresult";
 function Routing() {
   return (
     <Router>
@@ -19,7 +20,8 @@ function Routing() {
         <Route exact path="/offering" component={Offering}></Route>
         <Route exact path="/blog" component={Blog} />
         <Route exact path="/blog/:id" component={BlogInternal} />
-        <Route exact path="/blogs/:category" component={BlogList }/>
+        <Route exact path="/blogs/:category" component={BlogList} />
+        <Route exact path="/search" component={SearchResult} />
       </Switch>
     </Router>
   );

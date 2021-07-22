@@ -3,13 +3,19 @@ import React, { useEffect, useState } from "react";
 import Carousel, { consts } from "react-elastic-carousel";
 import { useHistory } from "react-router-dom";
 function Post() {
-  const [article, setArticle] = useState([]);
+  const [Article, setArticle] = useState([]);
   const history = useHistory();
 
   let breakPoints = [
-    { width: 1, itemsToShow: 1,itemsToScroll:1, pagination: false },
-    { width: 550, itemsToShow: 2,itemsToScroll:2, itemsToScroll: 2, pagination: false },
-    { width: 850, itemsToShow: 3,itemsToScroll:3, pagination: false },
+    { width: 1, itemsToShow: 1, itemsToScroll: 1, pagination: false },
+    {
+      width: 550,
+      itemsToShow: 2,
+      itemsToScroll: 2,
+      itemsToScroll: 2,
+      pagination: false,
+    },
+    { width: 850, itemsToShow: 3, itemsToScroll: 3, pagination: false },
     { width: 1150, itemsToShow: 5, itemsToScroll: 2 },
     { width: 1450, itemsToShow: 6, pagination: false },
     { width: 1750, itemsToShow: 7, pagination: false },
@@ -17,9 +23,8 @@ function Post() {
 
   useEffect(() => {
     async function getAticles() {
-      const article = await axios.get(
-        "https://trw-backend-api.herokuapp.com/blog/Blog1s"
-      );
+      const article = await axios.get("http://localhost:5000/blog/featured");
+
       setArticle(article.data);
     }
 
@@ -63,22 +68,30 @@ function Post() {
             breakPoints={breakPoints}
             renderArrow={customArrow}
           >
-            {article.map((data, index) => {
+            {Article.map((data, index) => {
               return (
                 <div key={index} className="card">
-                  <div>
+                  <div className="card-container">
                     <img src={data.image} alt="" />
                   </div>
                   <div className="content-card">
                     <div>
-                      <span className="ali">{data.title}</span>
-                      <span className={data.category==="Healing"?"head":"lead"}>{data.category}</span>
+                      <span className="ali">
+                        {data.title.substring(0, 15)}...
+                      </span>
+                      <span
+                        className={
+                          data.category === "Healing" ? "head" : "lead"
+                        }
+                      >
+                        {data.category}
+                      </span>
                     </div>
                     <div>
                       <p>
                         {data.description
                           .replace(/(<([^>]+)>)/gi, "")
-                          .substring(0, 200)}
+                          .substring(0, 100)}
                         ...
                       </p>
                     </div>

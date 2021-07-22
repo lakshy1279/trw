@@ -8,43 +8,45 @@ import { useParams } from "react-router-dom";
 function BlogInternal() {
   const { id } = useParams();
   const [article, setArticle] = useState([]);
+  const [healing, setHealing] = useState([]);
+  const [leading, setLeading] = useState([]);
+  const [otherBlog, setOtherBlog] = useState([]);
+
   useEffect(() => {
-    async function getArticle() {
+    async function getSingleArticle() {
       const article = await axios.get(
         `https://trw-backend-api.herokuapp.com/blog/update_blog1/${id}`
       );
 
       setArticle(article.data);
     }
-    getArticle();
+    async function getAticles() {
+      const article = await axios.get(
+        "https://trw-backend-api.herokuapp.com/blog/Blog1s"
+      );
+      setHealing(
+        article.data.filter((singleArticle) => {
+          return singleArticle.category.toLowerCase() === "healing";
+        })
+      );
+      setLeading(
+        article.data.filter((singleArticle) => {
+          return singleArticle.category.toLowerCase() === "leading";
+        })
+      );
+      setOtherBlog(
+        article.data.filter((singleArticle) => {
+          return (
+            singleArticle.category.toLowerCase() !== "leading" &&
+            singleArticle.category.toLowerCase() !== "healing"
+          );
+        })
+      );
+    }
+    getSingleArticle();
+    getAticles();
   }, []);
   console.log(article);
-  let cardData = [
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Healing",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Leading",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-    {
-      cardTitle: "Aliquam auctor",
-      cardPill: "Healing",
-      cardDesc:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit.In doloribus, accusantium, exercitationem velit hic etconsequatur aperiam qui cupiditate, similique alias remquas aliquam eligendi quam quibusdam unde minima vitae.",
-      cardAuth: "by Thomas Ulfa",
-      cardPublish: "4th July",
-    },
-  ];
   return (
     <div>
       <div className="container">
@@ -65,7 +67,13 @@ function BlogInternal() {
                     <h1>{article.title}</h1>
                   </div>
                   <div className="heading-label">
-                    <button className="label">{article.category}</button>
+                    <button
+                      className={
+                        article.category === "Leading" ? "lead-label" : "label"
+                      }
+                    >
+                      {article.category}
+                    </button>
                   </div>
                 </div>
                 <div className="para-desc">
@@ -190,23 +198,55 @@ function BlogInternal() {
                 <h1>Related Posts</h1>
               </div>
               <div className="healing-button">
-                <button className="view-all">Healing</button>
+                <button className="view-all">{article.category}</button>
               </div>
             </div>
             <div className="healing-card">
-              {cardData.map((cardItem, index) => {
-                return (
-                  <PostRow
-                    key={index}
-                    title={cardItem.cardTitle}
-                    date={cardItem.cardPublish}
-                    author={cardItem.cardAuth}
-                    description={cardItem.cardDesc}
-                    img="/assests/images/card-1.jfif"
-                    buttonClass="button-healing"
-                  />
-                );
-              })}
+              {(() => {
+                if (article.category?.toLowerCase() === "healing")
+                  return healing.map((item, index) => {
+                    return (
+                      <PostRow
+                        key={index}
+                        title={item.title}
+                        date={item.date}
+                        author={item.author}
+                        description={item.description}
+                        img={item.image}
+                        buttonClass="button-healing"
+                      />
+                    );
+                  });
+                if (article.category?.toLowerCase() === "leading")
+                  return leading.map((item, index) => {
+                    return (
+                      <PostRow
+                        key={index}
+                        title={item.title}
+                        date={item.date}
+                        author={item.author}
+                        description={item.description}
+                        img={item.image}
+                        buttonClass="button-healing leading-but"
+                      />
+                    );
+                  });
+                else;
+                return  otherBlog.map((item, index) => {
+                  return (
+                    <PostRow
+                      key={index}
+                      title={item.title}
+                      date={item.date}
+                      author={item.author}
+                      description={item.description}
+                      img={item.image}
+                      _id={item._id}
+                      buttonClass="button-healing"
+                    />
+                  );
+                });
+              })()}
             </div>
           </div>
         </section>
