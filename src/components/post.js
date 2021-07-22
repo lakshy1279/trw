@@ -23,7 +23,7 @@ function Post() {
 
   useEffect(() => {
     async function getAticles() {
-      const article = await axios.get("http://localhost:5000/blog/featured");
+      const article = await axios.get("https://lakshy12.herokuapp.com/blog/featured");
 
       setArticle(article.data);
     }

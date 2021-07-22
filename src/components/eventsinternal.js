@@ -46,7 +46,7 @@ function EventsInternal({match})
         setFlag(1);
       });
     async function getOrganisation() {
-      const org = await axios.get(`http://localhost:5000/organisation/fetch`);
+      const org = await axios.get(`https://lakshy12.herokuapp.com/organisation/fetch`);
       setOrganisation(org.data);
     }
     getOrganisation();
