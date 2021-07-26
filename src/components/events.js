@@ -51,36 +51,42 @@ function Event()
       {/* <!-- More Events --> */}
       <section className="more-events">
       <h1>More Events</h1>
-      <MoreEvents/>
+      <div className="more">
+        {moreEvents.slice(0, 4).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.eventby}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
       </section>
       {/* <!-- Recently Added Events --> */}
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-          {recEvents.length>0&&recEvents.slice(0,4).map((item)=>{
-            return (<div className="more-img1">
-              <div className="recent-event-img">
-            <img src={item.image} alt="" />
-            </div>
-            <div
-              style={{color: '#18a558', backgroundColor: 'white'}}
-              className="top-right"
-            >
-              {item.category}
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                 {item.title}
-                </h1>
-                <p id="date">{new Date(item.fromdate).getDate()} {new Date(item.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(item.fromdate).getFullYear()}</p>
-                <p id="time">IST: {new Date(item.fromdate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, CET: {new Date(item.enddate).getHours()}:{new Date(item.fromdate).getUTCMinutes()}, EST: 19:00</p>
-                <p id="by">{item.eventby}</p>
-              </div>
-              </div>
-          </div>)
-          })}
-        </div>
+        {moreEvents.slice(4, moreEvents.length).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.eventby}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
       </section>
     </div>
     <section class="humanity">

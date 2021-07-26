@@ -14,6 +14,7 @@ function EventsInternal({match})
   const [flag,setFlag]=useState(0);
   const [description,setDescription]=useState([]);
   const [organisation, setOrganisation] = useState([]);
+  const [moreEvents,setMoreEvents]=useState([]);
   let breakPoints = [
     { width: 1, itemsToShow: 1, pagination: false },
     {
@@ -28,7 +29,7 @@ function EventsInternal({match})
   ];
 
   
-  useEffect(()=>{
+  useEffect(async ()=>{
     console.log(match.params);
     const { id } = match.params;
     console.log(id);
@@ -50,6 +51,12 @@ function EventsInternal({match})
       setOrganisation(org.data);
     }
     getOrganisation();
+    const eventlist=await axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events');
+    const sorteddata=await eventlist.data;
+    console.log("sorted data",sorteddata);
+     let temp=sorteddata;
+     console.log(temp);
+     setMoreEvents(temp);
   }, []);
 
   function customArrow({ type, onClick, isEdge }) {
@@ -175,7 +182,22 @@ function EventsInternal({match})
           </div>
         </section>
         <div style={{ marginTop: "109px", borderTop: "1px solid #cbcbd4" }}>
-          <MoreEvents />
+        <div className="more">
+        {moreEvents.slice(0, 4).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.facilitator[0]}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
         </div>
         <hr
           style={{

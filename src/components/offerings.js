@@ -2,26 +2,108 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './navbar';
 import Footer from './footer';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MoreEvents from './moreevent';
+import { useAlert } from 'react-alert';
+import { func } from 'prop-types';
 function Offering()
 {
   const [moreEvents,setMoreEvents]=useState([]);
+  const [healingEvents,setHealingEvents]=useState([]);
+  const [leadingEvents,setLeadingEvents]=useState([]);
+  const [category,setCategory]=useState([]);
+  const [query,setQuery]=useState("");
+  const [flag,setFlag]=useState(false);
   function sortFunction(a,b){  
     var dateA = new Date(a.fromdate).getTime();
     var dateB = new Date(b.fromdate).getTime();
     return dateA > dateB ? 1 : -1;  
 };
-  useEffect(()=>{
-    axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
+const history = useHistory();
+const alert = useAlert();
+  useEffect(async ()=>{
+    const eventlist=await axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events');
         //  console.log(res.data);
-        const sorteddata=await res.data.sort(sortFunction);
+        const sorteddata=await eventlist.data.sort(sortFunction);
         console.log("sorted data",sorteddata);
          let temp=sorteddata;
          console.log(temp);
          setMoreEvents(temp);
-    })
+         const healingevent=eventlist.data.filter((item)=>{
+             if(item.category.toLowerCase()==='healing')
+             {
+               return item;
+             }
+         });
+         setHealingEvents(healingevent);
+         const leadingEvent=await eventlist.data.filter((item)=>{
+          if(item.category.toLowerCase()==='leading')
+          {
+            return item;
+          }
+      });
+      setLeadingEvents(leadingEvent);
+      axios
+      .get(`https://lakshy12.herokuapp.com/blog/get_event_cat`)
+      .then((res) => {
+        const eventCategories = res.data;
+        console.log(eventCategories);
+         setCategory(eventCategories);
+      });
   },[]);
+  function handleQuery(e)
+  {
+     setQuery(e.target.value.trim());
+  }
+  function searchResult()
+  {
+    console.log(query);
+    if (!query) {
+      alert.show("Please Enter Something To Search");
+    } else {
+      const result = moreEvents.filter((event) => {
+        if (
+          event.title.toLowerCase() === query.toLowerCase() ||
+          event.category.toLowerCase() === query.toLowerCase() ||
+          (event.facilitator.length>0&&event.facilitator.map((data)=>{
+            if(data===query.toLowerCase())
+              return true;
+          }))||(event.organisation.length>0&&event.organisation.map((data)=>{
+            if(data===query.toLowerCase())
+              return true;
+          }))||(event.speaker.length>0&&event.speaker.map((data)=>{
+            if(data===query.toLowerCase())
+              return true;
+          }))
+        ) {
+          return event;
+        }
+      });
+      localStorage.setItem("searcheventResult", JSON.stringify(result));
+      history.push("/searchevent");
+    }
+  }
+  function changeFlag()
+  {
+    if(!flag)
+    setFlag(true);
+    else
+    setFlag(false);
+  }
+  function togglebtn() {
+    if (_hide.innerText === "Hide") {
+      _filter.className="fadeOut"
+      _hide.innerText = "Filter";
+    } else {
+      _filter.className="fadeIn"
+      _hide.innerText = "Hide";
+    }
+    console.log("button clicked");
+    console.log(_hide.innerText);
+    console.log(_filter.className);
+  }
+  let _hide=React.createRef();
+  let _filter=React.createRef();
     return ( <div>
          <section class="offering-sec1" id="sec1">
             <Navbar/>
@@ -172,54 +254,55 @@ function Offering()
       </section>
       <section class="search-filter">
         <div class="search-filter-main">
-          <div class="search-bar">
+          <div class="search-bar1">
             <div class="bar">
               <input
                 type="text"
                 placeholder="search for events"
                 class="input-text"
-                name=""
-                id=""
+                onChange={(e)=>handleQuery(e)}
               />
             </div>
             <div class="btn-class">
-              <button class="search-btn">
+              <button class="search-btn" onClick={searchResult}>
                 <img src="/assests/images/Vector1.svg" alt="" /> Search
               </button>
             </div>
             <div class="filter">
-              <button class="search-btn" onclick="togglebtn()" id="hide">
-                <img src="/assests/images/Vector2.svg" alt="" /><span id="hide-text">Filter</span>
+              <button class="search-btn" onClick={togglebtn} id="hide">
+                <img src="/assests/images/Vector2.svg" alt="" /><span id="hide-text" ref={function(el)
+                {
+                   _hide=el;
+                }}>Filter</span>
               </button>
             </div>
           </div>
         </div>
       </section>
       {/* filters */}
-      <section class="filters" id="filter">
+      <section className="fadeOut" id="filter" ref={function(el)
+                {
+                   _filter=el;
+                }} >
         <div class="filters-main">
           <div class="dropdown-div one">
             <ul>
-              <li class="dropdown">
-                <a href="#" data-toggle="dropdown"
-                  > <span class="lan"> Category </span> <img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
+            <li class="dropdown">
+                <a data-toggle="dropdown"
+                  onClick={changeFlag}> <span class="lan"> Category </span> <img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
                 <hr class="line-one" />
-                <ul class="dropdown-menu">
+                <ul class={"dropdown-menu "+(flag?'show':'hide')}>
+                {category.length>0&&category.map((data)=>{
+                return (
                   <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Healing</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Healing</span
-                      ></a
-                    >
-                  </li>
+                  <a href="#"
+                    ><input type="checkbox" name="" id="check" /><span
+                      >{data.event_category}</span>
+                    <hr class="line"
+                  /></a>
+                </li>
+                )
+              })}
                 </ul>
               </li>
             </ul>
@@ -410,200 +493,57 @@ function Offering()
         {/* See all events */}
         <section class="see-all-events">
         <h1 id="see-all">See All Events</h1>
-        <MoreEvents/>
-        {/* <div class="more">
-          {moreEvents.length>0&&moreEvents.slice(0,4).map((data)=>{
-            return (  <div class="more-img1">
-            <img src={data.image} alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              {data.category}
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-              <Link to={`/events/${data._id}`}>
-                <h1>
-                 {data.title}
-                </h1>
-                </Link>
-                <p id="date">{new Date(data.fromdate).getDate()} {new Date(data.fromdate).toLocaleDateString('default',{month:'long'})} {new Date(data.fromdate).getFullYear()}</p>
-                <p id="time">IST: {new Date(data.fromdate).getHours()}:{new Date(data.fromdate).getUTCMinutes()}, CET: {new Date(data.enddate).getHours()}:{new Date(data.fromdate).getUTCMinutes()}, EST: 19:00</p>
-                <p id="by">{data.eventby}</p>
-              </div>
-            </div>
-          </div>)
-          })}
-      </div> */}
+        <div className="more">
+        {moreEvents.slice(0, 4).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.facilitator[0]}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
-      <section class="see-all-events">
-        <h1 id="see-all">See All Events</h1>
-        <MoreEvents/>
-         {/* <div class="more"> */}
-          {/* <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-              
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-3.jpg" alt="" />
-            <div
-              style={{color: "#4269f2" ,backgroundColor:"white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-          </div>
-        </div>*/ }
-      {/* </div> */}
-      </section>
+        <div className="more">
+        {healingEvents.slice(0, 4).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.facilitator[0]}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
-      <section class="see-all-events">
-        <h1 id="see-all">See All Events</h1>
-        <MoreEvents/>
-        {/* <div class="more">
-          <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-3.jpg" alt="" />
-            <div
-              style={{color: "#4269f2" ,backgroundColor:"white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-          </div>
-        </div>
-      </div>  */}
-      </section>
+        <div className="more">
+        {leadingEvents.slice(0, 4).map((item, index) => {
+                    return (
+                      <MoreEvents
+                        key={index}
+                        image={item.image}
+                        category={item.category}
+                        title={item.title}
+                        fromdate={item.fromdate}
+                        enddate={item.enddate}
+                        eventby={item.facilitator[0]}
+                        _id={item._id}
+                      />
+                    );
+                  })}
+                  </div>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
       <section class="next-prev">
         <div class="next-prev-main">

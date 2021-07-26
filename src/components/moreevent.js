@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-function MoreEvents()
+function MoreEvents(props)
 {
-    const [moreEvents,setMoreEvents]=useState([]);
-  function sortFunction(a,b){  
-    var dateA = new Date(a.fromdate).getTime();
-    var dateB = new Date(b.fromdate).getTime();
-    return dateA > dateB ? 1 : -1;  
-};
-  useEffect(()=>{
-    axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
-        //  console.log(res.data);
-        const sorteddata=await res.data.sort(sortFunction);
-        console.log("sorted data",sorteddata);
-         let temp=sorteddata;
-         console.log(temp);
-         setMoreEvents(temp);
-    })
-  },[]);
-    return ( <div>
-        <div className="more">
-          {moreEvents.length>0&&moreEvents.slice(0,4).map((item)=>{
-            return (<div className="more-img1">
+ 
+  const item=props;
+    return ( <div key={item.key}>
+      
+            <div className="more-img1">
             <img src={item.image} alt="" />
             <div
               style={{color: '#18a558', backgroundColor: 'white'}}
@@ -42,8 +27,6 @@ function MoreEvents()
                 <p id="by">{item.eventby}</p>
               </div>
               </div>
-          </div>)
-          })}
         </div>
 </div>)
 }

@@ -8,6 +8,7 @@ import Blog from "./components/blog";
 import BlogInternal from "./components/bloginternal";
 import BlogList from "./components/bloglist";
 import SearchResult from "./components/searchresult";
+import EventSearchResult from "./components/eventsearchresult";
 function Routing() {
   return (
     <Router>
@@ -22,6 +23,7 @@ function Routing() {
         <Route exact path="/blog/:id" component={BlogInternal} />
         <Route exact path="/blogs/:category" component={BlogList} />
         <Route exact path="/search" component={SearchResult} />
+        <Route exact path="/searchevent" component={EventSearchResult}></Route>
       </Switch>
     </Router>
   );
