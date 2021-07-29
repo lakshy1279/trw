@@ -1038,6 +1038,9 @@ time.icon span {
 .dd-input + .dd-menu {
   display: none;
 }
+.dd-input:checked + .dd-menu {
+  display: block;
+}
 .dd-menu li {
   padding: 10px 20px;
   cursor: pointer;
@@ -1067,12 +1070,7 @@ time.icon span {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 3rem;
-}
-.org-group-cards-sec-2 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 3rem;
-  margin-top: 65px;
+  grid-row-gap: 3rem;
 }
 .div-img {
   background: #ffffff;

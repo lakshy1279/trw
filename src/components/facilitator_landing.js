@@ -10,7 +10,7 @@ function Facilitator_landing(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [facilitatorPerPage] = useState(6);
     useEffect(()=>{
-        axios.get(`https://lakshy12.herokuapp.com/organisation/fetch`).then((res)=>{
+        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch`).then((res)=>{
             console.log(res.data);
               setFacilitator(res.data);
         })
@@ -70,25 +70,12 @@ function Facilitator_landing(props) {
           </div>
             <div class="group-cards sec-1 ">
               <div class="org-group-cards-sec-1">
-                {currentfacilitator.length>0&&currentfacilitator.slice(0,3).map((item)=>{
+                {currentfacilitator.length>0&&currentfacilitator.slice(0,currentfacilitator.length).map((item)=>{
                     return (<Link to={`/facilitator/${item._id}`}><div class="card">
                     <div class="div-img">
-                      <img src={item.logo} alt="" />
+                      <img src={item.photo} alt="" />
                       <div>
-                        <span><p id="even">{item.name}</p></span>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>)
-                })}
-              </div>
-              <div class="org-group-cards-sec-2">
-              {currentfacilitator.length>3&&currentfacilitator.slice(3,currentfacilitator.length).map((item)=>{
-                    return (<Link to={`/facilitator/${item._id}`}><div class="card">
-                    <div class="div-img">
-                      <img src={item.logo} alt="" />
-                      <div>
-                        <span><p id="even">{item.name}</p></span>
+                        <span><p id="even">{item.firstname}</p></span>
                       </div>
                     </div>
                   </div>

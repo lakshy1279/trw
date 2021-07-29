@@ -40,7 +40,7 @@ function Navbar() {
           <ul className="right-menu">
             <li>
               <a
-                href="/organisation"
+                href="/facilitator_landing"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -49,7 +49,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                href="/organisation_landing"
+                href={socialmedia.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -8,7 +8,7 @@ import Pagination from './pagination';
 function Organisation_landing(props) {
     const [organisation,setOrganisation]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [OrganisationPerPage] = useState(6);
+    const [OrganisationPerPage,setOrganisationPage] = useState(6);
     useEffect(()=>{
         axios.get(`https://lakshy12.herokuapp.com/organisation/fetch`).then((res)=>{
             console.log(res.data);
@@ -22,6 +22,15 @@ function Organisation_landing(props) {
     currentOrganisation = organisation.slice(indexOfFirstOrganisation, indexOfLastOrganisation);
   }
   const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+  function handleChange(e)
+  {
+      const no=e.target.innerText;
+      const records=no.slice(5,no.length);
+      setOrganisationPage(records);
+  }
+  const temp=()=>{
+      
+  }
     return (
         <div>
             <section class="offering-sec1" id="sec1">
@@ -51,26 +60,23 @@ function Organisation_landing(props) {
             <label class="dropdown-button">
 
               <div class="dd-button">
-                View 6 Profiles
+                View {OrganisationPerPage} Profiles
               </div>
             
               <input type="checkbox" class="dd-input" id="test"/>
             
               <ul class="dd-menu">
-                <li>Action</li>
-                <li>Another action</li>
-                <li>Something else here</li>
-                <li class="divider"></li>
-                <li>
-                  <a href="http://rane.io">Link to Rane.io</a>
-                </li>
+                <li onClick={(e)=>handleChange(e)}>View 6</li>
+                <li onClick={(e)=>handleChange(e)}>View 12</li>
+                <li  onClick={(e)=>handleChange(e)}>View 18</li>
+                <li  onClick={(e)=>handleChange(e)}>View 24</li>
               </ul>
               
             </label>
           </div>
             <div class="group-cards sec-1 ">
               <div class="org-group-cards-sec-1">
-                {currentOrganisation.length>0&&currentOrganisation.slice(0,3).map((item)=>{
+                {currentOrganisation.length>0&&currentOrganisation.slice(0,currentOrganisation.length).map((item)=>{
                     return (<Link to={`/organisation/${item._id}`}><div class="card">
                     <div class="div-img">
                       <img src={item.logo} alt="" />
@@ -82,7 +88,7 @@ function Organisation_landing(props) {
                   </Link>)
                 })}
               </div>
-              <div class="org-group-cards-sec-2">
+              {/* <div class="org-group-cards-sec-2">
               {currentOrganisation.length>3&&currentOrganisation.slice(3,currentOrganisation.length).map((item)=>{
                     return (<Link to={`/organisation/${item._id}`}><div class="card">
                     <div class="div-img">
@@ -94,7 +100,7 @@ function Organisation_landing(props) {
                   </div>
                   </Link>)
                 })}
-              </div>
+              </div> */}
             </div>
         </div>
         <div style={{marginTop:"2%",display:'flex',justifyContent:'center'}}>

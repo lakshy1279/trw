@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 function Community()
 {
   const [faciliator,setFacilitator]=useState([]);
@@ -15,11 +15,13 @@ function Community()
         <div class="community-head">
           <div><h2>Our Community</h2></div>
           <div>
+          <Link to="/organisation_landing">
             <button class="button" style={{marginTop: '0'}}>
               <span class="button-font-margin">View all</span>
               <i class="fas fa-chevron-right"></i
               ><i class="fas fa-chevron-right"></i>
             </button>
+            </Link>
           </div>
         </div>
         <div class="community-body">

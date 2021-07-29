@@ -5,13 +5,14 @@ import axios from "axios";
 import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
 import { useParams } from "react-router-dom";
+import Facilitator from './facilitator';
 function FacilitatorInfo(props) {
   const { id } = useParams();
     const [facilitator,setFacilitator]=useState({});
     const [Events,setEvents]=useState([]);
     const [flag,setFlag]=useState(0);
     useEffect(()=>{
-        axios.get(`https://lakshy12.herokuapp.com/organisation/fetch/${id}`).then((res)=>{
+        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
             console.log(res.data);
             setFacilitator(res.data);
             setEvents(res.data.events);
@@ -55,9 +56,9 @@ function FacilitatorInfo(props) {
         </div>
       </section>
       <section class="see-all-events">
-        <h1 id="see-all">Events by {facilitator.name}</h1>
+        <h1 id="see-all">Events by {facilitator.firstname}{facilitator.lastname}</h1>
         <div class="more">
-        {flag>0&&Events.length>0&&Events.slice(0, 4).map((item, index) => {
+        {/* {flag>0&&facilitator.length>0&&Events.slice(0, 4).map((item, index) => {
                     return (
                       <MoreEvents
                         key={index}
@@ -70,7 +71,7 @@ function FacilitatorInfo(props) {
                         _id={item._id}
                       />
                     );
-                  })}
+                  })} */}
         </div>
       </section>
 
