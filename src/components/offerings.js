@@ -12,8 +12,14 @@ function Offering()
   const [healingEvents,setHealingEvents]=useState([]);
   const [leadingEvents,setLeadingEvents]=useState([]);
   const [category,setCategory]=useState([]);
+  const [language,setLanguage]=useState([]);
+  const [searchevent,setsearchEvent]=useState([]);
+  const [theme,setTheme]=useState([]);
   const [query,setQuery]=useState("");
   const [flag,setFlag]=useState(false);
+  const [flag1,setFlag1]=useState(false);
+  const [flag2,setFlag2]=useState(false);
+  const [flag3,setFlag3]=useState(false);
   function sortFunction(a,b){  
     var dateA = new Date(a.fromdate).getTime();
     var dateB = new Date(b.fromdate).getTime();
@@ -29,6 +35,7 @@ const alert = useAlert();
          let temp=sorteddata;
          console.log(temp);
          setMoreEvents(temp);
+         setsearchEvent(temp);
          const healingevent=eventlist.data.filter((item)=>{
              if(item.category.toLowerCase()==='healing')
              {
@@ -49,6 +56,20 @@ const alert = useAlert();
         const eventCategories = res.data;
         console.log(eventCategories);
          setCategory(eventCategories);
+      });
+      axios
+      .get(`https://lakshy12.herokuapp.com/language/fetch`)
+      .then((res) => {
+        const eventCategories = res.data;
+        console.log(eventCategories);
+         setLanguage(eventCategories);
+      });
+      axios
+      .get(`https://trw-backend-api.herokuapp.com/blog/get_event_type`)
+      .then((res) => {
+        const eventCategories = res.data;
+        console.log(eventCategories);
+         setTheme(eventCategories);
       });
   },[]);
   function handleQuery(e)
@@ -83,12 +104,29 @@ const alert = useAlert();
       history.push("/searchevent");
     }
   }
-  function changeFlag()
+  function changeFlag(indicator)
   {
+    if(indicator==0)
+    {
     if(!flag)
     setFlag(true);
     else
     setFlag(false);
+    }
+    else if(indicator==1)
+    {
+      if(!flag1)
+     setFlag1(true);
+     else
+     setFlag1(false);
+    }
+    else if(indicator==2)
+    {
+      if(!flag2)
+      setFlag2(true);
+      else
+     setFlag2(false);
+    }
   }
   function togglebtn() {
     if (_hide.innerText === "Hide") {
@@ -102,8 +140,17 @@ const alert = useAlert();
     console.log(_hide.innerText);
     console.log(_filter.className);
   }
+  function filterSearch(type,e)
+  {
+    console.log(e.target.checked)
+     if(type==category)
+     {
+       console.log(e.target.value);
+     }
+  }
   let _hide=React.createRef();
   let _filter=React.createRef();
+  const curentDate=new Date().getDate();
     return ( <div>
          <section class="offering-sec1" id="sec1">
             <Navbar/>
@@ -289,14 +336,14 @@ const alert = useAlert();
             <ul>
             <li class="dropdown">
                 <a data-toggle="dropdown"
-                  onClick={changeFlag}> <span class="lan"> Category </span> <img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
+                  onClick={()=>changeFlag(0)}> <span class="lan"> Category </span> <img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
                 <hr class="line-one" />
                 <ul class={"dropdown-menu "+(flag?'show':'hide')}>
                 {category.length>0&&category.map((data)=>{
                 return (
                   <li>
                   <a href="#"
-                    ><input type="checkbox" name="" id="check" /><span
+                    ><input type="checkbox" value={data.event_category} id="check" onClick={(e)=>filterSearch(category,e)} /><span
                       >{data.event_category}</span>
                     <hr class="line"
                   /></a>
@@ -310,80 +357,26 @@ const alert = useAlert();
           <div class="dropdown-div two">
             <ul>
               <li class="dropdown">
-                <a href="#" data-toggle="dropdown"
+                <a  data-toggle="dropdown"  onClick={()=>changeFlag(1)}
                   > <span class="lan"> Theme </span><img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
                 <hr class="line-one" />
-                <ul class="dropdown-menu">
+                <ul class={"dropdown-menu "+(flag1?'show':'hide')}>
+                  {theme.length>0&&theme.map((item)=>{
+                    return (<li>
+                      <a href="#"
+                        ><input type="checkbox" name="" id="check"  />
+                        <span>{item.event_type}</span>
+                        <hr class="line"
+                      /></a>
+                    </li>)
+                  })}
                   <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" />
-                      <span>Colonisation and Geopolitics</span>
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Slavery</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Genocide / Ethnic Cleansing</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Castesim</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <input type="checkbox" name="" id="check" /><span>
-                        Religious Divisons</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Gender-based Oppression</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span>
-                        Environmental Degradation</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span>
-                        Economic Disparity</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Other</span
-                      ></a
-                    >
-                  </li>
+                      <a href="#"
+                        ><input type="checkbox" name="" id="check" />
+                        <span>Other</span>
+                        <hr class="line"
+                      /></a>
+                    </li>
                 </ul>
               </li>
             </ul>
@@ -424,68 +417,39 @@ const alert = useAlert();
           <div class="dropdown-div one">
             <ul>
               <li class="dropdown">
-                <a href="#" data-toggle="dropdown"
+                <a  data-toggle="dropdown"  onClick={()=>changeFlag(2)}
                   > <span class="lan"> Language </span><img src="/assests/images/Arrow.svg" class="icon-arrow" alt=""/></a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span>English</span>
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Spanish</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >French</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >German</span
-                      >
-                      <hr class="line"
-                    /></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><input type="checkbox" name="" id="check" /><span
-                        >Hindi</span
-                      ></a
-                    >
-                  </li>
+                  <ul class={"dropdown-menu "+(flag2?'show':'hide')}>
+                    {language.length>0&&language.map((item)=>{
+                      return (<li>
+                        <a href="#"
+                          ><input type="checkbox" name="" id="check" /><span>{item.language}</span>
+                          <hr class="line"
+                        /></a>
+                      </li>)
+                    })}
                 </ul>
               </li>
             </ul>
           </div>
           <div class="calendar">
             <div class="calendar-div1">
-              <span class="month">July</span>
+              <span class="month">{new Date().toLocaleDateString('default',{month:'long'})}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">19</span>
+              <span class="calender-date">{curentDate}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">20</span>
+              <span class="calender-date">{(curentDate+1)<=31?(curentDate+1):(1)}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">21</span>
+              <span class="calender-date">{(curentDate+2)<=31?(curentDate+2):(2)}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">22</span>
+              <span class="calender-date">{(curentDate+3)<=31?(curentDate+3):(3)}</span>
             </div>
             <div>
-              <span class="calender-date">23</span>
+              <span class="calender-date">{(curentDate+4)<=31?(curentDate+4):(4)}</span>
             </div>
           </div>
         </div>
@@ -511,6 +475,7 @@ const alert = useAlert();
                   </div>
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
+      <h1 id="see-all">Healing Events</h1>
         <div className="more">
         {healingEvents.slice(0, 4).map((item, index) => {
                     return (
@@ -528,6 +493,7 @@ const alert = useAlert();
                   })}
                   </div>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
+      <h1 id="see-all">Leading Events</h1>
         <div className="more">
         {leadingEvents.slice(0, 4).map((item, index) => {
                     return (

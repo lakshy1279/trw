@@ -40,7 +40,7 @@ function Navbar() {
           <ul className="right-menu">
             <li>
               <a
-                href={socialmedia.facebook}
+                href="/organisation"
                 target="_blank"
                 rel="noopener noreferrer"
               >
