@@ -92,7 +92,7 @@ function Event()
     <section class="humanity">
       <div class="humanity-cont">
         <div>
-          <img src="/assests/images/image.png" alt="" />
+          <img src="/assests/images/homeimage.png" alt="" />
         </div>
         <div style={{paddingRight: '50px' ,paddingLeft: '20px'}}>
           <h2>

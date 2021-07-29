@@ -49,7 +49,7 @@ function Navbar() {
             </li>
             <li>
               <a
-                href={socialmedia.twitter}
+                href="/organisation_landing"
                 target="_blank"
                 rel="noopener noreferrer"
               >

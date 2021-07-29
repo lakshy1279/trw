@@ -991,6 +991,117 @@ time.icon span {
   line-height: 24px;
   text-align: justify;
 }
+/* Presented Partners */
+.dropdown-button-sec
+{
+  margin-bottom: 40px;
+}
+.dropdown-button {
+  display: inline-block;
+  position: relative;
+}
+.dd-button {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 8px rgb(0 0 0 / 25%);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.5s;
+}
+.dd-button:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+.dd-input {
+  display: none;
+}
+.dd-menu {
+  position: absolute;
+  top: 100%;
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 8px rgb(0 0 0 / 25%);
+  list-style-type: none;
+}
+.dd-input + .dd-menu {
+  display: none;
+}
+.dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dd-menu li a {
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
+}
+.partners-main h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 32px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.partner-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.org-group-cards-sec-1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 3rem;
+}
+.org-group-cards-sec-2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 3rem;
+  margin-top: 65px;
+}
+.div-img {
+  background: #ffffff;
+  box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  text-align: center;
+}
+.card {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+}
+.card img {
+  padding: 28px 38px;
+  width: 100%;
+  min-height: 240px;
+  max-width: 264px;
+  max-height: 240px;
+  height: 100%;
+  object-fit: contain;
+}
+.card p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  position: relative;
+  bottom: 22px;
+}
 
 /* Contact US */
 

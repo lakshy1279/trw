@@ -10,6 +10,7 @@ import BlogList from "./components/bloglist";
 import SearchResult from "./components/searchresult";
 import EventSearchResult from "./components/eventsearchresult";
 import Organisation from "./components/organisation";
+import Organisation_landing from "./components/organisation_landing";
 function Routing() {
   return (
     <Router>
@@ -25,7 +26,8 @@ function Routing() {
         <Route exact path="/blogs/:category" component={BlogList} />
         <Route exact path="/search" component={SearchResult} />
         <Route exact path="/searchevent" component={EventSearchResult}></Route>
-        <Route exact path="/organisation" component={Organisation}></Route>
+        <Route exact path="/organisation/:id" component={Organisation}></Route>
+        <Route exact path="/organisation_landing" component={Organisation_landing}></Route>
       </Switch>
     </Router>
   );
