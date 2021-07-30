@@ -12,7 +12,7 @@ function FacilitatorInfo(props) {
     const [Events,setEvents]=useState([]);
     const [flag,setFlag]=useState(0);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/facilitator/fetch/${id}`).then((res)=>{
+        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
             console.log(res.data);
             setFacilitator(res.data);
             setEvents(res.data.events);
