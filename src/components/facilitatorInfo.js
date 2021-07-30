@@ -12,7 +12,7 @@ function FacilitatorInfo(props) {
     const [Events,setEvents]=useState([]);
     const [flag,setFlag]=useState(0);
     useEffect(()=>{
-        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
+        axios.get(`http://localhost:5000/facilitator/fetch/${id}`).then((res)=>{
             console.log(res.data);
             setFacilitator(res.data);
             setEvents(res.data.events);
@@ -29,19 +29,25 @@ function FacilitatorInfo(props) {
         <div class="org-main">
           <div class="org-main-sec-1">
             <div class="org-image">
-              <img src={facilitator.logo} alt="" />
+              <img src={facilitator.photo} alt="" />
             </div>
             <div class="org-details-info">
-              <div class="header">
-                <h1>{facilitator.name}</h1>
+              <div class="header" style={{marginBottom:"24px"}}>
+                <h1>{facilitator.firstname}{' '}{facilitator.lastname}</h1>
               </div>
-              <div class="link">
-                <i class="fas fa-external-link-alt"></i>
-                <span id="link-blue"><a target="_blank" style={{color:'blue'}} href={facilitator.url}>{facilitator.url}</a></span>
+
+              <div className="link" style={{marginBottom:"24px"}}>
+                <i class="fas fa-phone-alt"></i>
+                <span id="link-blue">{facilitator.contactno}</span>
+              </div>
+              <div className="link" style={{marginBottom:"24px"}}>
+                <span class="envelope">{facilitator.email}</span>
               </div>
               <div class="para">
                 <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam. Id venenatis velit eu in commodo venenatis cras.
+                {flag>0&&renderHTML(facilitator.profile
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(0, 691))}
                 </p>
               </div>
             </div>
@@ -49,16 +55,18 @@ function FacilitatorInfo(props) {
           <div class="org-main-sec-2">
             <div class="paragraphtwo">
               <p>
-             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas vitae eget turpis. Imperdiet congue viverra blandit diam. Id venenatis velit eu in commodo venenatis cras.
+              {flag>0&&renderHTML(facilitator.profile
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(691))}
               </p>
             </div>
           </div>
         </div>
       </section>
       <section class="see-all-events">
-        <h1 id="see-all">Events by {facilitator.firstname}{facilitator.lastname}</h1>
+        <h1 id="see-all">Events by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
         <div class="more">
-        {/* {flag>0&&facilitator.length>0&&Events.slice(0, 4).map((item, index) => {
+        {flag>0&&Events.length>0&&Events.slice(0, 4).map((item, index) => {
                     return (
                       <MoreEvents
                         key={index}
@@ -71,12 +79,12 @@ function FacilitatorInfo(props) {
                         _id={item._id}
                       />
                     );
-                  })} */}
+                  })}
         </div>
       </section>
 
       <section class="see-all-events mt">
-        <h1 id="see-all">Programs by {facilitator.name}</h1>
+        <h1 id="see-all">Programs by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
         <div class="more">
           <div class="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />

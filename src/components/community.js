@@ -14,7 +14,12 @@ function Community()
         <section class="community">
         <div class="community-head">
           <div><h2>Our Community</h2></div>
-          <div>
+        </div>
+        <div class="community-body">
+          <div class="part-sec">
+            <div style={{display:"flex",justifyContent:"space-between"}}>
+              <h1>Partners</h1>
+              <div>
           <Link to="/organisation_landing">
             <button class="button" style={{marginTop: '0'}}>
               <span class="button-font-margin">View all</span>
@@ -23,11 +28,6 @@ function Community()
             </button>
             </Link>
           </div>
-        </div>
-        <div class="community-body">
-          <div class="part-sec">
-            <div>
-              <h1>Partners</h1>
             </div>
             <br />
             <div class="partners">
@@ -47,9 +47,19 @@ function Community()
             </div>
           </div>
           <div class="fact-sec">
-            <div>
+            <div style={{display:"flex",justifyContent:"space-between"}}>
               <h1>Faciliators</h1>
+              <div>
+          <Link to="/facilitator_landing">
+            <button class="button" style={{marginTop: '0'}}>
+              <span class="button-font-margin">View all</span>
+              <i class="fas fa-chevron-right"></i
+              ><i class="fas fa-chevron-right"></i>
+            </button>
+            </Link>
+          </div>
             </div>
+            
             <br />
             <div class="partners">
               {faciliator.length>0&&faciliator.map((data)=>{

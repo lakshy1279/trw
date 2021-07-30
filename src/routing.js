@@ -13,6 +13,7 @@ import Organisation from "./components/organisation";
 import FacilitatorInfo from "./components/facilitatorInfo";
 import Organisation_landing from "./components/organisation_landing";
 import Facilitator_landing from "./components/facilitator_landing";
+import Program from "./components/program";
 function Routing() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function Routing() {
         <Route exact path="/facilitator/:id" component={FacilitatorInfo}></Route>
         <Route exact path="/organisation_landing" component={Organisation_landing}></Route>
          <Route exact path="/facilitator_landing" component={Facilitator_landing}></Route>
+         <Route exact path="/program" component={Program} />
       </Switch>
     </Router>
   );
