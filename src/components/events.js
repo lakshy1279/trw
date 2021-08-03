@@ -19,13 +19,13 @@ function Event()
        searchOrgo()
     },[query]);
    const searchOrgo=()=>{
-        axios.post("http://localhost:5000/blog/search",query).then((res)=>{
+        axios.post("https://lakshy12.herokuapp.com/blog/search",query).then((res)=>{
             console.log(res.data);
               setMoreEvents(res.data);
         })
     }
   useEffect(()=>{
-    axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
+    axios.get('https://lakshy12.herokuapp.com/blog/get_all_events').then(async (res)=>{
         //  console.log(res.data);
         const sorteddata=await res.data.sort(sortFunction);
         console.log("sorted data",sorteddata);

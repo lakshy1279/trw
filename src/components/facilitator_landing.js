@@ -17,7 +17,7 @@ function Facilitator_landing(props) {
       searchOrgo()
    },[query]);
   const searchOrgo=()=>{
-       axios.post("http://localhost:5000/facilitator/search",query).then((res)=>{
+       axios.post("https://lakshy12.herokuapp.com/facilitator/search",query).then((res)=>{
            console.log(res.data);
              setFacilitator(res.data);
        })

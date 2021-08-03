@@ -24,7 +24,7 @@ function Organisation_landing(props) {
        searchOrgo()
     },[query]);
    const searchOrgo=()=>{
-        axios.post("http://localhost:5000/organisation/search",query).then((res)=>{
+        axios.post("https://lakshy12.herokuapp.com/organisation/search",query).then((res)=>{
             console.log(res.data);
               setOrganisation(res.data);
         })
