@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MoreEvents from './moreevent';
+import SearchBar from "material-ui-search-bar";
+import {Grid,Button,Typography,CircularProgress} from '@material-ui/core'
 function Event()
 {
-  const [moreEvents,setMoreEvents]=useState([]);
+  const [moreEvents,setMoreEvents]=useState(null);
   const [recEvents,setRecEvents]=useState([]);
+  const [query,setQuery]=useState({
+      keyword:""
+    })
   function sortFunction(a,b){  
     var dateA = new Date(a.fromdate).getTime();
     var dateB = new Date(b.fromdate).getTime();
     return dateA > dateB ? 1 : -1;  
 };
+  useEffect(()=>{
+       searchOrgo()
+    },[query]);
+   const searchOrgo=()=>{
+        axios.post("http://localhost:5000/blog/search",query).then((res)=>{
+            console.log(res.data);
+              setMoreEvents(res.data);
+        })
+    }
   useEffect(()=>{
     axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events').then(async (res)=>{
         //  console.log(res.data);
@@ -51,7 +65,34 @@ function Event()
       {/* <!-- More Events --> */}
       <section className="more-events">
       <h1>More Events</h1>
-      <div className="more">
+      <Grid container  style={{marginTop:50,marginBottom:50}} spacing={2}>
+                              <Grid item xs={12} md={9} lg={9} xl={9} sm={9}  >
+                          <SearchBar
+             
+               placeholder="Search here..."
+                value={query.keyword}
+                onChange={(newValue) => 
+                  setQuery({...query,
+                    keyword:newValue
+
+                  })
+                }
+                
+              />
+               </Grid>
+               <Grid item xs={12} md={3} lg={3} xl={3} sm={3}  container alignItems='center'>
+              <Button color='primary' variant='contained' fullWidth onClick={searchOrgo}>Search</Button>
+              </Grid>
+                            
+{moreEvents===null?
+  <Grid item xs={12} md={12} lg={12} xl={12} sm={12}  container alignItems='center' justify='center' style={{marginTop:50}}>
+    <CircularProgress />
+    </Grid>:
+    <>
+{moreEvents.length>0?
+                       
+                       
+      <div className="more" style={{marginTop:50}}>
         {moreEvents.slice(0, 4).map((item, index) => {
                     return (
                       <MoreEvents
@@ -67,12 +108,21 @@ function Event()
                     );
                   })}
                   </div>
+                  :
+                   <Grid item xs={12} md={12} lg={12} xl={12} sm={12}  container alignItems='center' justify='center' style={{marginTop:50}}>
+                    <Typography variant='h5'> No Events Found</Typography>
+                    </Grid>
+}
+</>
+}
+
+                   </Grid>
       </section>
       {/* <!-- Recently Added Events --> */}
       <section className="recently-events">
         <h1>Recently Added Events</h1>
         <div className="more">
-        {moreEvents.slice(4, moreEvents.length).map((item, index) => {
+        {recEvents.slice(4, recEvents.length).map((item, index) => {
                     return (
                       <MoreEvents
                         key={index}
@@ -86,6 +136,7 @@ function Event()
                       />
                     );
                   })}
+
                   </div>
       </section>
     </div>

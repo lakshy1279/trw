@@ -5,10 +5,23 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import facilitator from './facilitator';
 import Pagination from './pagination';
+import SearchBar from "material-ui-search-bar";
+import {Grid,Button} from '@material-ui/core'
 function Facilitator_landing(props) {
     const [facilitator,setFacilitator]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [facilitatorPerPage] = useState(6);
+    const [facilitatorPerPage] = useState(6);const [query,setQuery]=useState({
+      keyword:""
+    })
+    useEffect(()=>{
+      searchOrgo()
+   },[query]);
+  const searchOrgo=()=>{
+       axios.post("http://localhost:5000/facilitator/search",query).then((res)=>{
+           console.log(res.data);
+             setFacilitator(res.data);
+       })
+   }
     useEffect(()=>{
         axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch`).then((res)=>{
             console.log(res.data);
@@ -45,7 +58,30 @@ function Facilitator_landing(props) {
       </header>
          </section>
          <div className="container">
-         <section class="presented-partners">
+         <Grid container  style={{marginTop:50,marginBottom:50}} spacing={2}>
+                              <Grid item xs={12} md={9} lg={9} xl={9} sm={9}  >
+                          <SearchBar
+             
+               placeholder="Search here..."
+                value={query.keyword}
+                onChange={(newValue) => 
+                  setQuery({...query,
+                    keyword:newValue
+
+                  })
+                }
+                
+              />
+               </Grid>
+               <Grid item xs={12} md={3} lg={3} xl={3} sm={3}  container alignItems='center'>
+              <Button color='primary' variant='contained' fullWidth onClick={searchOrgo}>Search</Button>
+              </Grid>
+                            
+
+
+                       
+                        </Grid>
+         <section >
         <div class="partners-main">
           <div class="dropdown-button-sec">
             <label class="dropdown-button">
