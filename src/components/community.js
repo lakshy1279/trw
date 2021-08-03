@@ -62,7 +62,7 @@ function Community()
             
             <br />
             <div class="partners">
-              {faciliator.length>0&&faciliator.map((data)=>{
+              {faciliator.length>0&&faciliator.slice(0,4).map((data)=>{
                 return (  <div class="fac">
                 <img src={data.photo} alt="" />
                 <div style={{padding: '22px'}}>
