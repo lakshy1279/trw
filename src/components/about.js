@@ -31,11 +31,7 @@ function About()
                 <div class="show-box1">
                   <h1>{flag>0&&about.heading}</h1>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. At
-                    curabitur nisi, egestas consectetur sed faucibus leo,
-                    consequat. Leo, habitasse adipiscing convallis ac. Dictumst
-                    arcu quam dolor urna adipiscing quam eget nibh. Eget nunc
-                    aliquet ut id at quam.
+                    {flag>0&&about.subtext}
                   </p>
                 </div>
               </div>
