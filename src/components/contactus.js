@@ -96,33 +96,28 @@ class  ContactUs extends React.Component
                     name="subscribeemail"
                     onChange={this.onChange}
                     value={this.state.subscribeemail}
-                    placeholder="yourname@address.com"
+                    placeholder="yourmail@address.com"
                     class="input"
                   />
                   &nbsp;&nbsp;&nbsp;
-                  <button class="button">Subscribe</button>
+                  <button class="contact-button">Subscribe</button>
                 </form>
               </div>
             </div>
             <div class="contacts-main-sec2">
-            <form
-                                            className="form-contact contact_form"
-                                            onSubmit={this.handleSubmit}
-                                        >
               <div class="flex-row">
                 <div class="input-box" style={{width: '244px'}}>
                   <p>Full Name</p>
                   <input type="text" class="input" name="name" value={this.state.name} onChange={this.onChange} required />
                 </div>
-                <div class="input-box row1" style={{width:'244px'}}>
+                <div class="input-box row1" style={{width: '244px'}}>
                   <p>Email</p>
                   <input
                      type="email"
-                     style={{width:'244px'}}
                      name="email"
                      onChange={this.onChange}
                      value={this.state.email}
-                     placeholder="yourname@address.com"
+                     placeholder="yourmail@address.com"
                      class="input"
                     required
                   />
@@ -161,17 +156,17 @@ class  ContactUs extends React.Component
                     onChange={this.onChange}
                     value={this.state.message}
                     placeholder="Write your message here"
-                    style={{width: '100%', paddingBottom: '30px'}}
+                    style={{width: '100%', paddingBottom: '30px',overflowY:"scroll"}}
+                    rows="5"
                     required
                   ></textarea>
                 </div>
               </div>
               <div class="flex-row" style={{alignSelf: 'flex-end'}}>
                 <div class="input-box row1">
-                  <button style={{margin: '0'}} class="button" type="submit" >Submit</button>
+                  <button style={{margin: '0'}} class="contact-button" type="submit" onClick={this.handleSubmit}>Submit</button>
                 </div>
               </div>
-              </form>
             </div>
           </div>
         </div>

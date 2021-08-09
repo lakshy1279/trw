@@ -3,7 +3,7 @@ import Home from "./components/home";
 import About from "./components/about";
 import ContactUs from "./components/contactus";
 import EventsInternal from "./components/eventsinternal";
-import Offering from "./components/offerings";
+import Event_landing from "./components/Event_landing";
 import Blog from "./components/blog";
 import BlogInternal from "./components/bloginternal";
 import BlogList from "./components/bloglist";
@@ -14,6 +14,7 @@ import FacilitatorInfo from "./components/facilitatorInfo";
 import Organisation_landing from "./components/organisation_landing";
 import Facilitator_landing from "./components/facilitator_landing";
 import Program from "./components/program";
+import Offering from "./components/Offering";
 function Routing() {
   return (
     <Router>
@@ -23,7 +24,7 @@ function Routing() {
         <Route exact path="/contactus" component={ContactUs}></Route>
         <Route exact path="/events" component={EventsInternal}></Route>
         <Route exact path="/events/:id" component={EventsInternal}></Route>
-        <Route exact path="/offering" component={Offering}></Route>
+        <Route exact path="/find_event" component={Event_landing}></Route>
         <Route exact path="/blog" component={Blog} />
         <Route exact path="/blog/:id" component={BlogInternal} />
         <Route exact path="/blogs/:category" component={BlogList} />
@@ -33,6 +34,7 @@ function Routing() {
         <Route exact path="/facilitator/:id" component={FacilitatorInfo}></Route>
         <Route exact path="/organisation_landing" component={Organisation_landing}></Route>
          <Route exact path="/facilitator_landing" component={Facilitator_landing}></Route>
+         <Route exact path="/offering" component={Offering}></Route>
          <Route exact path="/program" component={Program} />
       </Switch>
     </Router>

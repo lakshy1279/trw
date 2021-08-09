@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MoreEvents from './moreevent';
 import SearchBar from "material-ui-search-bar";
-import {Grid,Button,Typography,CircularProgress} from '@material-ui/core'
+import {Grid,Button,Typography,CircularProgress} from '@material-ui/core';
+import Find_event from './find_event';
 function Event()
 {
   const [moreEvents,setMoreEvents]=useState(null);
@@ -38,29 +39,7 @@ function Event()
     return (
         <div>
         <div className="container">
-      <section className="findevent">
-        <div className="event">
-          <div>
-            <h2>Find the right event that fits your interests</h2>
-            <p className="para">
-              A in pellentesque morbi elementum convallis maecenas. Facilisis
-              viverra ac sagittis, habitasse morbi maecenas purus. Sed egestas
-              donec a mauris.
-            </p>
-            <p class="star">Interested in our events?</p>
-            <button class="button" style={{marginLeft: '52px', marginTop: '24px'}}>
-              <span className="button-font-margin">See All Events </span
-              ><i className="fas fa-chevron-right"></i
-              ><i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-          <div className="grid">
-            <img className="img-1" src="/assests/images/gridimg3.jpg" alt="" />
-            <img className="img-3" src="/assests/images/gridimg2.jpg" alt="" />
-            <img className="img-2" src="/assests/images/gridimg1.jpg" alt="" />
-          </div>
-        </div>
-      </section>
+      <Find_event/>
 
       {/* <!-- More Events --> */}
       <section className="more-events">

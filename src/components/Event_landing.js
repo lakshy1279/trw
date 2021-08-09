@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import MoreEvents from './moreevent';
 import { useAlert } from 'react-alert';
 import { func } from 'prop-types';
-function Offering()
+function Event_landing()
 {
   const [moreEvents,setMoreEvents]=useState([]);
   const [healingEvents,setHealingEvents]=useState([]);
@@ -535,4 +535,4 @@ const alert = useAlert();
 </div>)
 }
 
-export default Offering;
+export default Event_landing;

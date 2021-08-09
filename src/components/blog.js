@@ -116,7 +116,9 @@ function Blog() {
 
       <div className="container">
         {/* Recent Posts */}
+        <div style={{marginTop:"130px"}}>
         <Post />
+        </div>
         {/* Blog */}
         <section className="blogs">
           <div className="blogs-main">

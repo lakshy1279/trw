@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Organisation from './organisation';
 import Pagination from './pagination';
 import SearchBar from "material-ui-search-bar";
-import {Grid,Button} from '@material-ui/core'
+import {Grid,Button} from '@material-ui/core';
 function Organisation_landing(props) {
     const [organisation,setOrganisation]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);

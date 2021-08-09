@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import facilitator from './facilitator';
 import Pagination from './pagination';
 import SearchBar from "material-ui-search-bar";
-import {Grid,Button} from '@material-ui/core'
+import {Grid,Button} from '@material-ui/core';
 function Facilitator_landing(props) {
     const [facilitator,setFacilitator]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
