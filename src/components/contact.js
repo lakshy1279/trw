@@ -69,7 +69,8 @@ onChange(event) {
     }
   render()
   {
-    return ( 
+    return ( <div >
+        <section class="contactus">
       <div class="container">
         <div class="contact-us-content">
           <div class="contact-main-sec1">
@@ -119,7 +120,7 @@ onChange(event) {
                 <p>Phone</p>
                 <input type="text" class="input"   name="phone"
                      onChange={this.onChange}
-                     value={this.state.phone}/>
+                     value={this.state.phone}required />
               </div>
               <div class="input-box row1" style={{width: '244px'}}>
                 <p>Reason</p>
@@ -143,8 +144,8 @@ onChange(event) {
                     onChange={this.onChange}
                     value={this.state.message}
                     placeholder="Write your message here"
+                    row="5"
                     style={{width: '100%', paddingBottom: '30px',overflowY:"scroll"}}
-                    rows="5"
                     required
                   ></textarea>
               </div>
@@ -156,7 +157,9 @@ onChange(event) {
             </div>
           </div>
         </div>
-      </div>)
+      </div>
+    </section>
+</div>)
   }
 }
 

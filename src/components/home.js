@@ -20,9 +20,7 @@ function Home()
     <Testinomial/>
     <Post/>
     </div>
-    <section className="contactus">
     <Contact/>
-    </section>
     <Footer/>
 </div>)
 }
