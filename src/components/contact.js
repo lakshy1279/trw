@@ -258,7 +258,7 @@ onChange(event) {
                     onChange={this.onChange}
                     value={this.state.message}
                     placeholder="Write your message here"
-                    row="5"
+                    rows="5"
                     style={{width: '100%', paddingBottom: '30px',overflowY:"scroll"}}
                     required
                   ></textarea>

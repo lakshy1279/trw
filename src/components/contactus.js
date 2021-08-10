@@ -256,11 +256,17 @@ class  ContactUs extends React.Component
                     id="select"
                     class="input facaliator"
                     onChange={this.onChange}
-                    style={{width: "100%"}}
+                    style={{width: "100%",color: "#cbcbd4",
+                    fontStyle: "normal",
+                    fontSize: "16px",
+                    lineHeight: "16px"}}
                     required
                   >
                   {this.state.fetchedreason.length>0&&this.state.fetchedreason.map((item)=>{
-                      return (<option value={item.reason}>
+                      return (<option style={{color: "#cbcbd4",
+                        fontStyle: "normal",
+                        fontSize: "16px",
+                        lineHeight: "16px"}} value={item.reason}>
                         {item.reason}
                     </option>)
                   })}

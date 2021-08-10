@@ -7,6 +7,12 @@ function Community()
   useEffect(()=>{
     axios.get('https://lakshy12.herokuapp.com/facilitator/fetch').then((res)=>{
          console.log(res.data);
+         const sortedData=res.data.sort((a,b)=>{if(a.firstname<b.firstname){
+           return -1;
+         }else
+        {
+          return 1;
+        }})
          setFacilitator(res.data);
     })
   },[]);
