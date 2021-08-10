@@ -10,7 +10,8 @@ class  ContactUs extends React.Component
         super(props);
         this.state = {
          name:"",
-         reason:"Join as faciliator",
+         fetchedreason:[],
+         reason:"",
          email:"",
          phone:"",
          message:"",
@@ -105,7 +106,15 @@ class  ContactUs extends React.Component
           },
       });
     }
-  
+   componentDidMount() {
+     axios.get('https://lakshy12.herokuapp.com/reason/fetch').then((res)=>{
+       console.log(res.data);
+       this.setState({
+         fetchedreason:res.data,
+         reason:res.data[0].reason
+       })
+     })
+   }
     onChange(event) {
         this.setState({
           [event.target.name]: event.target.value,
@@ -165,6 +174,7 @@ class  ContactUs extends React.Component
         } 
    render()
    {
+     console.log("state",this.state);
     return ( <div>
          <section class="secconatct" id="seccontact">
              <Navbar/>
@@ -241,19 +251,20 @@ class  ContactUs extends React.Component
                 </div>
                 <div class="input-box row1" style={{width:'244px'}}>
                   <p>Reason</p>
-                  <input
+                  <select
                     name="reason"
-                    value={this.state.reason}
-                    onChange={this.onChange}
-                    // id="select"
+                    id="select"
                     class="input facaliator"
-                    style={{width: '100%'}}
+                    onChange={this.onChange}
+                    style={{width: "100%"}}
                     required
                   >
-                    {/* <option disabled selected hidden value="">
-                      Join as faciliator
-                    </option> */}
-                  </input>
+                  {this.state.fetchedreason.length>0&&this.state.fetchedreason.map((item)=>{
+                      return (<option value={item.reason}>
+                        {item.reason}
+                    </option>)
+                  })}
+                  </select>
                 </div>
               </div>
               <div id="text-area-msg">
