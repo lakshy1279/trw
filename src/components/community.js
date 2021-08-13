@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 function Community()
 {
   const [faciliator,setFacilitator]=useState([]);
+  const [organisation,setOrganisation]=useState([]);
+  const [count,setCount]=useState(0);
   useEffect(()=>{
-    axios.get('https://lakshy12.herokuapp.com/facilitator/fetch').then((res)=>{
+    axios.get('https://lakshy12.herokuapp.com/facilitator/featured_facilitator').then((res)=>{
          console.log(res.data);
          const sortedData=res.data.sort((a,b)=>{if(a.firstname<b.firstname){
            return -1;
@@ -14,6 +16,13 @@ function Community()
           return 1;
         }})
          setFacilitator(res.data);
+    })
+    axios.get('https://lakshy12.herokuapp.com/organisation/fetch').then((res)=>{
+      const length=res.data.length;
+       setCount(length); 
+    })
+    axios.get('https://lakshy12.herokuapp.com/organisation/featured_organisation').then((res)=>{
+       setOrganisation(res.data);
     })
   },[]);
     return ( <div>
@@ -37,17 +46,15 @@ function Community()
             </div>
             <br />
             <div class="partners">
-              <div class="par">
-                <img src="/assests/images/p1.png" style={{width: '100%'}} alt="" />
+              {organisation.length>0&&organisation.map((item)=>{
+                  return (
+                    <div class="par">
+                <img src={item.logo} style={{width: '100%'}} alt="" />
               </div>
-              <div class="par">
-                <img src="/assests/images/p2.png" style={{width: '50%'}} alt="" />
-              </div>
-              <div class="par">
-                <img src="/assests/images/p3.png" style={{width: '38%'}} alt="" />
-              </div>
+                  )
+              })}
               <div class="mem">
-                <h1>+250</h1>
+                <h1>+{count}</h1>
                 <p>Members in the community</p>
               </div>
             </div>

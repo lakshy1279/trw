@@ -21,7 +21,7 @@ function About()
       });
   }, []);
     return ( <div>
-         <section class="sec" id="sec">
+         <section class="sec" id="sec" style={{background:`url(${about.image}) no-repeat center center/cover`}}>
         <Navbar/>
         <header class="showcase">
         <div class="showcase-main">

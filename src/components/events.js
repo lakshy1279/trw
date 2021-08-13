@@ -6,8 +6,9 @@ import {Grid,Button,Typography,CircularProgress} from '@material-ui/core';
 import Find_event from './find_event';
 function Event()
 {
-  const [moreEvents,setMoreEvents]=useState(null);
+  const [moreEvents,setMoreEvents]=useState([]);
   const [recEvents,setRecEvents]=useState([]);
+  const [humanity_data,setHumanity]=useState([]);
   const [query,setQuery]=useState({
       keyword:""
     })
@@ -32,8 +33,15 @@ function Event()
         console.log("sorted data",sorteddata);
          let temp=sorteddata;
          console.log(temp);
-         setMoreEvents(temp);
+       
          setRecEvents(temp);
+    })
+    axios.get('http://localhost:5000/blog/featured_event').then((res)=>{
+           console.log("featured",res.data);
+          setMoreEvents(res.data);
+    })
+    axios.get('https://lakshy12.herokuapp.com/home/fetch_section2').then((res)=>{
+      setHumanity(res.data[0]);
     })
   },[]);
     return (
@@ -43,7 +51,7 @@ function Event()
 
       {/* <!-- More Events --> */}
       <section className="more-events">
-      <h1>More Events</h1>
+      <h1>Featured Events</h1>
       <Grid container  style={{marginTop:50,marginBottom:50}} spacing={2}>
                               <Grid item xs={12} md={9} lg={9} xl={9} sm={9}  >
                           <SearchBar
@@ -122,23 +130,20 @@ function Event()
     <section class="humanity">
       <div class="humanity-cont">
         <div>
-          <img src="/assests/images/homeimage.png" alt="" />
+          <img src={humanity_data.image} alt="" />
         </div>
         <div style={{paddingRight: '50px' ,paddingLeft: '20px'}}>
           <h2>
-            Time for Humanity to step into the New Age of a world that works for
-            all
+           {humanity_data.heading}
           </h2>
           <br />
           <p class="para">
-            A in pellentesque morbi elementum convallis maecenas. Facilisis
-            viverra ac sagittis, habitasse morbi maecenas purus. Sed egestas
-            donec a mauris.
+           {humanity_data.subtext}
           </p>
           <br />
-          <p class="bell">Get Notifications for latest events</p>
+          <p class="bell">{humanity_data.buttontext}</p>
           <button style={{marginLeft:'50px', marginTop: '15px'}} class="button">
-            <span class="button-font-margin">See All Events</span>
+            <span class="button-font-margin">{humanity_data.buttonname}</span>
             <i class="fas fa-chevron-right"></i
             ><i class="fas fa-chevron-right"></i>
           </button>
