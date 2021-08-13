@@ -36,7 +36,7 @@ function Event()
        
          setRecEvents(temp);
     })
-    axios.get('http://localhost:5000/blog/featured_event').then((res)=>{
+    axios.get('https://lakshy12.herokuapp.com/blog/featured_event').then((res)=>{
            console.log("featured",res.data);
           setMoreEvents(res.data);
     })
