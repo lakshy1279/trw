@@ -4,20 +4,24 @@ import { Link } from 'react-router-dom';
 import Navbar from './navbar';
 function Home1()
 {
+  const [Data,setData]=useState([]);
   const [banner_deatil,setDetail]=useState({});
   const [banner_image,setBannerImage]=useState("");
   useEffect(()=>{
     axios.get("https://lakshy12.herokuapp.com/home/fetch_home").then((res)=>{
       console.log("banner",res.data);
+      setData(res.data);
       setDetail(res.data[0]);
-      setBannerImage(res.data[0].image[0]);
+      setBannerImage(res.data[0].image);
     })
   },[]);
   const nextSlide=()=>{
-    setBannerImage(banner_deatil.image[1]);
+    setDetail(Data[1]);
+    setBannerImage(Data[1].image);
 }
 const prevSlide=()=>{
-  setBannerImage(banner_deatil.image[0]);
+  setDetail(Data[0]);
+  setBannerImage(Data[0].image);
 }
     return (
          <div>
@@ -43,8 +47,8 @@ const prevSlide=()=>{
         </div>
       </header>
       <div className="container" style={{textAlign: 'center', paddingBottom: '37px'}}>
-        {/* <img src="/assests/images/Dot.svg" className="dot" alt="" onClick={prevSlide} />
-        <img src="/assests/images/Dot.svg" className="dot" alt="" onClick={nextSlide}/> */}
+        <img src="/assests/images/Dot.svg" className="dot" alt="" onClick={prevSlide} />
+        <img src="/assests/images/Dot.svg" className="dot" alt="" onClick={nextSlide}/>
       </div>
       </section>
          </div>)

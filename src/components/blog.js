@@ -12,6 +12,7 @@ function Blog() {
   const [leading, setLeading] = useState([]);
   const [otherBlog, setOtherBlog] = useState([]);
   const [allBlog, setAllBlog] = useState([]);
+  const [banner,setBanner]=useState({});
   const [query, setQuery] = useState("");
   const history = useHistory();
   const alert = useAlert();
@@ -40,6 +41,10 @@ function Blog() {
           );
         })
       );
+      axios.get("https://lakshy12.herokuapp.com/blog/fetch_banner").then((res)=>{
+        console.log("blog banner",res.data);
+        setBanner(res.data[0]);
+      })
     }
     getAticles();
   }, []);
@@ -70,7 +75,7 @@ function Blog() {
   }
   return (
     <div>
-      <section className="blog-sec1" id="blog-sec1">
+      <section style={{background:`url(${banner.image}) no-repeat center center/cover`}}>
         <div className="container">
           <Navbar />
         </div>
@@ -80,10 +85,9 @@ function Blog() {
               <div className="container">
                 <div className="main-content-showcase">
                   <div className="show-box1">
-                    <h1>Blogs.</h1>
+                    <h1>{banner.heading}</h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Facilisi arcu, ut sem at dolore.
+                     {banner.subtext}
                     </p>
                   </div>
                 </div>
