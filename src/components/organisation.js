@@ -33,7 +33,7 @@ function Org(props) {
   }
     return (
         <div>
-              <section >
+              <section>
         <div class="partners-main">
           <div class="dropdown-button-sec">
             <label class="dropdown-button">

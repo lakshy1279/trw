@@ -10,7 +10,8 @@ import {Grid,Button} from '@material-ui/core';
 function Facilitator_landing(props) {
     const [facilitator,setFacilitator]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [facilitatorPerPage] = useState(6);const [query,setQuery]=useState({
+    const [banner,setBanner]=useState({});
+    const [facilitatorPerPage,setFacilitatorPage] = useState(6);const [query,setQuery]=useState({
       keyword:""
     })
     useEffect(()=>{
@@ -27,6 +28,10 @@ function Facilitator_landing(props) {
             console.log(res.data);
               setFacilitator(res.data);
         })
+        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch_banner`).then((res)=>{
+          console.log(res.data);
+            setBanner(res.data[0]);
+      })
     },[]);
     const indexOfLastfacilitator = currentPage * facilitatorPerPage;
   const indexOfFirstfacilitator = indexOfLastfacilitator - facilitatorPerPage;
@@ -35,9 +40,15 @@ function Facilitator_landing(props) {
     currentfacilitator = facilitator.slice(indexOfFirstfacilitator, indexOfLastfacilitator);
   }
   const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+  function handleChange(e)
+  {
+      const no=e.target.innerText;
+      const records=no.slice(5,no.length);
+      setFacilitatorPage(records);
+  }
     return (
         <div>
-            <section class="offering-sec1" id="sec1">
+            <section class="offering-sec1" id="sec1" style={{background:`url(${banner.image}) no-repeat center center/cover`}}>
             <Navbar/>
             <header class="showcase">
         <div class="offering-showcase-main">
@@ -45,10 +56,9 @@ function Facilitator_landing(props) {
             <div class="container">
               <div class="offering-main-content-showcase">
                 <div class="show-box1">
-                  <h1>Facilitators</h1>
+                  <h1>{banner.heading}</h1>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Facilisi arcu, ut sem at dolore.
+                   {banner.subtext}
                   </p>
                 </div>
               </div>
@@ -87,19 +97,16 @@ function Facilitator_landing(props) {
             <label class="dropdown-button">
 
               <div class="dd-button">
-                View 6 Profiles
+                View {facilitatorPerPage} Profiles
               </div>
             
               <input type="checkbox" class="dd-input" id="test"/>
             
               <ul class="dd-menu">
-                <li>Action</li>
-                <li>Another action</li>
-                <li>Something else here</li>
-                <li class="divider"></li>
-                <li>
-                  <a href="http://rane.io">Link to Rane.io</a>
-                </li>
+              <li onClick={(e)=>handleChange(e)}>View 6</li>
+                <li onClick={(e)=>handleChange(e)}>View 12</li>
+                <li  onClick={(e)=>handleChange(e)}>View 18</li>
+                <li  onClick={(e)=>handleChange(e)}>View 24</li>
               </ul>
               
             </label>
@@ -107,9 +114,19 @@ function Facilitator_landing(props) {
             <div class="group-cards sec-1 ">
               <div class="org-group-cards-sec-1">
                 {currentfacilitator.length>0&&currentfacilitator.slice(0,currentfacilitator.length).map((item)=>{
-                    return (<Link to={`/facilitator/${item._id}`}><div class="card">
-                    <div class="div-img">
-                      <img src={item.photo} alt="" />
+                    return (<Link to={`/facilitator/${item._id}`}><div style={{display: "grid",
+                    gridTemplateRows: "repeat(1, 1fr)"}}>
+                    <div style={{background: "#ffffff",
+    boxShadow: "1px 1px 16px rgb(0 0 0 / 25%)",
+    borderRadius: "12px",
+    textAlign: "center"}}>
+                      <img src={item.photo} alt="" style={{padding: "28px 38px",
+    width: "100%",
+    minHeight: "240px",
+    maxWidth: "264px",
+    maxHeight: "240px",
+    height: "100%",
+    objectFit: "contain"}} />
                       <div>
                         <span><p id="even">{item.firstname}</p></span>
                       </div>

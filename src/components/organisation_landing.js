@@ -10,6 +10,7 @@ import {Grid,Button} from '@material-ui/core';
 function Organisation_landing(props) {
     const [organisation,setOrganisation]=useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [banner,setBanner]=useState({});
     const [OrganisationPerPage,setOrganisationPage] = useState(6);
     const [query,setQuery]=useState({
       keyword:""
@@ -19,6 +20,10 @@ function Organisation_landing(props) {
             console.log(res.data);
               setOrganisation(res.data);
         })
+        axios.get(`https://lakshy12.herokuapp.com/organisation/fetch_banner`).then((res)=>{
+          console.log(res.data);
+             setBanner(res.data[0]);
+      })
     },[]);
      useEffect(()=>{
        searchOrgo()
@@ -44,7 +49,7 @@ function Organisation_landing(props) {
   }
     return (
         <div>
-            <section class="offering-sec1" id="sec1">
+            <section class="offering-sec1" id="sec1" style={{background:`url(${banner.image}) no-repeat center center/cover`}}>
             <Navbar/>
             <header class="showcase">
         <div class="offering-showcase-main">
@@ -52,10 +57,9 @@ function Organisation_landing(props) {
             <div class="container">
               <div class="offering-main-content-showcase">
                 <div class="show-box1">
-                  <h1>Organisations</h1>
+                  <h1>{banner.heading}</h1>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Facilisi arcu, ut sem at dolore.
+                    {banner.subtext}
                   </p>
                 </div>
               </div>

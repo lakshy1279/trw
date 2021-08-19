@@ -182,6 +182,7 @@ function EventsInternal({match})
           </div>
         </section>
         <div style={{ marginTop: "109px", borderTop: "1px solid #cbcbd4" }}>
+        <h1 style={{marginTop:"50px",marginBottom:"30px"}}>More Events</h1>
         <div className="more">
         {moreEvents.slice(0, 4).map((item, index) => {
                     return (

@@ -92,79 +92,9 @@ function Facilitator() {
                             </div>
                           </div>
                         </div>
-                        // <div class="fac1">
-                        //   <div>
-                        //     <img src={data.photo} alt="" />
-                        //   </div>
-                        //   <div class="img-bottom-card1">
-                        //     <div>
-                        //       <span
-                        //         style={{ fontSize: "14px", fontWeight: "700" }}
-                        //       >
-                        //         {data.firstname} {data.lastname}
-                        //       </span>
-                        //     </div>
-                        //     <div>
-                        //       <span
-                        //         style={{ fontSize: "10px", opacity: "0.5" }}
-                        //       >
-                        //         {data.country}
-                        //       </span>
-                        //     </div>
-                        //     <div class="profile">
-                        //       <span>View Profile</span>
-                        //     </div>
-                        //   </div>
-                        // </div>
                       );
                     })}
                 </Carousel>
-
-                {/* <div class="fac">
-                <img src="./Images/f2.jpg" alt="" />
-                <div class="img-bottom-card">
-                    <div>
-                      <span style={{fontSize: "14px" ,fontWeight: "700"}}
-                      >Beatrace Wade</span>
-                    </div>
-                    <div>
-                      <span style={{fontSize: "10px" ,opacity: "0.5"}}>Switzerland</span>
-                    </div>
-                    <div class="profile">
-                      <span>View Profile</span>
-                    </div>
-                  </div>
-              </div> */}
-                {/* <div class="fac">
-                <img src="./Images/f4.jpg" alt="" />
-                <div class="img-bottom-card">
-                    <div>
-                      <span style={{fontSize: "14px" ,fontWeight: "700"}}
-                      >Beatrace Wade</span>
-                    </div>
-                    <div>
-                      <span style={{fontSize: "10px" ,opacity: "0.5"}}>Switzerland</span>
-                    </div>
-                    <div class="profile">
-                      <span>View Profile</span>
-                    </div>
-                  </div>
-              </div> */}
-                {/* <div class="fac">
-                <img src="./Images/f4.jpg" alt="" />
-                <div class="img-bottom-card">
-                    <div>
-                      <span style={{fontSize: "14px" ,fontWeight: "700"}}
-                      >Beatrace Wade</span>
-                    </div>
-                    <div>
-                      <span style={{fontSize: "10px" ,opacity: "0.5"}}>Switzerland</span>
-                    </div>
-                    <div class="profile">
-                      <span>View Profile</span>
-                    </div>
-                  </div>
-              </div> */}
               </div>
             </div>
           </div>
