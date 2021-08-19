@@ -9,12 +9,12 @@ import BlogInternal from "./components/bloginternal";
 import BlogList from "./components/bloglist";
 import SearchResult from "./components/searchresult";
 import EventSearchResult from "./components/eventsearchresult";
-import Organisation from "./components/organisation";
 import FacilitatorInfo from "./components/facilitatorInfo";
 import Organisation_landing from "./components/organisation_landing";
 import Facilitator_landing from "./components/facilitator_landing";
 import Program from "./components/program";
 import Offering from "./components/Offering";
+import Organisation from "./components/organisation_internal";
 function Routing() {
   return (
     <Router>

@@ -2,7 +2,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Carousel, { consts } from "react-elastic-carousel";
-import { Link } from "react-router-dom";
 function Facilitator() {
   const [faciliator, setFacilitator] = useState([]);
   let breakPoints = [

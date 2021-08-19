@@ -5,15 +5,15 @@ import axios from "axios";
 import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
 import { useParams } from "react-router-dom";
-function FacilitatorInfo(props) {
+function Organisation(props) {
   const { id } = useParams();
-    const [facilitator,setFacilitator]=useState({});
+    const [organisation,setOrganisation]=useState({});
     const [Events,setEvents]=useState([]);
     const [flag,setFlag]=useState(0);
     useEffect(()=>{
-        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
+        axios.get(`https://lakshy12.herokuapp.com/organisation/fetch/${id}`).then((res)=>{
             console.log(res.data);
-            setFacilitator(res.data);
+            setOrganisation(res.data);
             setEvents(res.data.events);
             setFlag(1);
         });
@@ -28,23 +28,19 @@ function FacilitatorInfo(props) {
         <div class="org-main">
           <div class="org-main-sec-1">
             <div class="org-image">
-              <img src={facilitator.photo} alt="" />
+              <img src={organisation.logo} alt="" />
             </div>
             <div class="org-details-info">
-              <div class="header" style={{marginBottom:"24px"}}>
-                <h1>{facilitator.firstname}{' '}{facilitator.lastname}</h1>
+              <div class="header">
+                <h1>{organisation.name}</h1>
               </div>
-
-              <div className="link" style={{marginBottom:"24px"}}>
-                <i class="fas fa-phone-alt"></i>
-                <span id="link-blue">{facilitator.contactno}</span>
-              </div>
-              <div className="link" style={{marginBottom:"24px"}}>
-                <span class="envelope">{facilitator.email}</span>
+              <div class="link">
+                <i class="fas fa-external-link-alt"></i>
+                <span id="link-blue"><a target="_blank" style={{color:'blue'}} href={organisation.url}>{organisation.url}</a></span>
               </div>
               <div class="para">
                 <p>
-                {flag>0&&renderHTML(facilitator.profile
+                {flag>0&&renderHTML(organisation.profile
                           .replace(/(<([^>]+)>)/gi, "")
                           .substring(0, 691))}
                 </p>
@@ -54,7 +50,7 @@ function FacilitatorInfo(props) {
           <div class="org-main-sec-2">
             <div class="paragraphtwo">
               <p>
-              {flag>0&&renderHTML(facilitator.profile
+              {flag>0&&renderHTML(organisation.profile
                           .replace(/(<([^>]+)>)/gi, "")
                           .substring(691))}
               </p>
@@ -63,7 +59,7 @@ function FacilitatorInfo(props) {
         </div>
       </section>
       <section class="see-all-events">
-        <h1 id="see-all">Events by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
+        <h1 id="see-all">Events by {organisation.name}</h1>
         <div class="more">
         {flag>0&&Events.length>0&&Events.slice(0, 4).map((item, index) => {
                     return (
@@ -83,7 +79,7 @@ function FacilitatorInfo(props) {
       </section>
 
       <section class="see-all-events mt">
-        <h1 id="see-all">Programs by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
+        <h1 id="see-all">Programs by {organisation.name}</h1>
         <div class="more">
           <div class="more-img1">
             <img src="/assests/images/event-1.jpg" alt="" />
@@ -179,4 +175,4 @@ function FacilitatorInfo(props) {
     );
 }
 
-export default FacilitatorInfo;
+export default Organisation;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './navbar';
 import Footer from './footer';
+import Org from './organisation';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Organisation from './organisation';
+
 import Pagination from './pagination';
 import SearchBar from "material-ui-search-bar";
 import {Grid,Button} from '@material-ui/core';
@@ -41,9 +41,6 @@ function Organisation_landing(props) {
       const no=e.target.innerText;
       const records=no.slice(5,no.length);
       setOrganisationPage(records);
-  }
-  const temp=()=>{
-      
   }
     return (
         <div>
@@ -92,64 +89,7 @@ function Organisation_landing(props) {
 
                        
                         </Grid>
-           
-         <section >
-        <div class="partners-main">
-          <div class="dropdown-button-sec">
-            <label class="dropdown-button">
-
-              <div class="dd-button">
-                View {OrganisationPerPage} Profiles
-              </div>
-            
-              <input type="checkbox" class="dd-input" id="test"/>
-            
-              <ul class="dd-menu">
-                <li onClick={(e)=>handleChange(e)}>View 6</li>
-                <li onClick={(e)=>handleChange(e)}>View 12</li>
-                <li  onClick={(e)=>handleChange(e)}>View 18</li>
-                <li  onClick={(e)=>handleChange(e)}>View 24</li>
-              </ul>
-              
-            </label>
-          </div>
-            <div class="group-cards sec-1 ">
-              <div class="org-group-cards-sec-1">
-                {currentOrganisation.length>0&&currentOrganisation.slice(0,currentOrganisation.length).map((item)=>{
-                    return (<Link to={`/organisation/${item._id}`}><div class="card">
-                    <div class="div-img">
-                      <img src={item.logo} alt="" />
-                      <div>
-                        <span><p id="even">{item.name}</p></span>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>)
-                })}
-              </div>
-              {/* <div class="org-group-cards-sec-2">
-              {currentOrganisation.length>3&&currentOrganisation.slice(3,currentOrganisation.length).map((item)=>{
-                    return (<Link to={`/organisation/${item._id}`}><div class="card">
-                    <div class="div-img">
-                      <img src={item.logo} alt="" />
-                      <div>
-                        <span><p id="even">{item.name}</p></span>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>)
-                })}
-              </div> */}
-            </div>
-        </div>
-        <div style={{marginTop:"2%",display:'flex',justifyContent:'center'}}>
-         <Pagination
-          postsPerPage={OrganisationPerPage}
-          totalPosts={organisation.length}
-          paginate={paginate}
-        />
-        </div>
-      </section>
+                        <Org/>
          </div>
         
          <div style={{marginTop:"70px"}}>

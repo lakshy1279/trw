@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './navbar';
 import Footer from './footer';
+import Org from './organisation';
 import { Link, useHistory } from 'react-router-dom';
 import MoreEvents from './moreevent';
 import { useAlert } from 'react-alert';
@@ -14,6 +15,7 @@ function Event_landing()
   const [category,setCategory]=useState([]);
   const [language,setLanguage]=useState([]);
   const [searchevent,setsearchEvent]=useState([]);
+  const [banner,setBanner]=useState({});
   const [theme,setTheme]=useState([]);
   const [query,setQuery]=useState("");
   const [flag,setFlag]=useState(false);
@@ -71,6 +73,10 @@ const alert = useAlert();
         console.log(eventCategories);
          setTheme(eventCategories);
       });
+      axios.get('https://lakshy12.herokuapp.com/TRW/fetch_TRW').then((res)=>{
+           console.log(res.data[0]);
+           setBanner(res.data[0]);
+      })
   },[]);
   function handleQuery(e)
   {
@@ -152,7 +158,7 @@ const alert = useAlert();
   let _filter=React.createRef();
   const curentDate=new Date().getDate();
     return ( <div>
-         <section class="offering-sec1" id="sec1">
+         <section class="offering-sec1" id="sec1"  style={{background:`url(${banner.image}) no-repeat center center/cover`}}>
             <Navbar/>
             <header class="showcase">
         <div class="offering-showcase-main">
@@ -160,10 +166,9 @@ const alert = useAlert();
             <div class="container">
               <div class="offering-main-content-showcase">
                 <div class="show-box1">
-                  <h1>TRW 2021</h1>
+                  <h1>{banner.heading}</h1>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Facilisi arcu, ut sem at dolore.
+                    {banner.subtext}
                   </p>
                 </div>
               </div>
@@ -176,21 +181,14 @@ const alert = useAlert();
          <section class="sec-1-text">
         <div class="sec-1-main">
           <div>
-            <h1>Quam tristique vestibulum nulla</h1>
+            <h1>{banner.secheading}</h1>
           </div>
           <div>
-            <h3>Proin vitae justo, venenatis velit arcu</h3>
+            <h3>{banner.secsubheading}</h3>
           </div>
           <div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Libero,
-              justo, facilisis consectetur euismod. Non vulputate ultrices
-              venenatis felis, id platea platea nibh natoque. Venenatis
-              pellentesque blandit enim turpis sagittis enim, felis dictum.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Libero,
-              justo, facilisis consectetur euismod. Non vulputate ultrices
-              venenatis felis, id platea. pellentesque blandit enim turpis
-              sagittis enim, felis dictum.
+             {banner.sectext}
             </p>
           </div>
         </div>
@@ -201,14 +199,15 @@ const alert = useAlert();
             <h1>Presented with our partners</h1>
           </div>
           <div class="partner-group slideshow-container">
-            <div class="button-rotate">
-              <button class="button btn-animation prev" onclick="plusSlides(-1)">
+            {/* <div class="button-rotate">
+              {/* <button class="button btn-animation prev" onclick="plusSlides(-1)">
                 <i class="fas fa-chevron-right"> </i
                 ><i class="fas fa-chevron-right"> </i>
-              </button>
-            </div>
+              </button> */}
+            {/* </div> */} 
             <div class="group-cards sec-1 mySlides fade">
-              <div class="group-cards-sec-1">
+              <Org/>
+              {/* <div class="group-cards-sec-1">
                 <div class="card">
                   <div class="div-img">
                     <img src="/assests/images/Image-3.png" alt="" />
@@ -245,8 +244,8 @@ const alert = useAlert();
                     <span><p id="odd">Lorem ipsum</p></span>
                   </div>
                 </div>
-              </div>
-              <div class="group-cards-sec-2">
+              </div> */}
+              {/* <div class="group-cards-sec-2">
                 <div class="card">
                   <div class="div-img">
                     <img src="/assests/images/Image-3.png" alt="" />
@@ -283,21 +282,21 @@ const alert = useAlert();
                     <span><p id="odd">Lorem ipsum</p></span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
-            <div>
+            {/* <div>
               <button class="button rotate-90 n" onclick="plusSlides(1)" style={{float: "right"}}>
                 <i class="fas fa-chevron-left"> </i
                 ><i class="fas fa-chevron-left"> </i>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div class="group-svg">
+        {/* <div class="group-svg">
             <span class="dot" onclick="currentSlide(1)"></span> 
             <span class="dot" onclick="currentSlide(2)"></span> 
             <span class="dot" onclick="currentSlide(3)"></span> 
-        </div>
+        </div> */}
       </section>
       <section class="search-filter">
         <div class="search-filter-main">
