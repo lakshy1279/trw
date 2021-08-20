@@ -9,7 +9,7 @@ function BlogList() {
   const [blog, setBlog] = useState([]);
   const [otherBlog, setOtherBlog] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2);
+  const [postsPerPage] = useState(3);
   const { category } = useParams();
 
   useEffect(() => {

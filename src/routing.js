@@ -15,6 +15,7 @@ import Facilitator_landing from "./components/facilitator_landing";
 import Program from "./components/program";
 import Offering from "./components/Offering";
 import Organisation from "./components/organisation_internal";
+import EventList from "./components/event_cate";
 function Routing() {
   return (
     <Router>
@@ -36,6 +37,7 @@ function Routing() {
          <Route exact path="/facilitator_landing" component={Facilitator_landing}></Route>
          <Route exact path="/offering" component={Offering}></Route>
          <Route exact path="/program" component={Program} />
+         <Route exact path="/event/:category" component={EventList} />
       </Switch>
     </Router>
   );

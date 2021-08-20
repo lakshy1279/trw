@@ -29,7 +29,7 @@ function PostRow(props) {
             </p>
           </div>
           <div className={props.buttonClass}>
-            <Link to={`/blog/${props._id}`}>
+            <a href={`/blog/${props._id}`}>
               <button className="button">
                 Read More
                 <i
@@ -41,7 +41,7 @@ function PostRow(props) {
                   style={{ float: "right" }}
                 ></i>
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

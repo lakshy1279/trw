@@ -12,39 +12,40 @@ function BlogInternal() {
   const [leading, setLeading] = useState([]);
   const [otherBlog, setOtherBlog] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
+    let article2;
     async function getSingleArticle() {
       const article = await axios.get(
         `https://trw-backend-api.herokuapp.com/blog/update_blog1/${id}`
       );
 
       setArticle(article.data);
+      article2=article.data;
     }
     async function getAticles() {
-      const article = await axios.get(
+      const article1 = await axios.get(
         "https://trw-backend-api.herokuapp.com/blog/Blog1s"
       );
-      setHealing(
-        article.data.filter((singleArticle) => {
-          return singleArticle.category.toLowerCase() === "healing";
-        })
-      );
-      setLeading(
-        article.data.filter((singleArticle) => {
-          return singleArticle.category.toLowerCase() === "leading";
-        })
-      );
+      // setHealing(
+      //   article1.data.filter((singleArticle) => {
+      //     return singleArticle.category.toLowerCase() === "healing";
+      //   })
+      // );
+      // setLeading(
+      //   article1.data.filter((singleArticle) => {
+      //     return singleArticle.category.toLowerCase() === "leading";
+      //   })
+      // );
       setOtherBlog(
-        article.data.filter((singleArticle) => {
+        article1.data.filter((singleArticle) => {
           return (
-            singleArticle.category.toLowerCase() !== "leading" &&
-            singleArticle.category.toLowerCase() !== "healing"
+            singleArticle.category.toLowerCase() === article2.category.toLowerCase()
           );
         })
       );
     }
-    getSingleArticle();
-    getAticles();
+   await getSingleArticle();
+         getAticles();
   }, []);
   console.log(article);
   return (
@@ -102,35 +103,6 @@ function BlogInternal() {
             </div>
             <div className="healing-card">
               {(() => {
-                if (article.category?.toLowerCase() === "healing")
-                  return healing.map((item, index) => {
-                    return (
-                      <PostRow
-                        key={index}
-                        title={item.title}
-                        date={item.date}
-                        author={item.author}
-                        description={item.description}
-                        img={item.image}
-                        buttonClass="button-healing"
-                      />
-                    );
-                  });
-                if (article.category?.toLowerCase() === "leading")
-                  return leading.map((item, index) => {
-                    return (
-                      <PostRow
-                        key={index}
-                        title={item.title}
-                        date={item.date}
-                        author={item.author}
-                        description={item.description}
-                        img={item.image}
-                        buttonClass="button-healing leading-but"
-                      />
-                    );
-                  });
-                else;
                 return  otherBlog.map((item, index) => {
                   return (
                     <PostRow

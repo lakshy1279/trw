@@ -154,6 +154,10 @@ const alert = useAlert();
        console.log(e.target.value);
      }
   }
+  function changeUrl(category)
+  {
+    history.push(`/event/${category}`);
+  }
   let _hide=React.createRef();
   let _filter=React.createRef();
   const curentDate=new Date().getDate();
@@ -199,104 +203,11 @@ const alert = useAlert();
             <h1>Presented with our partners</h1>
           </div>
           <div class="partner-group slideshow-container">
-            {/* <div class="button-rotate">
-              {/* <button class="button btn-animation prev" onclick="plusSlides(-1)">
-                <i class="fas fa-chevron-right"> </i
-                ><i class="fas fa-chevron-right"> </i>
-              </button> */}
-            {/* </div> */} 
             <div class="group-cards sec-1 mySlides fade">
               <Org/>
-              {/* <div class="group-cards-sec-1">
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">AEIOU1</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Elisa Tawil</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Tiara</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Unburn</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div class="group-cards-sec-2">
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Elisa Tawil</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Unburn</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">AEIOU</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="div-img">
-                    <img src="/assests/images/Image-3.png" alt="" />
-                  </div>
-                  <div>
-                    <span><p id="even">Tiara</p></span>
-                    <span><p id="odd">Lorem ipsum</p></span>
-                  </div>
-                </div>
-              </div> */}
             </div>
-            {/* <div>
-              <button class="button rotate-90 n" onclick="plusSlides(1)" style={{float: "right"}}>
-                <i class="fas fa-chevron-left"> </i
-                ><i class="fas fa-chevron-left"> </i>
-              </button>
-            </div> */}
           </div>
         </div>
-        {/* <div class="group-svg">
-            <span class="dot" onclick="currentSlide(1)"></span> 
-            <span class="dot" onclick="currentSlide(2)"></span> 
-            <span class="dot" onclick="currentSlide(3)"></span> 
-        </div> */}
       </section>
       <section class="search-filter">
         <div class="search-filter-main">
@@ -474,7 +385,17 @@ const alert = useAlert();
                   </div>
       </section>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
+      <div style={{display:'flex',justifyContent:'space-between'}}>
       <h1 id="see-all">Healing Events</h1>
+      <div className="healing-button">
+                    <button
+                      className="view-all"
+                      onClick={() => changeUrl("Healing")}
+                    >
+                      View all
+                    </button>
+                  </div>
+                  </div>
         <div className="more">
         {healingEvents.slice(0, 4).map((item, index) => {
                     return (
@@ -492,7 +413,17 @@ const alert = useAlert();
                   })}
                   </div>
       <hr style={{border: "1px solid #CBCBD4", marginTop:"44px", marginBottom: "40px"}}/>
+      <div style={{display:'flex',justifyContent:'space-between'}}>
       <h1 id="see-all">Leading Events</h1>
+      <div className="healing-button">
+                    <button
+                      className="view-all"
+                      onClick={() => changeUrl("Leading")}
+                    >
+                      View all
+                    </button>
+                  </div>
+      </div>
         <div className="more">
         {leadingEvents.slice(0, 4).map((item, index) => {
                     return (
