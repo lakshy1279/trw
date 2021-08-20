@@ -58,11 +58,16 @@ function BlogInternal() {
         {/* Sec-2 Event Details*/}
         <section className="event-details">
           <div className="flex-event-details">
-            <div className="blog-internal-row">
-              <div className="blog-img-container">
-                <img src={article.image} alt="" />
+            <div style={{display:"flex",flexDirection:"column"}}>
+              <div style={{width:"100%",textAlign:"center"}}>
+                <img src={article.image} alt=""  style={{ width: "100%",
+    height: "100%",
+    maxWidth: "650px",
+    maxHeight: "450px",
+    objectFit: "cover",
+    paddingRight: "1.5rem"}} />
               </div>
-              <div className="blog-container">
+              <div style={{width:"100%"}}>
                 <div className="blog-heading-container">
                   <div className="heading-text">
                     <h1>{article.title}</h1>

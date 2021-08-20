@@ -32,9 +32,9 @@ function EventsInternal({match})
   useEffect(async ()=>{
     console.log(match.params);
     const { id } = match.params;
+    let category;
     console.log(id);
-    axios
-
+    await axios
       .get(
         `https://lakshy12.herokuapp.com/blog/get_event_ById/${id}`
       )
@@ -42,6 +42,7 @@ function EventsInternal({match})
         console.log(res.data);
         const temp=await res.data.description.split('</p>');
         console.log("temp",temp);
+        category=res.data.category;
         setEvent(res.data);
         setDescription(temp);
         setFlag(1);
@@ -51,7 +52,7 @@ function EventsInternal({match})
       setOrganisation(org.data);
     }
     getOrganisation();
-    const eventlist=await axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events');
+    const eventlist=await axios.get(`https://lakshy12.herokuapp.com/blog/eventwithcategory/${category}`);
     const sorteddata=await eventlist.data;
     console.log("sorted data",sorteddata);
      let temp=sorteddata;
