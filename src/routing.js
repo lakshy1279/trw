@@ -36,7 +36,7 @@ function Routing() {
         <Route exact path="/organisation_landing" component={Organisation_landing}></Route>
          <Route exact path="/facilitator_landing" component={Facilitator_landing}></Route>
          <Route exact path="/offering" component={Offering}></Route>
-         <Route exact path="/program" component={Program} />
+         <Route exact path="/program/:id" component={Program} />
          <Route exact path="/event/:category" component={EventList} />
       </Switch>
     </Router>

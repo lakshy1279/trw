@@ -26,9 +26,19 @@ function FacilitatorInfo(props) {
            </section>
            <section class="org-details">
         <div class="org-main">
-          <div class="org-main-sec-1">
-            <div class="org-image">
-              <img src={facilitator.photo} alt="" />
+          <div style={{display: "flex",
+    flexDirection: "column",
+    gridGap: "4.5rem",
+    alignItems: "center"}}>
+            <div  style={{background: "#ffffff",
+    width: "100%",
+    maxWidth: "600px",
+    borderRadius: "12px",
+    flexShrink: "1"}}>
+              <img src={facilitator.photo} style={{width: "100%",
+    height: "100%",
+    boxShadow: "1px 1px 16px rgb(0 0 0 / 25%)",
+    borderRadius: "12px"}} />
             </div>
             <div class="org-details-info">
               <div class="header" style={{marginBottom:"24px"}}>
@@ -44,20 +54,9 @@ function FacilitatorInfo(props) {
               </div>
               <div class="para">
                 <p>
-                {flag>0&&renderHTML(facilitator.profile
-                          .replace(/(<([^>]+)>)/gi, "")
-                          .substring(0, 691))}
+                {flag>0&&renderHTML(facilitator.profile)}
                 </p>
               </div>
-            </div>
-          </div>
-          <div class="org-main-sec-2">
-            <div class="paragraphtwo">
-              <p>
-              {flag>0&&renderHTML(facilitator.profile
-                          .replace(/(<([^>]+)>)/gi, "")
-                          .substring(691))}
-              </p>
             </div>
           </div>
         </div>

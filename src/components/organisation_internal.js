@@ -4,17 +4,22 @@ import Footer from './footer';
 import axios from "axios";
 import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
+import Progrow from './progrow';
 import { useParams } from "react-router-dom";
 function Organisation(props) {
   const { id } = useParams();
     const [organisation,setOrganisation]=useState({});
+    const [programs,setPrograms]=useState([]);
     const [Events,setEvents]=useState([]);
+    const [facilitator,setFacilitator]=useState([]);
     const [flag,setFlag]=useState(0);
     useEffect(()=>{
         axios.get(`https://lakshy12.herokuapp.com/organisation/fetch/${id}`).then((res)=>{
             console.log(res.data);
             setOrganisation(res.data);
             setEvents(res.data.events);
+            setPrograms(res.data.program);
+            setFacilitator(res.data.facilitator);
             setFlag(1);
         });
     },[])
@@ -77,86 +82,47 @@ function Organisation(props) {
                   })}
         </div>
       </section>
-
+      {/* <section class="see-all-events">
+        <h1 id="see-all">Facilitators with {organisation.name}</h1>
+        <div class="partners">
+              {flag>0&&facilitator.length>0&&facilitator.slice(0,4).map((data)=>{
+                return (  <div class="fac">
+                <img src={data.photo} alt="" />
+                <div style={{padding: '22px'}}>
+                  <span style={{fontSize: '14px', fontWeight: '700'}}
+                    >{data.firstname}{" "}{data.lastname}</span
+                  ><br />
+                  <span style={{fontSize: '10px', opacity: '0.5'}}>{data.country}</span
+                  ><br />
+                  <span
+                    class="profile"
+                    style={{
+                      position: 'relative',
+                      top: '31px',
+                      fontWeight: '700',
+                      fontSize: '12px'}}
+                    >View Profile</span
+                  >
+                </div>
+              </div>)
+              })}
+            </div>
+      </section> */}
       <section class="see-all-events mt">
         <h1 id="see-all">Programs by {organisation.name}</h1>
         <div class="more">
-          <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-girl.jfif" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-img-5.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
+        {flag>0&&programs.length>0&&programs.slice(0, 4).map((item, index) => {
+                    return (
+                      <Progrow
+                        key={index}
+                        image={item.photo}
+                        title={item.heading}
+                        facilitator={item.facilitator}
+                        date={item.date}
+                        _id={item._id}
+                      />
+                    );
+                  })}
         </div>
         <div class="next-prev-main" style={{paddingBottom:"24px",borderBottom: "1px solid #cbcbd4"}}>
           <div class="previous">
