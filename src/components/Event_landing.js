@@ -15,9 +15,9 @@ function Event_landing()
   const [category,setCategory]=useState([]);
   const [language,setLanguage]=useState([]);
   const [searchevent,setsearchEvent]=useState([]);
+  const [searchdata,setSearchData]=useState([]);
   const [banner,setBanner]=useState({});
   const [theme,setTheme]=useState([]);
-  const [query,setQuery]=useState("");
   const [flag,setFlag]=useState(false);
   const [flag1,setFlag1]=useState(false);
   const [flag2,setFlag2]=useState(false);
@@ -30,13 +30,14 @@ function Event_landing()
 const history = useHistory();
 const alert = useAlert();
   useEffect(async ()=>{
-    const eventlist=await axios.get('https://trw-backend-api.herokuapp.com/blog/get_all_events');
+    const eventlist=await axios.get('https://lakshy12.herokuapp.com/blog/get_all_events');
         //  console.log(res.data);
         const sorteddata=await eventlist.data.sort(sortFunction);
         console.log("sorted data",sorteddata);
          let temp=sorteddata;
          console.log(temp);
          setMoreEvents(temp);
+         setSearchData(temp);
          setsearchEvent(temp);
          const healingevent=eventlist.data.filter((item)=>{
              if(item.category.toLowerCase()==='healing')
@@ -80,35 +81,26 @@ const alert = useAlert();
   },[]);
   function handleQuery(e)
   {
-     setQuery(e.target.value.trim());
+     searchResult(e.target.value.trim());
   }
-  function searchResult()
+  async function searchResult(query1)
   {
-    console.log(query);
-    if (!query) {
+    console.log(query1);
+    if (!query1) {
       alert.show("Please Enter Something To Search");
     } else {
-      const result = moreEvents.filter((event) => {
-        if (
-          event.title.toLowerCase() === query.toLowerCase() ||
-          event.category.toLowerCase() === query.toLowerCase() ||
-          (event.facilitator.length>0&&event.facilitator.map((data)=>{
-            if(data===query.toLowerCase())
-              return true;
-          }))||(event.organisation.length>0&&event.organisation.map((data)=>{
-            if(data===query.toLowerCase())
-              return true;
-          }))||(event.speaker.length>0&&event.speaker.map((data)=>{
-            if(data===query.toLowerCase())
-              return true;
-          }))
-        ) {
-          return event;
-        }
+      const result =await searchdata.filter((event) => {
+        if(event.title.toLowerCase().startsWith(query1.toLowerCase()))
+         return event;
       });
+      setSearchData(result);
       localStorage.setItem("searcheventResult", JSON.stringify(result));
-      history.push("/searchevent");
+     
     }
+  }
+  function searchPage()
+  {
+    history.push("/searchevent");
   }
   function changeFlag(indicator)
   {
@@ -146,12 +138,61 @@ const alert = useAlert();
     console.log(_hide.innerText);
     console.log(_filter.className);
   }
-  function filterSearch(type,e)
+  async function filterSearch(type,e)
   {
-    console.log(e.target.checked)
-     if(type==category)
+   if(type!="Date")
+   {
+    console.log(e.target.checked);
+    let value=e.target.value;
+     if(e.target.checked&&type=="category")
      {
-       console.log(e.target.value);
+       const result=await searchdata.filter((event)=>{
+         if(event.category.toLowerCase()==value.toLowerCase())
+         return event;
+       })
+       localStorage.setItem("searcheventResult", JSON.stringify(result));
+       setSearchData(result);
+     }
+     else if(e.target.checked&&type=="theme")
+     {
+       console.log(value);
+      const result=await searchdata.filter((event)=>{
+        if(event.type.toLowerCase()==value.toLowerCase())
+        return event;
+      });
+      console.log(result);
+      localStorage.setItem("searcheventResult", JSON.stringify(result));
+      setSearchData(result);
+     }
+     else if(e.target.checked&&type=="language")
+     {
+      console.log(value);
+      const result=await searchdata.filter((event)=>{
+        let language=event.language;
+        if(language.length>0&&language.map((lan)=>lan.toLowerCase()==value.toLowerCase()))
+         return event;
+      });
+      console.log(result);
+      localStorage.setItem("searcheventResult", JSON.stringify(result));
+      setSearchData(result);
+     }
+    }
+    else
+     {
+       console.log(e.target.innerHTML);
+       let month=new Date().getMonth();
+       console.log(month);
+
+        const result=await searchdata.filter((event)=>{
+         var dateA = new Date(event.fromdate).getDate();
+         let eventmonth=new Date(event.fromdate).getMonth();
+         if(dateA==e.target.innerHTML&&month==eventmonth)
+         return event;
+          console.log(month);
+      });
+      console.log(result);
+      localStorage.setItem("searcheventResult", JSON.stringify(result));
+      setSearchData(result);
      }
   }
   function changeUrl(category)
@@ -221,7 +262,7 @@ const alert = useAlert();
               />
             </div>
             <div class="btn-class">
-              <button class="search-btn" onClick={searchResult}>
+              <button class="search-btn" onClick={searchPage}>
                 <img src="/assests/images/Vector1.svg" alt="" /> Search
               </button>
             </div>
@@ -253,7 +294,7 @@ const alert = useAlert();
                 return (
                   <li>
                   <a href="#"
-                    ><input type="checkbox" value={data.event_category} id="check" onClick={(e)=>filterSearch(category,e)} /><span
+                    ><input type="checkbox" value={data.event_category} id="check" onClick={(e)=>filterSearch("category",e)} /><span
                       >{data.event_category}</span>
                     <hr class="line"
                   /></a>
@@ -274,7 +315,7 @@ const alert = useAlert();
                   {theme.length>0&&theme.map((item)=>{
                     return (<li>
                       <a href="#"
-                        ><input type="checkbox" name="" id="check"  />
+                        ><input type="checkbox" value={item.event_type} id="check" onClick={(e)=>filterSearch("theme",e)}   />
                         <span>{item.event_type}</span>
                         <hr class="line"
                       /></a>
@@ -282,7 +323,7 @@ const alert = useAlert();
                   })}
                   <li>
                       <a href="#"
-                        ><input type="checkbox" name="" id="check" />
+                        ><input type="checkbox" value="other" id="check" onClick={(e)=>filterSearch("theme",e)}/>
                         <span>Other</span>
                         <hr class="line"
                       /></a>
@@ -333,7 +374,7 @@ const alert = useAlert();
                     {language.length>0&&language.map((item)=>{
                       return (<li>
                         <a href="#"
-                          ><input type="checkbox" name="" id="check" /><span>{item.language}</span>
+                          ><input type="checkbox" value={item.language} id="check" onClick={(e)=>filterSearch("language",e)} /><span>{item.language}</span>
                           <hr class="line"
                         /></a>
                       </li>)
@@ -347,19 +388,19 @@ const alert = useAlert();
               <span class="month">{new Date().toLocaleDateString('default',{month:'long'})}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">{curentDate}</span>
+              <span class="calender-date" onClick={(e)=>filterSearch("Date",e)}>{curentDate}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">{(curentDate+1)<=31?(curentDate+1):(1)}</span>
+              <span class="calender-date" onClick={(e)=>filterSearch("Date",e)}>{(curentDate+1)<=31?(curentDate+1):(1)}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">{(curentDate+2)<=31?(curentDate+2):(2)}</span>
+              <span class="calender-date" onClick={(e)=>filterSearch("Date",e)}>{(curentDate+2)<=31?(curentDate+2):(2)}</span>
             </div>
             <div class="calendar-div">
-              <span class="calender-date">{(curentDate+3)<=31?(curentDate+3):(3)}</span>
+              <span class="calender-date" onClick={(e)=>filterSearch("Date",e)}>{(curentDate+3)<=31?(curentDate+3):(3)}</span>
             </div>
             <div>
-              <span class="calender-date">{(curentDate+4)<=31?(curentDate+4):(4)}</span>
+              <span class="calender-date" onClick={(e)=>filterSearch("Date",e)}>{(curentDate+4)<=31?(curentDate+4):(4)}</span>
             </div>
           </div>
         </div>
