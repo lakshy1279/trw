@@ -19,7 +19,7 @@ function Organisation(props) {
             setOrganisation(res.data);
             setEvents(res.data.events);
             setPrograms(res.data.program);
-            setFacilitator(res.data.facilitator);
+            setFacilitator(res.data.fac);
             setFlag(1);
         });
     },[])
@@ -82,7 +82,7 @@ function Organisation(props) {
                   })}
         </div>
       </section>
-      {/* <section class="see-all-events">
+      <section class="see-all-events">
         <h1 id="see-all">Facilitators with {organisation.name}</h1>
         <div class="partners">
               {flag>0&&facilitator.length>0&&facilitator.slice(0,4).map((data)=>{
@@ -107,7 +107,7 @@ function Organisation(props) {
               </div>)
               })}
             </div>
-      </section> */}
+      </section>
       <section class="see-all-events mt">
         <h1 id="see-all">Programs by {organisation.name}</h1>
         <div class="more">

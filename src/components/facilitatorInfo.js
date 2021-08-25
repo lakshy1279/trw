@@ -1,23 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import Navbar from './navbar';
 import Footer from './footer';
 import axios from "axios";
 import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
-import { useParams } from "react-router-dom";
+import Progrow from './progrow';
+import { useParams,useHistory } from "react-router-dom";
+import Carousel, { consts } from "react-elastic-carousel";
 function FacilitatorInfo(props) {
   const { id } = useParams();
     const [facilitator,setFacilitator]=useState({});
     const [Events,setEvents]=useState([]);
+    const [blogs,setBlogs]=useState([]);
+    const [programs,setPrograms]=useState([]);
     const [flag,setFlag]=useState(0);
+    const history = useHistory();
     useEffect(()=>{
         axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
             console.log(res.data);
             setFacilitator(res.data);
             setEvents(res.data.events);
+            setBlogs(res.data.blogs);
+            setPrograms(res.data.program);
             setFlag(1);
         });
-    },[])
+    },[]);
+    let breakPoints = [
+      { width: 1, itemsToShow: 1, itemsToScroll: 1, pagination: false },
+      {
+        width: 550,
+        itemsToShow: 2,
+        itemsToScroll: 2,
+        itemsToScroll: 2,
+        pagination: false,
+      },
+      { width: 850, itemsToShow: 3, itemsToScroll: 3, pagination: false },
+      { width: 1150, itemsToShow: 5, itemsToScroll: 2 },
+      { width: 1450, itemsToShow: 6, pagination: false },
+      { width: 1750, itemsToShow: 7, pagination: false },
+    ];
+    function routeChange(blogId) {
+      history.push(`blog/${blogId}`);
+    }
+    function customArrow({ type, onClick, isEdge }) {
+      const pointer =
+        type === consts.PREV ? (
+          <div style={{ alignSelf: "center" }}>
+            <button className="arrows">
+              <i className="fas fa-chevron-left"></i>
+              <i className="fas fa-chevron-left"></i>
+            </button>
+          </div>
+        ) : (
+          <button className="arrows">
+            <i className="fas fa-chevron-right"></i>
+            <i className="fas fa-chevron-right"></i>
+          </button>
+        );
+      return (
+        <p style={{ alignSelf: "center" }} onClick={onClick} disabled={isEdge}>
+          {pointer}
+        </p>
+      );
+    }
     return (
         <div>
             <div className="container">
@@ -80,94 +125,94 @@ function FacilitatorInfo(props) {
                   })}
         </div>
       </section>
-
-      <section class="see-all-events mt">
+      <section class="see-all-events">
+        <h1 id="see-all">Blogs by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
+        <div className="recentpost-main">
+          <Carousel
+            itemsToShow={3}
+            itemsToScroll={3}
+            breakPoints={breakPoints}
+            renderArrow={customArrow}
+          >
+            {blogs.length>0&&blogs.map((data, index) => {
+              return (
+                <div key={index} className="card">
+                  <div className="card-container">
+                    <img src={data.image} alt="" />
+                  </div>
+                  <div className="content-card">
+                    <div>
+                      <span className="ali">
+                        {data.title.substring(0, 15)}...
+                      </span>
+                      <span
+                        className={
+                          data.category === "Healing" ? "head" : "lead"
+                        }
+                      >
+                        {data.category}
+                      </span>
+                    </div>
+                    <div>
+                      <p style={{marginTop:"28px"}}>
+                        {data.description
+                          .replace(/(<([^>]+)>)/gi, "")
+                          .substring(0, 100)}
+                        ...
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      className="button"
+                      style={{
+                        borderRadius: "0",
+                        width: "100%",
+                        margin: "0",
+                        borderBottomLeftRadius: "12px",
+                        borderBottomRightRadius: "12px",
+                      }}
+                      onClick={() => routeChange(data._id)}
+                    >
+                      Read More
+                      <i
+                        className="fas fa-chevron-right"
+                        style={{ float: "right" }}
+                      ></i>
+                      <i
+                        className="fas fa-chevron-right"
+                        style={{ float: "right" }}
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </Carousel>
+        </div>
+        {/* <div style={{alignItems:"center"}}>
+          <img
+            style={{ marginTop: "80px" }}
+            src="/assests/images/Group1.svg"
+            alt=""
+          />
+        </div> */}
+      </section>
+      <section class="see-all-events mt" style={{marginTop:"70px"}}>
         <h1 id="see-all">Programs by {facilitator.firstname}{' '}{facilitator.lastname}</h1>
         <div class="more">
-          <div class="more-img1">
-            <img src="/assests/images/event-1.jpg" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-girl.jfif" alt="" />
-            <div
-              style={{color: "#18a558", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Healing
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-img-5.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-          <div class="more-img1">
-            <img src="/assests/images/event-4.jpg" alt="" />
-            <div
-              style={{color: "#4269f2", backgroundColor: "white"}}
-              class="top-right"
-            >
-              Leading
-            </div>
-            <div class="img-bottom">
-              <div class="img-text">
-                <h1>
-                  Lorem ipsum dolor sit amet, elit con sectetur aliquam ipsum
-                </h1>
-                <p id="date">19th July 2021</p>
-                <p id="time">IST: 8:00, CET: 12:00, EST: 19:00</p>
-                <p id="by">by Pierce Starre & Nicholas Ball</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="next-prev-main" style={{paddingBottom:"24px",borderBottom: "1px solid #cbcbd4"}}>
-          <div class="previous">
-            <span class="pre">Previous</span>
-          </div>
-          <div class="next">
-            <span class="nex">Next</span>
-          </div>
+        {flag>0&&programs.length>0&&programs.slice(0, 4).map((item, index) => {
+                    return (
+                      <Progrow
+                        key={index}
+                        image={item.photo}
+                        title={item.heading}
+                        facilitator={item.facilitator}
+                        date={item.date}
+                        _id={item._id}
+                      />
+                    );
+                  })}
         </div>
       </section>
            </div>
