@@ -112,8 +112,6 @@ onChange(event) {
   {
     e.preventDefault();
     console.log(this.state.subscribeemail);
-    if(this.validator.allValid())
-        {
         axios
             .post(
               "https://lakshy12.herokuapp.com/contact/add_subscriber",
@@ -126,12 +124,6 @@ onChange(event) {
               this.props.history.push("/");
               console.log(response.data);
             })
-          }
-          else
-          {
-            this.validator.showMessages();
-             this.forceUpdate();
-          }    
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -189,10 +181,11 @@ onChange(event) {
                     value={this.state.subscribeemail}
                     placeholder="yourname@address.com"
                     class="input"
+                    required
                   />
                       {this.validator.message(
-                                                            "email",
-                                                            this.state.email,
+                                                            "subscribeemail",
+                                                            this.state.subscribeemail,
                                                             "required|whitespace|min:1|max:80"
                                                         )}
                 &nbsp;&nbsp;&nbsp;

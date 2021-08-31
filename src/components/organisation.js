@@ -9,7 +9,7 @@ function Org(props) {
     useEffect(()=>{
         axios.get(`https://lakshy12.herokuapp.com/organisation/fetch`).then((res)=>{
             console.log(res.data);
-            const sortedData=res.data.sort((a,b)=>{if(a.name<b.name){
+            const sortedData=res.data.sort((a,b)=>{if(a.name.toLowerCase()<b.name.toLowerCase()){
                 return -1;
               }else
              {

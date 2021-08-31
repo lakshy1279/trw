@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import Footer from './footer';
-import PropTypes from "prop-types";
+import swal from "sweetalert";
 import axios from 'axios';
 import SimpleReactValidator from 'simple-react-validator';
 class  ContactUs extends React.Component
@@ -124,8 +124,6 @@ class  ContactUs extends React.Component
       {
         e.preventDefault();
         console.log(this.state.subscribeemail);
-        if(this.validator.allValid())
-        {
         axios
             .post(
               "https://lakshy12.herokuapp.com/contact/add_subscriber",
@@ -134,16 +132,10 @@ class  ContactUs extends React.Component
               }
             )
             .then((response)=> {
-              // handle success
-              this.props.history.push("/");
-              console.log(response.data);
+              swal("Thank you for subscribing to the TRW newsletter.","","success").then((value)=>{
+                this.props.history.push("/");
+              })
             })
-          }
-          else
-          {
-            this.validator.showMessages();
-             this.forceUpdate();
-          }    
       }
       handleSubmit(e) {
         e.preventDefault();
@@ -162,9 +154,9 @@ class  ContactUs extends React.Component
           }
         )
         .then((response)=> {
-          // handle success
-          window.location.reload();
-          console.log(response.data);
+            swal("Thank you for Contacting Us,We will reach you Shortly.","","success").then((value)=>{
+              this.props.history.push("/");
+            })
         })
       }
       else {
@@ -202,12 +194,8 @@ class  ContactUs extends React.Component
                     value={this.state.subscribeemail}
                     placeholder="yourmail@address.com"
                     class="input"
+                    required
                   />
-                   {this.validator.message(
-                                                            "email",
-                                                            this.state.email,
-                                                            "required|whitespace|min:1|max:80"
-                                                        )}
                   &nbsp;&nbsp;&nbsp;
                   <button class="contact-button">Subscribe</button>
                 </form>
