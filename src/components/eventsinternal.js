@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Carousel, { consts } from "react-elastic-carousel";
@@ -6,7 +5,6 @@ import renderHTML from "react-render-html";
 import Navbar from './navbar';
 import MoreEvents from './moreevent';
 import Facilitator from './facilitator';
-import Speaker from './speaker';
 import Footer from './footer';
 function EventsInternal({match})
 {
@@ -126,7 +124,6 @@ function EventsInternal({match})
           </div>
         </section>
         <Facilitator />
-        <Speaker />
         <section class="partners-grp">
           <h1>Organsiations</h1>
           <div className="logo-slider">
