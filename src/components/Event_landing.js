@@ -30,7 +30,7 @@ function Event_landing()
 const history = useHistory();
 const alert = useAlert();
   useEffect(async ()=>{
-    const eventlist=await axios.get('https://lakshy12.herokuapp.com/blog/get_all_events');
+    const eventlist=await axios.get('https://lakshy12.herokuapp.com/blog/featured_trw');
         //  console.log(res.data);
         const sorteddata=await eventlist.data.sort(sortFunction);
         console.log("sorted data",sorteddata);
