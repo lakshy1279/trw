@@ -14,14 +14,14 @@ function About()
       .get(`https://lakshy12.herokuapp.com/about1/fetch_about`)
       .then((res) => {
         //   const blogs = res.data.reverse();
-        console.log(res.data[0]);
+        console.log("about data",res.data[0]);
         setAbout(res.data[0]);
         setFlag(1);
         //   console.log(people);
       });
   }, []);
     return ( <div>
-         <section class="sec" id="sec" style={{background:"url(${about.image}) no-repeat center center/cover"}}>
+         <section style={{background:`url(${about.image}) no-repeat center center/cover`}}>
         <Navbar/>
         <header class="showcase">
         <div class="showcase-main">
