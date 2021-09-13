@@ -116,28 +116,26 @@ function Facilitator_landing(props) {
                 {currentfacilitator.length>0&&currentfacilitator.slice(0,currentfacilitator.length).map((item)=>{
                     return (<Link to={`/facilitator/${item._id}`}><div style={{display: "grid",
                     gridTemplateRows: "repeat(1, 1fr)"}}>
-                    <div style={{background: "#ffffff",
-    boxShadow: "1px 1px 16px rgb(0 0 0 / 25%)",
-    borderRadius: "12px",
-    textAlign: "center"}}>
-                      <img src={item.photo} alt="" style={{padding: "28px 38px",
+                    <div>
+                      <img src={item.photo} alt="" style={{
     width: "100%",
     minHeight: "240px",
-    maxWidth: "264px",
+    maxWidth: "334.60px",
     maxHeight: "240px",
     height: "100%",
-    objectFit: "contain"}} />
-                      <div>
-                        <span><p id="even">{item.firstname}</p></span>
-                      </div>
+    boxShadow: "1px 1px 16px rgb(0 0 0 / 25%)",
+    borderRadius: "12px",}} />
                     </div>
+                    <div>
+                        <span style={{textAlign:"center"}}><p id="even">{item.firstname}</p></span>
+                      </div>
                   </div>
                   </Link>)
                 })}
               </div>
             </div>
         </div>
-        <div style={{marginTop:"2%",display:'flex',justifyContent:'center'}}>
+        <div style={{marginTop:"2%",display:'flex'}}>
          <Pagination
           postsPerPage={facilitatorPerPage}
           totalPosts={facilitator.length}

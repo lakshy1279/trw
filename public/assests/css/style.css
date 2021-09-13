@@ -2638,6 +2638,7 @@ input[type="radio"]:checked + span {
 }
 .pagination {
   display: flex;
+  justify-content: center;
   margin-bottom: 3rem;
 }
 .page-link {
