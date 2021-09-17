@@ -4,6 +4,7 @@ import Footer from './footer';
 import Find_event from './find_event';
 import Post from './post';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 function Offering(props) {
   const [banner,setBanner]=useState({});
   useEffect(()=>{
@@ -85,6 +86,7 @@ function Offering(props) {
               <div class="img-card-1">
                 <img src="/assests/images/pastevent-1.jpg" alt="" />
               </div>
+            <Link to="/event_type/Annual Events">
               <div class="text-card-1">
                 <h3>Speacial/Annual Events</h3>
                 <p>
@@ -94,11 +96,13 @@ function Offering(props) {
                   feugiat.
                 </p>
               </div>
+              </Link>
             </div>
             <div class="card-prog">
               <div class="img-card-1">
                 <img src="/assests/images/pastevent-2.jpg" alt="" />
               </div>
+              <Link to="/event_type/Standalone Events">
               <div class="text-card-1">
                 <h3>TBD - Other/Standalone Events</h3>
                 <p>
@@ -108,6 +112,7 @@ function Offering(props) {
                   feugiat.
                 </p>
               </div>
+              </Link>
             </div>
           </div>
         </div>
