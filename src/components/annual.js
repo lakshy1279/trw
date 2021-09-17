@@ -14,7 +14,7 @@ function AnnualEvent() {
 
   useEffect(async () => {
       const EventList = await axios.get(
-        `http://localhost:5000/blog/get_event_Bytype/${type}`
+        `https://lakshy12.herokuapp.com/blog/get_event_Bytype/${type}`
       );
       console.log(EventList.data);
       setEvent(EventList.data);
