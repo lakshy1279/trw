@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 function Navbar() {
   const [socialmedia, setMedia] = useState({});
+  const [EventType,setEventType]=useState([]);
   useEffect(() => {
     axios
       .get("https://trw-backend-api.herokuapp.com/social/fetch_socialmedia")
       .then((res) => {
         setMedia(res.data[0]);
+      });
+      axios
+      .get(`https://lakshy12.herokuapp.com/blog/get_event_type`)
+      .then((res) => {
+        const eventTypes = res.data;
+        console.log("types",eventTypes);
+        setEventType(eventTypes);
       });
   }, []);
 
@@ -33,40 +41,20 @@ function Navbar() {
                   <div class="dropdown">
                     <ul>
                       <li class="dropdown-link">
-                        <a href="">Events</a>
+                        <a href="/all_event">Events</a>
                         <div class="dropdown second">
                           <ul>
-                            <li class="dropdown-link">
-                              <a href="">Upcoming</a>
-                              <div class="dropdown second">
-                                <ul>
+                            {EventType.length>0&&EventType.map((item)=>{
+                              return (
                                   <li class="dropdown-link">
-                                    <a href="">TRW2021</a>
-                                  </li>
-                                  <li class="dropdown-link">
-                                    <a href="">TBD</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </li>
-                            <li class="dropdown-link">
-                              <a href="">Past</a>
-                              <div class="dropdown second">
-                                <ul>
-                                  <li class="dropdown-link">
-                                    <a href="">TRW2021</a>
-                                  </li>
-                                  <li class="dropdown-link">
-                                    <a href="">TBD</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </li>
+                                  <a href={`/event_type/${item.event_type}`} style={{fontSize:"12px"}}>{item.event_type}</a>
+                                </li>)
+                            })}
                           </ul>
                         </div>
                       </li>
                       <li class="dropdown-link">
-                        <a href="">Programs</a>
+                        <a href="/all_program">Programs</a>
                       </li>
                     </ul>
                   </div>

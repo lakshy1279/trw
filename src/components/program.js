@@ -1,8 +1,21 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import Navbar from './navbar';
 import Footer from './footer';
 import axios from 'axios'
+import { useParams } from 'react-router';
+import { ListItem } from '@material-ui/core';
+import renderHTML from 'react-render-html';
 function Program(props) {
+  const [program,setProgram]=useState({});
+  const [flag,setFlag]=useState(0);
+  const {id}=useParams();
+  useEffect(()=>{
+      axios.get(`https://lakshy12.herokuapp.com/program/fetch/${id}`).then((res)=>{
+        console.log(res.data);
+        setProgram(res.data);
+        setFlag(1);
+      })
+  },[]);
     return (
         <div>
             <div className="container">
@@ -11,29 +24,14 @@ function Program(props) {
       <section class="prog-details">
         <div class="prog-main">
           <div class="prog-heading">
-            <h1>Tempor posuere imperdiet consequat est et feugiat imperdiet</h1>
+            <h1>{flag>0&&program.heading}</h1>
           </div>
           <div class="prog-img">
-            <img src="/assests/images/Party.jfif" alt="" />
+            <img src={flag>0&&program.photo} alt="" />
           </div>
           <div class="prog-para">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget eu
-              velit et facilisi faucibus luctus tellus. Arcu enim, maecenas
-              vitae eget turpis. Imperdiet congue viverra blandit diam dolor. Id
-              venenatis velit eu in commodo venenatis cras vulputate. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Eget eu velit
-              et facilisi faucibus luctus tellus. Arcu enim, maecenas vitae eget
-              turpis. Imperdiet congue viverra blandit diam dolor. Id venenatis
-              velit eu in commodo venenatis cras vulputate. Arcu enim, maecenas
-              vitae eget turpis. Imperdiet congue viverra blandit. Id venenatis
-              velit eu in commodo venenatis cras vulputate. Lorem ipsum dolor
-              sit. luctus tellus arcu enim, maecenas vitae. Lorem ipsum dolor
-              sit amet, consectetur adipiscing elit. Eget eu velit et facilisi
-              faucibus luctus tellus. Arcu enim, maecenas vitae eget turpis.
-              Imperdiet congue viverra blandit diam dolor. Id venenatis velit eu
-              in commodo venenatis cras vulputate. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
+             {flag>0&&renderHTML(program.description)}
             </p>
           </div>
           <div class="when">
@@ -140,7 +138,7 @@ function Program(props) {
             </ul>
           </div>
           <div class="apply-button">
-            <button>Apply Now</button>
+            <a href={flag>0?program.apply:''} target="_blank" style={{color:"whitesmoke"}}><button>Apply Now</button></a>
           </div>
         </div>
       </section>

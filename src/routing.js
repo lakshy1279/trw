@@ -17,6 +17,8 @@ import Offering from "./components/Offering";
 import Organisation from "./components/organisation_internal";
 import EventList from "./components/event_cate";
 import AnnualEvent from "./components/annual";
+import All_Events from "./components/all_events";
+import All_Programs from "./components/all_program";
 function Routing() {
   return (
     <Router>
@@ -40,6 +42,8 @@ function Routing() {
          <Route exact path="/program/:id" component={Program} />
          <Route exact path="/event/:category" component={EventList} />
          <Route exact path="/event_type/:type" component={AnnualEvent}/>
+         <Route exact path="/all_event" component={All_Events}/>
+         <Route exact path="/all_program" component={All_Programs}/>
       </Switch>
     </Router>
   );
