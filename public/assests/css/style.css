@@ -1155,7 +1155,6 @@ time.icon span {
   height: 100%;
   max-width: 1240px;
   max-height: 400px;
-  object-fit: cover;
   box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
 }

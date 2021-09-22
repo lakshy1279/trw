@@ -35,7 +35,7 @@ function All_Programs(props) {
       <Navbar />
       <div className="container">
         <div className="bloglist-heading">
-          <h1>All Events</h1>
+          <h1>Programs</h1>
         </div>
         <div  style={{ marginBottom: "3rem",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gridGap:"1.3rem" }}>
           {currentPosts.length > 0
