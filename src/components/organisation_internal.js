@@ -6,6 +6,7 @@ import renderHTML from 'react-render-html';
 import MoreEvents from './moreevent';
 import Progrow from './progrow';
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 function Organisation(props) {
   const { id } = useParams();
     const [organisation,setOrganisation]=useState({});
@@ -32,12 +33,18 @@ function Organisation(props) {
            <section class="org-details">
         <div class="org-main">
           <div class="org-main-sec-1">
+            
             <div class="org-image">
+            <a href={organisation.url} target="_blank">
               <img src={organisation.logo} alt="" />
+              </a>
             </div>
+           
             <div class="org-details-info">
               <div class="header">
+              <a href={organisation.url} target="_blank">
                 <h1>{organisation.name}</h1>
+                </a>
               </div>
               <div class="link">
                 <i class="fas fa-external-link-alt"></i>
@@ -94,6 +101,7 @@ function Organisation(props) {
                   ><br />
                   <span style={{fontSize: '10px', opacity: '0.5'}}>{data.country}</span
                   ><br />
+                  <Link to={`/facilitator/${data._id}`}>
                   <span
                     class="profile"
                     style={{
@@ -103,7 +111,9 @@ function Organisation(props) {
                       fontSize: '12px'}}
                     >View Profile</span
                   >
+                  </Link>
                 </div>
+              
               </div>)
               })}
             </div>

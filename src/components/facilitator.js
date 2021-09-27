@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Carousel, { consts } from "react-elastic-carousel";
 function Facilitator() {
   const [faciliator, setFacilitator] = useState([]);
@@ -88,7 +89,9 @@ function Facilitator() {
                               </span>
                             </div>
                             <div className="profile" style={{marginRight:"0.5rem"}}>
+                              <Link to={`/facilitator/${data._id}`}>
                               <span>View Profile</span>
+                              </Link>
                             </div>
                           </div>
                         </div>

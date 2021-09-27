@@ -84,6 +84,7 @@ function Community()
                   ><br />
                   <span style={{fontSize: '10px', opacity: '0.5'}}>{data.country}</span
                   ><br />
+                  <Link to={`/facilitator/${data._id}`}>
                   <span
                     class="profile"
                     style={{
@@ -93,6 +94,7 @@ function Community()
                       fontSize: '12px'}}
                     >View Profile</span
                   >
+                  </Link>
                 </div>
               </div>)
               })}

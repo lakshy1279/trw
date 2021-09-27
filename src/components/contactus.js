@@ -306,7 +306,7 @@ class  ContactUs extends React.Component
               pellentesque dis vel, vel blandit imperdiet urna pellentesque
               vestibulum.
             </p>
-            <p id="email">ouremail@adress.com</p>
+           <a> <p id="email">ouremail@gmail.com</p></a>
           </div>
         </div>
       </div>
