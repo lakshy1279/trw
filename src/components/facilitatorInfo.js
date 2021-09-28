@@ -7,6 +7,17 @@ import MoreEvents from './moreevent';
 import Progrow from './progrow';
 import { useParams,useHistory } from "react-router-dom";
 import Carousel, { consts } from "react-elastic-carousel";
+function sortFunction(a,b){  
+  var dateA = new Date(a.fromdate).getTime();
+  var dateB = new Date(b.fromdate).getTime();
+  return dateA > dateB ? 1 : -1;  
+};
+function sortProgram(a,b)
+{
+   var date1=new Date(a.date);
+   var date2=new Date(a.date);
+   return date1>date2?1:-1;
+}
 function FacilitatorInfo(props) {
   const { id } = useParams();
     const [facilitator,setFacilitator]=useState({});
@@ -15,13 +26,18 @@ function FacilitatorInfo(props) {
     const [programs,setPrograms]=useState([]);
     const [flag,setFlag]=useState(0);
     const history = useHistory();
-    useEffect(()=>{
-        axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then((res)=>{
+    useEffect( ()=>{
+         axios.get(`https://lakshy12.herokuapp.com/facilitator/fetch/${id}`).then(async (res)=>{
             console.log(res.data);
             setFacilitator(res.data);
-            setEvents(res.data.events);
+            // if(res.data.events.length>0)
+            // {
+            //   const sortedData=await sortFunction(res.data.events);
+            //   setEvents(sortedData);
+            // }
             setBlogs(res.data.blogs);
-            setPrograms(res.data.program);
+            const sortedProgram=await sortProgram(res.data.program);
+            setPrograms(sortedProgram);
             setFlag(1);
         });
     },[]);
@@ -80,10 +96,13 @@ function FacilitatorInfo(props) {
     maxWidth: "600px",
     borderRadius: "12px",
     flexShrink: "1"}}>
+      <a href={`mailto:${facilitator.email}}`} target="_blank">
               <img src={facilitator.photo} style={{width: "100%",
     height: "100%",
     boxShadow: "1px 1px 16px rgb(0 0 0 / 25%)",
-    borderRadius: "12px"}} />
+    borderRadius: "12px",
+    maxHeight:"400px"}} />
+    </a>
             </div>
             <div class="org-details-info">
               <div class="header" style={{marginBottom:"24px"}}>
