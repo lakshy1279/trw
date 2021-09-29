@@ -50,6 +50,12 @@ function Navbar() {
                                   <a href={`/event_type/${item.event_type}`} style={{fontSize:"12px"}}>{item.event_type}</a>
                                 </li>)
                             })}
+                             <li class="dropdown-link">
+                                  <a href="/past_event" style={{fontSize:"12px"}}>Past Events</a>
+                                </li>
+                                <li class="dropdown-link">
+                                  <a href="/upcoming_event" style={{fontSize:"12px"}}>Upcoming Events</a>
+                                </li>
                           </ul>
                         </div>
                       </li>
